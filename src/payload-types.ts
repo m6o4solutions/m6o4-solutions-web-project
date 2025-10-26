@@ -401,18 +401,66 @@ export interface Service {
   description?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
-  benefits?:
+  benefits: {
+    title: string;
+    subtitle: string;
+    serviceBenefits?:
+      | {
+          benefitTitle: string;
+          benefitDescription: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  features: {
+    title: string;
+    subtitle: string;
+    serviceFeatures?:
+      | {
+          featureTitle: string;
+          featureDescription: string;
+          featureImage?: (string | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  pricing: {
+    title: string;
+    subtitle: string;
+    servicePricing?:
+      | {
+          priceTitle: string;
+          priceDescription?: string | null;
+          price: number;
+          enableSubscription?: boolean | null;
+          subscriptionPrice?: number | null;
+          perks?:
+            | {
+                perk?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  ctaItems?:
     | {
-        benefitTitle: string;
-        benefitDescription: string;
-        id?: string | null;
-      }[]
-    | null;
-  features?:
-    | {
-        featureTitle: string;
-        featureDescription: string;
-        featureImage?: (string | null) | Media;
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
         id?: string | null;
       }[]
     | null;
@@ -1016,16 +1064,64 @@ export interface ServicesSelect<T extends boolean = true> {
   benefits?:
     | T
     | {
-        benefitTitle?: T;
-        benefitDescription?: T;
-        id?: T;
+        title?: T;
+        subtitle?: T;
+        serviceBenefits?:
+          | T
+          | {
+              benefitTitle?: T;
+              benefitDescription?: T;
+              id?: T;
+            };
       };
   features?:
     | T
     | {
-        featureTitle?: T;
-        featureDescription?: T;
-        featureImage?: T;
+        title?: T;
+        subtitle?: T;
+        serviceFeatures?:
+          | T
+          | {
+              featureTitle?: T;
+              featureDescription?: T;
+              featureImage?: T;
+              id?: T;
+            };
+      };
+  pricing?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        servicePricing?:
+          | T
+          | {
+              priceTitle?: T;
+              priceDescription?: T;
+              price?: T;
+              enableSubscription?: T;
+              subscriptionPrice?: T;
+              perks?:
+                | T
+                | {
+                    perk?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  ctaItems?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
         id?: T;
       };
   updatedAt?: T;
