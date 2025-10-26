@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.3.1...v1.4.0) (2025-10-26)
+
+
+### Bug Fixes
+
+* ensure layout is an empty array if undefined in RenderBlocks ([8524170](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/8524170f5dba51973ef709edaa79d88002880370))
+* make layout property optional in Page interface ([1026962](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/102696297e78684ef80e75e3edb7bb01a62d8142))
+
+
+### Features
+
+* enhance service schema with detailed benefits, features, and pricing ([e9aa480](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/e9aa480fb7b56f8c641c163f95cd1a1195b10ec9))
+
 # [1.2.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.1.0...v1.2.0) (2025-10-25)
 
 
