@@ -1,0 +1,14 @@
+import { Categories } from "@/payload/collections/categories/schema";
+import { CTA } from "@/payload/collections/cta/schema";
+import { FAQ } from "@/payload/collections/faq/schema";
+import { Media } from "@/payload/collections/media/schema";
+import { Pages } from "@/payload/collections/pages/schema";
+import { Posts } from "@/payload/collections/posts/schema";
+import { Services } from "@/payload/collections/services/schema";
+import { Testimonials } from "@/payload/collections/testimonials/schema";
+import { Users } from "@/payload/collections/users/schema";
+import { Work } from "@/payload/collections/work/schema";
+
+const collections = [Pages, Posts, Services, Work, FAQ, CTA, Testimonials, Categories, Media, Users];
+
+export { collections };
