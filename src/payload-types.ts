@@ -160,7 +160,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: Archive[];
+  layout?: Archive[] | null;
   meta?: {
     title?: string | null;
     /**

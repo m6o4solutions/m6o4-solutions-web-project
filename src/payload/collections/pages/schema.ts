@@ -70,7 +70,6 @@ const Pages: CollectionConfig<"pages"> = {
 						{
 							name: "layout",
 							type: "blocks",
-							required: true,
 							admin: {
 								initCollapsed: true,
 							},
