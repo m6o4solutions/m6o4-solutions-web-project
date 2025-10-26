@@ -71,7 +71,7 @@ const Page = async ({ params: paramsPromise }: Args) => {
 
 			{draft && <LivePreviewListener />}
 
-			<RenderBlocks blocks={layout} />
+			<RenderBlocks blocks={layout || []} />
 		</article>
 	);
 };

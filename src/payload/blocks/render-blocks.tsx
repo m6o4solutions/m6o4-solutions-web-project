@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
  * props for the RenderBlocks component.
  */
 interface RenderBlocksProps {
-	blocks: Page["layout"][0][];
+	blocks: NonNullable<Page["layout"]>[number][];
 }
 
 const blockComponents = {
@@ -27,22 +27,9 @@ const RenderBlocks = (props: RenderBlocksProps) => {
 		return (
 			<Fragment>
 				{blocks.map((block, index) => {
-					const { blockType } = block;
-
-					// use the block type check to ensure type safety with blockComponents keys
-					if (blockType && typeof blockType === "string" && blockType in blockComponents) {
-						const Block = blockComponents[blockType as keyof typeof blockComponents];
-
-						if (Block) {
-							return (
-								<div key={index}>
-									{/* @ts-expect-error there may be some mismatch between the expected types here */}
-									<Block {...block} />
-								</div>
-							);
-						}
-					}
-					return null;
+					const key = block.blockType as keyof typeof blockComponents;
+					const BlockComponent = blockComponents[key];
+					return BlockComponent ? <BlockComponent key={index} {...(block as any)} /> : null;
 				})}
 			</Fragment>
 		);
