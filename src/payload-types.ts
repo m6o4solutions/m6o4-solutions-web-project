@@ -396,6 +396,29 @@ export interface User {
  * via the `definition` "HeroPrimary".
  */
 export interface HeroPrimary {
+  headline: string;
+  subHeadline: string;
+  ctaItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  media: string | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'heroPrimary';
@@ -1046,6 +1069,23 @@ export interface ArchiveSelect<T extends boolean = true> {
  * via the `definition` "HeroPrimary_select".
  */
 export interface HeroPrimarySelect<T extends boolean = true> {
+  headline?: T;
+  subHeadline?: T;
+  ctaItems?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  media?: T;
   id?: T;
   blockName?: T;
 }
