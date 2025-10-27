@@ -1,8 +1,15 @@
 import { link } from "@/payload/fields/link";
 import type { Block } from "payload";
 
+/**
+ * defines the 'primary hero block', a reusable payload layout block.
+ * this block is intended for a page's main, high-impact section, featuring
+ * a headline, text, call-to-action, and a prominent image.
+ */
 const HeroPrimary: Block = {
+	// unique identifier for the block.
 	slug: "heroPrimary",
+	// typescript interface name for strong typing.
 	interfaceName: "HeroPrimary",
 	labels: {
 		singular: "Primary Hero Block",
@@ -10,19 +17,21 @@ const HeroPrimary: Block = {
 	},
 	fields: [
 		{
+			// main heading text field.
 			name: "headline",
 			type: "text",
 			label: "Headline",
 			required: true,
 		},
 		{
+			// supporting text below the headline.
 			name: "subHeadline",
 			type: "textarea",
 			label: "Sub Headline",
 			required: true,
 		},
 		{
-			// array of links for call-to-action buttons in the header (e.g., "get a quote").
+			// array field for one or more call-to-action buttons.
 			name: "ctaItems",
 			type: "array",
 			label: "Call to Action Items",
@@ -31,31 +40,34 @@ const HeroPrimary: Block = {
 				plural: "Call to Action Items",
 			},
 			fields: [
-				// imports the reusable link field configuration.
+				// incorporates a reusable link field configuration.
 				link({
-					// disables the appearance field since the header will handle link styling.
+					// disables the link's appearance field, as the component will enforce button styling.
 					appearances: false,
 				}),
 			],
-			// limits the array to a single call-to-action button for focus.
+			// enforces a limit of one cta item to maintain design consistency and focus.
 			maxRows: 1,
 			admin: {
 				components: {
-					// uses a custom component to generate a readable label for each row in the admin ui.
-					RowLabel: "@/payload/blocks/hero-primary/row-label#RowLabel",
+					// specifies a custom react component to provide a human-readable label for the array row in the admin ui.
+					RowLabel: "@/payload/blocks/hero-primary/row-label#rowlabel",
 				},
-				// keeps the array field collapsed by default for a cleaner form.
+				// keeps the array field closed by default to reduce form clutter.
 				initCollapsed: true,
 			},
 		},
 		{
+			// field for selecting the main visual media (image) for the hero.
 			name: "media",
 			type: "upload",
 			label: "Media",
+			// relates this field to the 'media' collection.
 			relationTo: "media",
 			required: true,
 		},
 	],
 };
 
+// export the block configuration.
 export { HeroPrimary };
