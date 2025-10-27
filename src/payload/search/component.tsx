@@ -6,19 +6,19 @@ import { useDebounce } from "@/payload/utilities/use-debounce";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-/**
- * a client-side search component that debounces user input
- * and updates the Next.js router query parameter for search results.
- */
+// a client-side search component that updates the url query string
+// after the user stops typing, enabling debounced search navigation
 const Search = () => {
+	// store the current search input value
 	const [value, setValue] = useState("");
+	// get access to the next.js router instance
 	const router = useRouter();
 
-	// debounce the input value to limit the frequency of route changes
+	// apply debounce to delay route updates until the user pauses typing
 	const debouncedValue = useDebounce(value);
 
 	useEffect(() => {
-		// navigate to the search route with the query parameter
+		// update the route to include the search query parameter if a value exists
 		router.push(`/search${debouncedValue ? `?q=${debouncedValue}` : ""}`);
 	}, [debouncedValue, router]);
 
@@ -26,19 +26,19 @@ const Search = () => {
 		<div>
 			<form
 				onSubmit={(e) => {
+					// prevent form submission since navigation happens automatically
 					e.preventDefault();
 				}}
 			>
+				{/* accessible label for screen readers */}
 				<Label htmlFor="search" className="sr-only">
 					Search
 				</Label>
-				<Input
-					id="search"
-					onChange={(event) => {
-						setValue(event.target.value);
-					}}
-					placeholder="Search"
-				/>
+
+				{/* input field for entering search terms */}
+				<Input id="search" onChange={(event) => setValue(event.target.value)} placeholder="Search" />
+
+				{/* hidden submit button to maintain semantic form structure */}
 				<button type="submit" className="sr-only">
 					submit
 				</button>

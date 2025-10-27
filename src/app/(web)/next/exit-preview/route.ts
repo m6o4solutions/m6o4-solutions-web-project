@@ -1,20 +1,19 @@
 import { draftMode } from "next/headers";
 
 /**
- * @function GET
- * @description next.js api route handler for explicitly disabling draft mode (live preview).
- * this endpoint is typically called when a user wants to exit a live preview session,
- * clearing the preview cookies and reverting to fetching only published content.
+ * next.js api route handler for explicitly disabling draft mode (live preview).
+ * this is typically called to end a content preview session by clearing the
+ * associated next.js cookies, forcing the server to fetch only published data.
  *
- * @returns {Promise<Response>} an http response confirming that draft mode has been disabled.
+ * @returns a promise that resolves to an http response confirming the action.
  */
 export async function GET(): Promise<Response> {
-	// access next.js draft mode utility
+	// access the next.js draft mode utility from the headers.
 	const draft = await draftMode();
 
-	// disable next.js draft mode, clearing the preview cookies
+	// clears the draft mode cookie, reverting the session to public, published content.
 	draft.disable();
 
-	// return a simple confirmation response
-	return new Response("Draft mode is disabled.");
+	// return a confirmation message to the client.
+	return new Response("draft mode is disabled.");
 }

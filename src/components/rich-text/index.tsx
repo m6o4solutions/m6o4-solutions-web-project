@@ -10,88 +10,107 @@ import {
 	type DefaultTypedEditorState,
 } from "@payloadcms/richtext-lexical";
 import {
-	RichText as ConvertRichText, // renamed to avoid collision with this component's name
+	RichText as ConvertRichText, // renamed to avoid collision
 	JSXConvertersFunction,
 	LinkJSXConverter,
 } from "@payloadcms/richtext-lexical/react";
+import React from "react";
 
-// defines the custom structure of block nodes expected within the lexical data.
+// defines the union of default lexical node types and the custom block nodes used in this application.
 type NodeTypes = DefaultNodeTypes | SerializedBlockNode<MediaBlockProps | BannerBlockProps | CodeBlockProps>;
 
 /**
- * @function internalDocToHref
- * @description custom function to translate internal document link data (from Payload)
- * into a usable frontend url path (e.g., converting a 'post' relationship slug to '/posts/[slug]').
- * this is passed to the LinkJSXConverter to handle internal links correctly.
+ * custom function to map internal payload document relationship data to a frontend url.
+ * this ensures that internal links created in the payload editor resolve correctly
+ * in the published application.
+ *
+ * @param linkNode - the serialized link node containing relationship details.
+ * @returns the correctly formatted public url string.
  */
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
+	// safely destructures the document value and relation from the link node fields.
 	const { value, relationTo } = linkNode.fields.doc!;
+
+	// ensures the related document object is fully populated as expected.
 	if (typeof value !== "object") {
-		throw new Error("Expected value to be an object.");
+		throw new Error("expected value to be an object.");
 	}
+
+	// extracts the slug from the related document.
 	const slug = value.slug;
+
+	// constructs the url path based on the document's collection type.
 	return relationTo === "posts" ? `/posts/${slug}` : `/${slug}`;
 };
 
 /**
- * @function jsxConverters
- * @description defines the comprehensive set of rules for converting lexical json nodes
- * into react jsx elements. this is where custom payload blocks are mapped to their
- * corresponding react components.
+ * defines the complete set of rules for converting lexical editor json into react jsx.
+ * it extends the default converters and explicitly maps custom blocks to their components.
  */
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
-	// includes standard formatting converters (bold, italic, lists, etc.).
+	// includes all standard rich text formatting and element converters.
 	...defaultConverters,
-	// customizes link handling using the internalDocToHref function defined above.
+
+	// overrides the default link converter to use the custom 'internaldoc-to-href' logic.
 	...LinkJSXConverter({ internalDocToHref }),
-	// defines custom block rendering rules:
+
+	// maps the payload block slugs to their corresponding react components.
 	blocks: {
+		// maps the 'banner' block, applying custom tailwind grid placement.
 		banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+		// maps the 'media' block, applying custom grid placement and presentation classes.
 		media: ({ node }) => (
 			<MediaBlock
 				className="col-span-3 col-start-1"
 				imgClassName="m-0"
 				{...node.fields}
 				captionClassName="mx-auto max-w-[48rem]"
-				enableGutter={false}
+				enableGutter={false} // media block handles its own gutter/container logic.
 				disableInnerContainer={true}
 			/>
 		),
+		// maps the 'code' block, applying custom tailwind grid placement.
 		code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
 	},
 });
 
-// defines the component props, including the required rich text data and optional layout controls.
+// defines the props for the rich text component.
 type Props = {
-	data: DefaultTypedEditorState; // the json state from the lexical editor.
-	enableGutter?: boolean; // controls whether to use a container for centering/padding.
-	enableProse?: boolean; // controls whether to apply Tailwind Typography styles.
+	// the required json data structure from the lexical editor field.
+	data: DefaultTypedEditorState;
+	// control flag to apply max-width, horizontal padding, and centering (gutter).
+	enableGutter?: boolean;
+	// control flag to apply tailwind typography ('prose') styling.
+	enableProse?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 /**
- * @component RichText
- * @description the main component that renders payload lexical rich text.
- * it takes the json data, applies custom block converters, and styles the output
- * using tailwind utility classes, including the 'prose' styling for typography.
+ * the main component that accepts rich text json data and renders it as styled html.
+ * it manages the application of typography and layout container styles around the content.
  */
 const RichText = (props: Props) => {
+	// destructures props, setting defaults for optional layout controls.
 	const { className, enableProse = true, enableGutter = true, ...rest } = props;
 	return (
+		// uses the underlying payload rich text converter component.
 		<ConvertRichText
-			converters={jsxConverters} // passes the custom converter rules
+			converters={jsxConverters} // applies the custom block and link conversion rules.
 			className={cn(
 				"payload-richtext",
 				{
-					// conditional styling based on props:
-					container: enableGutter, // apply max-width/centering if gutter is enabled
-					"max-w-none": !enableGutter, // override max-width if gutter is disabled
-					"prose md:prose-md dark:prose-invert mx-auto": enableProse, // apply tailwind typography styles
+					// conditional container styling: applies max-width and centering if gutter is enabled.
+					container: enableGutter,
+					// removes max-width constraint if gutter is disabled.
+					"max-w-none": !enableGutter,
+					// applies tailwind typography classes for readable styling if prose is enabled.
+					"prose md:prose-md dark:prose-invert mx-auto": enableProse,
 				},
-				className, // merges any user-provided classes
+				className, // includes any external classes passed to the component.
 			)}
 			{...rest}
 		/>
 	);
 };
 
+// export the reusable rich text rendering component.
 export { RichText };

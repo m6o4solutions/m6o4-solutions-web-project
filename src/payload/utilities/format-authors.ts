@@ -1,23 +1,19 @@
 import { Post } from "@/payload-types";
 
-/**
- * formats an array of populatedAuthors from posts into a prettified string.
- * @param authors - the populatedAuthors array from a Post.
- * @returns a prettified string of authors.
- * @example
- *
- * [Author1, Author2] becomes 'Author1 and Author2'
- * [Author1, Author2, Author3] becomes 'Author1, Author2, and Author3'
- *
- */
+// converts an array of populated authors into a clean, human-readable string.
+// handles proper english joining with commas and 'and' for the last item.
 const formatAuthors = (authors: NonNullable<NonNullable<Post["populatedAuthors"]>[number]>[]) => {
-	// ensure we don't have any authors without a name
+	// extract only author names, excluding any null or undefined entries
 	const authorNames = authors.map((author) => author.name).filter(Boolean);
 
+	// handle empty or single author cases
 	if (authorNames.length === 0) return "";
 	if (authorNames.length === 1) return authorNames[0];
+
+	// handle two authors (no comma before 'and')
 	if (authorNames.length === 2) return `${authorNames[0]} and ${authorNames[1]}`;
 
+	// handle three or more authors with oxford-comma style joining
 	return `${authorNames.slice(0, -1).join(", ")} and ${authorNames[authorNames.length - 1]}`;
 };
 

@@ -1,3 +1,4 @@
+// import collection schemas from payloadcms
 import { Categories } from "@/payload/collections/categories/schema";
 import { CTA } from "@/payload/collections/cta/schema";
 import { FAQ } from "@/payload/collections/faq/schema";
@@ -9,6 +10,7 @@ import { Testimonials } from "@/payload/collections/testimonials/schema";
 import { Users } from "@/payload/collections/users/schema";
 import { Work } from "@/payload/collections/work/schema";
 
+// central array of all collections for payloadcms registration
 const collections = [Pages, Posts, Services, Work, FAQ, CTA, Testimonials, Categories, Media, Users];
 
 export { collections };

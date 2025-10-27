@@ -3,6 +3,7 @@ import type { Field, GroupField } from "payload";
 
 export type LinkAppearances = "default" | "outline";
 
+/* defines selectable appearance options for link styling */
 const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
 	default: {
 		label: "Default",
@@ -14,6 +15,7 @@ const appearanceOptions: Record<LinkAppearances, { label: string; value: string 
 	},
 };
 
+/* configures a reusable link field group with optional label, appearance, and overrides */
 type LinkType = (options?: {
 	appearances?: LinkAppearances[] | false;
 	disableLabel?: boolean;
@@ -21,6 +23,7 @@ type LinkType = (options?: {
 }) => Field;
 
 const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
+	/* base link group configuration */
 	const linkResult: GroupField = {
 		name: "link",
 		type: "group",
@@ -66,6 +69,7 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
 		],
 	};
 
+	/* defines link target fields for internal references and external urls */
 	const linkTypes: Field[] = [
 		{
 			name: "reference",
@@ -88,6 +92,7 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
 		},
 	];
 
+	/* adds label support if not disabled */
 	if (!disableLabel) {
 		linkTypes.map((linkType) => ({
 			...linkType,
@@ -116,6 +121,7 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
 		linkResult.fields = [...linkResult.fields, ...linkTypes];
 	}
 
+	/* adds appearance selector unless explicitly disabled */
 	if (appearances !== false) {
 		let appearanceOptionsToUse = [appearanceOptions.default, appearanceOptions.outline];
 
@@ -127,13 +133,14 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
 			name: "appearance",
 			type: "select",
 			admin: {
-				description: "Choose how the link should be rendered.",
+				description: "choose how the link should be rendered.",
 			},
 			defaultValue: "default",
 			options: appearanceOptionsToUse,
 		});
 	}
 
+	/* merges base link configuration with any external overrides */
 	return deepMerge(linkResult, overrides);
 };
 

@@ -3,18 +3,15 @@ import config from "@payload-config";
 import { unstable_cache } from "next/cache";
 import { getPayload } from "payload";
 
+// represents all available collection slugs defined in payload config
 type Collection = keyof Config["collections"];
 
-/**
- * fetches a single document from payload by slug.
- * @param {Collection} collection - the collection slug.
- * @param {string} slug - the slug of the document.
- * @param {number} [depth=0] - the depth for relationship population.
- * @returns {Promise<any>} the document object.
- */
+// fetches a single document from payload by its collection and slug
 const getDocument = async (collection: Collection, slug: string, depth = 0) => {
-	const payload = await getPayload({ config: config });
+	// initialize payload instance with config
+	const payload = await getPayload({ config });
 
+	// query the collection for a document whose slug matches the provided value
 	const page = await payload.find({
 		collection,
 		depth,
@@ -25,16 +22,12 @@ const getDocument = async (collection: Collection, slug: string, depth = 0) => {
 		},
 	});
 
+	// return the first matching document
 	return page.docs[0];
 };
 
-/**
- * returns an unstable_cache function mapped with a cache tag for the document's slug.
- * the returned function should be called to execute the query, e.g., `await getCachedDocument('pages', 'home')()`.
- * @param {Collection} collection - the collection slug.
- * @param {string} slug - the slug of the document.
- * @returns {() => Promise<any>} a memoized function that returns the document.
- */
+// creates a cached version of getDocument using next's unstable_cache
+// ties cache identity to both the collection and slug for efficient reuse
 const getCachedDocument = (collection: Collection, slug: string) =>
 	unstable_cache(async () => getDocument(collection, slug), [collection, slug], {
 		tags: [`${collection}_${slug}`],

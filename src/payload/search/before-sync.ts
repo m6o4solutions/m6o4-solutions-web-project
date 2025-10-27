@@ -1,65 +1,67 @@
 import type { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
 
-/**
- * custom 'beforeSync' hook for the search plugin.
- * this function modifies the document data before it's saved to the search index,
- * specifically to simplify SEO meta fields and manually populate category titles.
- */
+// a hook that runs before syncing a document to the search index
+// cleans and restructures the document to ensure consistent and optimized search data
 const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searchDoc }) => {
+	// extract the collection name from the search document
 	const {
 		doc: { relationTo: collection },
 	} = searchDoc;
 
+	// extract relevant fields from the original document
 	const { slug, id, categories, title, meta } = originalDoc;
 
-	// construct the base modified search document
+	// create the base version of the document that will be synced
+	// this ensures consistent structure and proper meta field formatting
 	const modifiedDoc: DocToSync = {
 		...searchDoc,
 		slug,
 		meta: {
 			...meta,
-			// fallback: Use doc title if meta title is missing
+			// use meta title if available, otherwise fallback to the document title
 			title: meta?.title || title,
-			// ensure image is stored as an id for search simplicity
+			// store only the image id to keep the search index lightweight
 			image: meta?.image?.id || meta?.image,
 			description: meta?.description,
 		},
 		categories: [],
 	};
 
-	// manually populate categories to include title in the search document
+	// if categories exist, populate them to include human-readable titles
 	if (categories && Array.isArray(categories) && categories.length > 0) {
 		const populatedCategories: { id: string | number; title: string }[] = [];
 
 		for (const category of categories) {
-			if (!category) {
-				continue;
-			}
+			// skip empty category entries
+			if (!category) continue;
 
-			// if the category is already populated (an object), use it
+			// if category is already populated with a title, reuse it
 			if (typeof category === "object" && "title" in category) {
 				populatedCategories.push(category);
 				continue;
 			}
 
-			// if the category is just an ID, manually fetch it
+			// if category is an id, fetch its document to get the title
 			const doc = await req.payload.findByID({
 				collection: "categories",
-				id: category as string | number, // cast to handle id type
+				id: category as string | number,
 				disableErrors: true,
 				depth: 0,
 				select: { title: true },
 				req,
 			});
 
+			// push the result if found, otherwise log a warning for debugging
 			if (doc !== null) {
 				populatedCategories.push(doc);
 			} else {
-				console.error(`Failed. Category not found when syncing collection '${collection}' with id '${id}' to search.`);
+				console.error(
+					`Failed to sync category for collection '${collection}' with id '${id}': The category was not found.`,
+				);
 			}
 		}
 
-		// map the populated category objects to the search plugin's expected format
+		// transform populated categories into the structure expected by the search plugin
 		modifiedDoc.categories = populatedCategories.map((each) => ({
 			relationTo: "categories",
 			categoryID: String(each.id),
@@ -67,6 +69,7 @@ const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searchDoc })
 		}));
 	}
 
+	// return the final cleaned and structured document for indexing
 	return modifiedDoc;
 };
 

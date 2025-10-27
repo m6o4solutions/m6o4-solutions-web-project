@@ -3,40 +3,35 @@ import { getServerSideURL } from "@/payload/utilities/get-url";
 import { mergeOpenGraph } from "@/payload/utilities/merge-opengraph";
 import type { Metadata } from "next";
 
-/**
- * determines the absolute url for the open graph image.
- * Uses the doc's meta image if available, otherwise falls back to a default template OG image.
- * @param {Media | Config['db']['defaultIDType'] | null} image - The media object or ID from the document's meta field.
- * @returns {string} the absolute URL of the OG image.
- */
+// builds the absolute url for an open graph image using either
+// the document's provided meta image or a default template image
 const getImageURL = (image?: Media | Config["db"]["defaultIDType"] | null) => {
 	const serverUrl = getServerSideURL();
 
+	// default image used when no meta image is defined
 	let url = serverUrl + "/website-template-OG.webp";
 
+	// if a media object is provided, use its og or base url
 	if (image && typeof image === "object" && "url" in image) {
 		const ogUrl = image.sizes?.og?.url;
-
 		url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url;
 	}
 
 	return url;
 };
 
-/**
- * generates the next.js metadata object (title, description, and opengraph data)
- * for a Payload document (page or post).
- * @param {object} args - the arguments containing the document.
- * @param {Partial<Page> | Partial<Post> | null} args.doc - the payload document.
- * @returns {Promise<Metadata>} the generated next.js metadata.
- */
+// builds the metadata object for a next.js page or post document,
+// including title, description, and open graph information
 const generateMeta = async (args: { doc: Partial<Page> | Partial<Post> | null }): Promise<Metadata> => {
 	const { doc } = args;
 
+	// resolve og image url from the document
 	const ogImage = getImageURL(doc?.meta?.image);
 
-	const title = doc?.meta?.title ? doc?.meta?.title + " | M6O4 Solutions" : "M6O4 Solutions";
+	// append site name to meta title if available
+	const title = doc?.meta?.title ? doc.meta.title + " | M6O4 Solutions" : "M6O4 Solutions";
 
+	// compose and return metadata object
 	return {
 		description: doc?.meta?.description,
 		openGraph: mergeOpenGraph({
@@ -49,8 +44,8 @@ const generateMeta = async (args: { doc: Partial<Page> | Partial<Post> | null })
 					]
 				: undefined,
 			title,
-			// fallback slug logic
-			url: Array.isArray(doc?.slug) ? doc?.slug.join("/") : "/",
+			// construct a url-friendly slug path if the slug is an array
+			url: Array.isArray(doc?.slug) ? doc.slug.join("/") : "/",
 		}),
 		title,
 	};

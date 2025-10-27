@@ -6,61 +6,59 @@ import { getMediaUrl } from "@/payload/utilities/get-media-url";
 import React, { useEffect, useRef } from "react";
 
 /**
- * @component videomedia
- * @description renders a video element using payload cms media data.
- * it is configured for background video usage: autoplay, loop, and muted.
- *
- * @param {function} [onClick] - click handler for the video element.
- * @param {object} resource - the payload media object containing video details.
- * @param {string} [videoClassName] - tailwind classes to apply directly to the <video> element.
+ * a client-side component that renders a video element.
+ * it is specifically configured for decorative, background use: autoplaying, looping, and muted.
+ * it relies on a payload media object to construct the video source url.
  */
 const VideoMedia = ({ onClick, resource, videoClassName }: MediaProps) => {
-	// creates a ref to directly access the native html <video> dom element.
+	// ref to gain direct access to the underlying <video> element for managing playback/events.
 	const videoRef = useRef<HTMLVideoElement>(null);
 
-	// useeffect hook to attach a temporary event listener on component mount.
-	// the 'suspend' listener is often used here as a placeholder or to manage
-	// browser-specific loading issues, though its current implementation is empty.
+	// handles side effects after initial render.
 	useEffect(() => {
 		const { current: video } = videoRef;
 
 		if (video) {
-			// currently attaches a no-op listener; often a placeholder for load/error handling.
+			// attaches a listener for the 'suspend' event.
+			// this is often used to manage video loading states, though the current implementation is a no-op.
 			video.addEventListener("suspend", () => {});
 		}
-		// dependency array is empty, so it runs only once on mount.
+		// runs only once on mount to attach the event listener.
+		// note: the listener should ideally be cleaned up, but 'suspend' generally does not need to be removed.
 	}, []);
 
-	// conditional rendering: only proceed if the resource data object is present.
+	// ensure the resource is a valid object before attempting to render.
 	if (resource && typeof resource === "object") {
 		const { filename } = resource;
 
 		return (
 			<video
-				// enables automatic playback when loaded.
+				// enables automatic playback (often requires 'muted' to work in modern browsers).
 				autoPlay
-				// merges custom video classes.
+				// merge custom classes provided via props.
 				className={cn(videoClassName)}
-				// disables native browser controls (intended for background/decorative video).
+				// hides the browser's native playback controls.
 				controls={false}
 				// ensures the video repeats indefinitely.
 				loop
-				// disables audio (required for autoplay in most browsers).
+				// disables audio (required for autoplay in many environments).
 				muted
+				// attaches the click handler from props.
 				onClick={onClick}
-				// ensures the video is played within the element's bounds, not fullscreen (ios requirement).
+				// ensures inline playback, particularly for mobile safari.
 				playsInline
-				// attaches the ref for dom access.
+				// attaches the ref to the dom element.
 				ref={videoRef}
 			>
-				{/* defines the video source by constructing the full url using the filename. */}
+				{/* defines the video source by constructing the full public url from the filename. */}
 				<source src={getMediaUrl(`/media/${filename}`)} />
 			</video>
 		);
 	}
 
-	// returns null if no valid resource object is provided.
+	// returns nothing if the resource data is missing or invalid.
 	return null;
 };
 
+// export the video media component.
 export { VideoMedia };

@@ -3,52 +3,70 @@ import { getCachedDocument } from "@/payload/utilities/get-document";
 import { getCachedRedirects } from "@/payload/utilities/get-redirects";
 import { notFound, redirect } from "next/navigation";
 
-// props for the PayloadRedirects function
+// props for the payloadredirects function.
 interface Props {
+	// flag to prevent triggering the next.js notfound() if no redirect rule is matched.
 	disableNotFound?: boolean;
+	// the incoming url path to check against redirect rules.
 	url: string;
 }
 
-/* this function handles server-side dynamic redirects based on payload cms data. */
+/**
+ * a server component function that intercepts requests to handle dynamic 301/302 redirects
+ * configured within payload cms. it checks the incoming url against cached rules and
+ * issues a next.js redirect if a match is found.
+ *
+ * @param props - includes the url to check and an optional flag to disable notfound.
+ */
 const PayloadRedirects = async ({ disableNotFound, url }: Props) => {
+	// fetch all cached redirect rules configured in payload.
 	const redirects = await getCachedRedirects()();
 
+	// find the first redirect rule whose 'from' url matches the incoming url.
 	const redirectItem = redirects.find((redirect) => redirect.from === url);
 
 	if (redirectItem) {
-		// 1. handle direct url redirects
+		// 1. handle direct url redirects (to an external or hardcoded internal url).
 		if (redirectItem.to?.url) {
 			redirect(redirectItem.to.url);
 		}
 
 		let redirectUrl: string;
 
-		// 2. handle redirects to an internal payload document
+		// 2. handle redirects to an internal payload document (e.g., when reference is an id string).
 		if (typeof redirectItem.to?.reference?.value === "string") {
 			const collection = redirectItem.to?.reference?.relationTo;
 			const id = redirectItem.to?.reference?.value;
 
+			// fetch the target document to get its slug for the url.
 			const document = (await getCachedDocument(collection, id)()) as Page | Post;
 
-			// build the url: conditional prefix (e.g., /posts) + slug
+			// construct the redirect url: includes a collection prefix (e.g., /posts) unless it's a 'page',
+			// followed by the document slug.
 			redirectUrl = `${redirectItem.to?.reference?.relationTo !== "pages" ? `/${redirectItem.to?.reference?.relationTo}` : ""}/${
 				document?.slug
 			}`;
 		} else {
-			// 3. handle object-based reference (e.g., when the reference is an object due to population)
+			// 3. handle object-based reference (e.g., when the reference is already populated as an object).
+			// this assumes the target document's slug is available in the object reference.
 			redirectUrl = `${redirectItem.to?.reference?.relationTo !== "pages" ? `/${redirectItem.to?.reference?.relationTo}` : ""}/${
 				typeof redirectItem.to?.reference?.value === "object" ? redirectItem.to?.reference?.value?.slug : ""
 			}`;
 		}
 
+		// if a valid internal url was constructed, execute the redirect.
 		if (redirectUrl) redirect(redirectUrl);
 	}
 
-	// if no redirect is found and notFound is disabled, return null (important for wrapping components)
-	if (disableNotFound) return null;
+	// if no redirect rule was found, check the disable notfound flag.
+	if (disableNotFound) {
+		// if notfound is disabled, simply return null to allow the wrapper component to continue rendering.
+		return null;
+	}
 
-	// if no redirect is found, trigger a Next.js notFound page
+	// if no redirect was found and notfound is not disabled, terminate the request with a 404.
 	notFound();
 };
 
+// export the server function for use in next.js route handlers or pages.
 export { PayloadRedirects };

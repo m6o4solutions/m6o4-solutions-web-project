@@ -4,43 +4,34 @@ import { VideoMedia } from "@/components/media/video-media";
 import React, { Fragment } from "react";
 
 /**
- * @component media
- * @description the main media abstraction component. it inspects the 'resource' prop
- * (typically a payload media object) to determine if it's a video or an image,
- * and delegates rendering to the appropriate sub-component (videomedia or imagemedia).
- * it also allows wrapping the media in a custom html element.
- *
- * @param {string} [className] - classes for the wrapper element.
- * @param {ElementType | null} [htmlElement="div"] - the html tag to wrap the content (e.g., 'div', 'span').
- * if null, it uses react.fragment.
- * @param {MediaType | string | number | null} resource - the media data object from payload or a static source.
- * @param {Props} rest - all other props (fill, priority, alt, etc.) passed down to sub-components.
+ * the primary media component that acts as a router for image and video rendering.
+ * it inspects the payload media object's mime type to determine the correct sub-component
+ * and wraps the rendered output in a customizable html tag.
  */
 const Media = ({ className, htmlElement = "div", resource, ...rest }: Props) => {
-	// logic to determine if the resource is a video by checking the mimetype property.
+	// determine if the resource is an object and if its mimetype property includes 'video'.
 	const isVideo = typeof resource === "object" && resource?.mimeType?.includes("video");
 
-	// sets the wrapper tag to the specified html element or react.fragment if htmlElement is null.
+	// set the wrapper tag, defaulting to 'div' or using react.fragment if 'htmlElement' is null.
 	const Tag = htmlElement || Fragment;
 
 	return (
 		<Tag
-			// conditionally spreads props onto the wrapper. if htmlElement is null (using fragment),
-			// we avoid passing props like className, which fragments cannot accept.
-			{...(htmlElement !== null
-				? {
-						className,
-					}
-				: {})}
+			// conditionally apply the className only if a concrete html element is used,
+			// as react.fragment cannot accept dom attributes.
+			{...(htmlElement !== null ? { className } : {})}
 		>
-			{/* conditional rendering: if it's a video, render videomedia; otherwise, render imagemedia. */}
+			{/* delegate rendering based on the media type */}
 			{isVideo ? (
+				// render video media component, passing all props through.
 				<VideoMedia resource={resource} className={className} {...rest} />
 			) : (
+				// render image media component (including svgs and other non-video types).
 				<ImageMedia resource={resource} className={className} {...rest} />
 			)}
 		</Tag>
 	);
 };
 
+// export the versatile media component.
 export { Media };

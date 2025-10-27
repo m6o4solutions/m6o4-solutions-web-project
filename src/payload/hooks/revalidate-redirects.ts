@@ -1,14 +1,13 @@
 import { revalidateTag } from "next/cache";
 import type { CollectionAfterChangeHook } from "payload";
 
-/**
- * revalidates the 'redirects' cache tag after any change to the collection.
- */
+/* 
+collection hook that runs after a redirect document is created or updated
+logs the action and triggers cache revalidation for the 'redirects' tag to keep frontend data in sync
+*/
 const revalidateRedirects: CollectionAfterChangeHook = ({ doc, req: { payload } }) => {
-	payload.logger.info(`Revalidating redirects...`);
-
+	payload.logger.info("revalidating redirects...");
 	revalidateTag("redirects");
-
 	return doc;
 };
 

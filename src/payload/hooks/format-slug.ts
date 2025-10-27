@@ -1,39 +1,35 @@
 import type { FieldHook } from "payload";
 
-/**
- * formats a string to be url-safe by converting to lowercase, replacing spaces with hyphens, and removing special characters.
- * @param {string} val - the string to format.
- * @returns {string} the url-safe slug.
- */
+/* 
+formats a string into a url-friendly slug
+converts to lowercase, replaces spaces with hyphens, and removes special characters
+*/
 const format = (val: string): string =>
 	val
 		.replace(/ /g, "-")
 		.replace(/[^\w-]+/g, "")
 		.toLowerCase();
 
-/**
- * payload field hook that formats a value into a url slug, using a fallback field if the value is not present during creation.
- * @param {string} fallback - the name of the field to use as a fallback for the slug during 'create' operation.
- * @returns {FieldHook} the Payload Field Hook function.
- */
+/* 
+returns a payload field hook that auto-generates a slug
+if a manual value is provided, it formats and returns it
+if creating a new document, it uses a fallback field (e.g., title) when no slug is provided
+otherwise, it preserves the existing value
+*/
 const formatSlug =
 	(fallback: string): FieldHook =>
 	({ data, operation, originalDoc, value }) => {
-		// 1. if a value is manually provided, use and format it
 		if (typeof value === "string") {
 			return format(value);
 		}
 
-		// 2. if creating a new document, use and format the fallback field
 		if (operation === "create") {
 			const fallbackData = data?.[fallback] || originalDoc?.[fallback];
-
 			if (fallbackData && typeof fallbackData === "string") {
 				return format(fallbackData);
 			}
 		}
 
-		// 3. otherwise, return the original value (which might be undefined or null)
 		return value;
 	};
 

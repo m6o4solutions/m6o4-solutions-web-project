@@ -1,34 +1,29 @@
 "use client";
 
-// imports the router hook from next/navigation for programmatic navigation/refreshing.
-// imports a utility to get the correct base url for client-side API requests.
 import { getClientSideURL } from "@/payload/utilities/get-url";
-// imports the specific component from the payload live preview library.
-// 'refreshrouteonsave' is used to trigger a next.js route refresh when a document is saved in payload.
 import { RefreshRouteOnSave as PayloadLivePreview } from "@payloadcms/live-preview-react";
 import { useRouter } from "next/navigation";
 
 /**
- * @component livepreviewlistener
- * @description sets up a listener to enable real-time live preview functionality
- * between the payload admin dashboard and the next.js frontend.
- * it tells payload's library how to refresh the current next.js route when content is saved.
+ * a client-side component that activates payload's live preview functionality.
+ * it connects the payload admin's content saving event to the next.js frontend,
+ * enabling automatic, soft route refreshes upon document updates.
  */
 const LivePreviewListener = () => {
-	// initializes the next.js router instance.
+	// initializes the next.js router hook to access client-side navigation methods.
 	const router = useRouter();
 
 	return (
-		// renders the payload live preview component.
+		// renders the core payload live preview component.
 		<PayloadLivePreview
-			// passes the next.js router's refresh method to payload, which executes
-			// a soft refresh of the current page's data without a full page reload.
+			// provides the next.js route refresh function, instructing payload's library
+			// to execute a soft navigation refresh when content is saved in the admin.
 			refresh={router.refresh}
-			// passes the base url of the next.js application to the payload component
-			// so it knows where to look for content/api endpoints.
+			// provides the base url for the client to communicate with payload's api.
 			serverURL={getClientSideURL()}
 		/>
 	);
 };
 
+// export the listener for inclusion in pages that require live preview.
 export { LivePreviewListener };

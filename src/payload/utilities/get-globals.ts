@@ -3,36 +3,26 @@ import config from "@payload-config";
 import { unstable_cache } from "next/cache";
 import { getPayload } from "payload";
 
+// represents all available global slugs defined in payload config
 type Global = keyof Config["globals"];
 
-// each slug directly maps to its corresponding global type
+// maps each slug to its specific global type from payload config
 type DataFromGlobalSlug<TSlug extends Global> = Config["globals"][TSlug];
 
-/**
- * fetches a single global document from Payload by slug.
- * @param {Global} slug - the slug of the global document.
- * @param {number} [depth=0] - the depth for relationship population.
- * @returns {Promise<any>} the global document object.
- */
+// fetches a single global document from payload using its slug
 const getGlobal = async <TSlug extends Global>(slug: TSlug, depth = 0): Promise<DataFromGlobalSlug<TSlug>> => {
+	// initialize payload with its config
 	const payload = await getPayload({ config });
 
-	const global = await payload.findGlobal({
-		slug,
-		depth,
-	});
+	// fetch the global document by slug with optional population depth
+	const global = await payload.findGlobal({ slug, depth });
 
-	// cast safely to the inferred type
+	// return the result cast to the correct inferred type
 	return global as DataFromGlobalSlug<TSlug>;
 };
 
-/**
- * returns an unstable_cache function mapped with a cache tag for the global's slug.
- * the returned function should be called to execute the query, e.g., `await getCachedGlobal('header')()`.
- * @param {Global} slug - the slug of the global.
- * @param {number} [depth=0] - the depth for relationship population.
- * @returns {() => Promise<any>} a memoized function that returns the global document.
- */
+// creates a cached version of getGlobal tied to a specific slug
+// ensures data reuse and avoids repeated fetching
 const getCachedGlobal = <TSlug extends Global>(slug: TSlug, depth = 0) =>
 	unstable_cache(async () => getGlobal(slug, depth), [slug], {
 		tags: [`global_${slug}`],

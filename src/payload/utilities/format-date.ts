@@ -1,64 +1,46 @@
-/**
- * @function formatdate
- * @description formats a date string into a human-readable string. it displays
- * relative time (e.g., "5 minutes ago", "3 days ago") for recent dates,
- * and a full localized date (e.g., "january 15, 2025") for older dates.
- *
- * @param {string | null | undefined} datestring - the date string to be formatted.
- * @returns {string} the formatted date string, or an error message if the input is invalid.
- */
+// formats a date string into a readable, user-friendly format.
+// shows relative time for recent dates (e.g., "5 minutes ago")
+// and full date format for older entries (e.g., "january 15, 2025").
 const formatDate = (dateString?: string | null): string => {
-	// handle null, undefined, or empty date string input
+	// handle missing or empty input values
 	if (!dateString) return "Unknown date";
 
-	// create a date object from the string
+	// convert input string to a date object
 	const date = new Date(dateString);
 
-	// check if the date object is invalid (e.g., failed to parse)
+	// check for invalid date formats
 	if (isNaN(date.getTime())) return "Invalid date";
 
-	// get the current time for comparison
+	// get current time for relative comparison
 	const now = new Date();
 
-	// calculate the difference in milliseconds
+	// calculate difference in milliseconds between now and the date
 	const diffMs = now.getTime() - date.getTime();
 
-	// calculate the difference in full days
+	// derive difference in full days
 	const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-	// --- relative time logic ---
-
-	// check if the difference is less than one full day (today)
+	// handle time differences less than one day
 	if (diffDays < 1) {
-		// calculate difference in hours
 		const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
 
-		// if less than an hour ago
+		// handle time differences under an hour
 		if (diffHours < 1) {
-			// calculate difference in minutes
 			const diffMinutes = Math.floor(diffMs / (1000 * 60));
-			// return "just now" or "x minutes ago"
 			return diffMinutes <= 1 ? "Just now" : `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
 		}
 
-		// return "x hours ago"
+		// return hours ago for same-day entries
 		return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
 	}
 
-	// if within the last 7 days (but more than 1 day ago)
+	// handle dates within the past week
 	if (diffDays < 7) {
-		// return "x days ago"
 		return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
 	}
 
-	// --- full date formatting (for older dates) ---
-
-	// otherwise, show the full, long-form date
-	return date.toLocaleDateString("en-US", {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	});
+	// fallback to full localized date format for older entries
+	return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 };
 
 export { formatDate };

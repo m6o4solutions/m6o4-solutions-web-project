@@ -1,5 +1,6 @@
 import type { CollectionSlug, PayloadRequest } from "payload";
 
+// maps each collection to its url prefix used for preview routing
 const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
 	posts: "/posts",
 	pages: "",
@@ -11,14 +12,12 @@ type Props = {
 	req: PayloadRequest;
 };
 
-/**
- * generates the url path for next.js Draft Mode (Preview Mode) based on a Payload document's collection and slug.
- * @param {Props} args - the arguments including collection, slug, and Payload request object.
- * @returns {string} the full preview URL path.
- */
+// builds a next.js draft mode (preview mode) path for a payload document
 const generatePreviewPath = ({ collection, slug }: Props) => {
+	// determine the base path from the collection mapping
 	const path = collectionPrefixMap[collection];
 
+	// encode all required query parameters for preview mode
 	const encodedParams = new URLSearchParams({
 		slug,
 		collection,
@@ -26,6 +25,7 @@ const generatePreviewPath = ({ collection, slug }: Props) => {
 		previewSecret: process.env.PREVIEW_SECRET!,
 	});
 
+	// construct final preview url
 	const url = `/next/preview?${encodedParams.toString()}`;
 
 	return url;
