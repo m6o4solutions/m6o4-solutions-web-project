@@ -160,7 +160,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout?: Archive[] | null;
+  layout?: (Archive | HeroPrimary | HeroSecondary)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -390,6 +390,24 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroPrimary".
+ */
+export interface HeroPrimary {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroPrimary';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroSecondary".
+ */
+export interface HeroSecondary {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroSecondary';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -992,6 +1010,8 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         archive?: T | ArchiveSelect<T>;
+        heroPrimary?: T | HeroPrimarySelect<T>;
+        heroSecondary?: T | HeroSecondarySelect<T>;
       };
   meta?:
     | T
@@ -1018,6 +1038,22 @@ export interface ArchiveSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroPrimary_select".
+ */
+export interface HeroPrimarySelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroSecondary_select".
+ */
+export interface HeroSecondarySelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }

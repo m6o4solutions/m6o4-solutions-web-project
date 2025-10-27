@@ -1,10 +1,14 @@
 import type { Page } from "@/payload-types";
 import { ArchiveBlock } from "@/payload/blocks/archive/component";
+import { HeroPrimaryBlock } from "@/payload/blocks/hero-primary/component";
+import { HeroSecondaryBlock } from "@/payload/blocks/hero-secondary/component";
 import React, { Fragment } from "react";
 
 // map of available block components keyed by blockType
 const blockComponents = {
 	archive: ArchiveBlock,
+	heroPrimary: HeroPrimaryBlock,
+	heroSecondary: HeroSecondaryBlock,
 } as const;
 
 // types for block structure and valid block keys
