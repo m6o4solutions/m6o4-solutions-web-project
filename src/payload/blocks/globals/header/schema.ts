@@ -20,13 +20,13 @@ const Header: GlobalConfig = {
 			// the name of the organization to display in the header, mandatory.
 			name: "organizationName",
 			type: "text",
-			label: "name",
+			label: "Name",
 			required: true,
 		},
 		{
 			// the organization's logo, linked to the 'media' collection, mandatory.
 			name: "organizationLogo",
-			label: "logo",
+			label: "Logo",
 			type: "upload",
 			relationTo: "media",
 			required: true,
@@ -39,10 +39,10 @@ const Header: GlobalConfig = {
 			// array of links that make up the main navigation menu.
 			name: "navigationItems",
 			type: "array",
-			label: "navigation items",
+			label: "Navigation Items",
 			labels: {
-				singular: "navigation item",
-				plural: "navigation items",
+				singular: "Navigation Item",
+				plural: "Navigation Items",
 			},
 			fields: [
 				// imports the reusable link field configuration.
@@ -66,10 +66,10 @@ const Header: GlobalConfig = {
 			// array of links for call-to-action buttons in the header (e.g., "get a quote").
 			name: "ctaItems",
 			type: "array",
-			label: "call to action items",
+			label: "Call to Action Items",
 			labels: {
-				singular: "call to action item",
-				plural: "call to action items",
+				singular: "Call to Action Item",
+				plural: "Call to Action Items",
 			},
 			fields: [
 				// imports the reusable link field configuration.

@@ -19,12 +19,12 @@ const RowLabel = (_props: RowLabelProps) => {
 	const data = useRowLabel<HeaderItem>();
 
 	// determines the section name based on the path of the array field being edited.
-	const sectionName = data.path.includes("navigationItems") ? "navigation" : "call to action";
+	const sectionName = data.path.includes("navigationItems") ? "Navigation" : "Call to Action";
 
 	// logic to construct a meaningful label for the row.
 	const label = data?.data?.link?.label
 		? // if a link label exists, use it to form a descriptive label: "[section name] item [row number]: [link label]".
-			`${sectionName} item ${data.rowNumber !== undefined ? data.rowNumber + 1 : ""}: ${data?.data?.link?.label}`
+			`${sectionName} Item ${data.rowNumber !== undefined ? data.rowNumber + 1 : ""}: ${data?.data?.link?.label}`
 		: // if no link label exists, fall back to a generic label: "[section name] row".
 			`${sectionName} row`;
 

@@ -17,7 +17,7 @@ const Branding: GlobalConfig = {
 				{
 					// a small, square version of the logo (e.g., favicon, app icon), mandatory.
 					name: "organizationIcon",
-					label: "icon",
+					label: "Icon",
 					type: "upload",
 					required: true,
 					// links this field to the 'media' collection.
@@ -26,7 +26,7 @@ const Branding: GlobalConfig = {
 				{
 					// the full, horizontal logo of the organization (e.g., for header), optional.
 					name: "organizationLogo",
-					label: "logo",
+					label: "Logo",
 					type: "upload",
 					// links this field to the 'media' collection.
 					relationTo: "media",

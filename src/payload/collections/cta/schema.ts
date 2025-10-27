@@ -42,7 +42,7 @@ const CTA: CollectionConfig = {
 					// the main title of the cta, mandatory.
 					name: "title",
 					type: "text",
-					label: "title",
+					label: "Title",
 					required: true,
 					admin: {
 						// allocate 40% of the row width to the title field.
@@ -53,7 +53,7 @@ const CTA: CollectionConfig = {
 					// the primary content or body text for the cta, mandatory.
 					name: "content",
 					type: "textarea",
-					label: "content",
+					label: "Content",
 					required: true,
 					admin: {
 						// allocate 60% of the row width to the content field.
@@ -64,10 +64,10 @@ const CTA: CollectionConfig = {
 					// an array to hold navigation links, specifically limited to one item.
 					name: "navigationItems",
 					type: "array",
-					label: "navigation items",
+					label: "Navigation Items",
 					labels: {
-						singular: "navigation item",
-						plural: "navigation items",
+						singular: "Navigation Item",
+						plural: "Navigation Items",
 					},
 					fields: [
 						// imports the reusable link field configuration.

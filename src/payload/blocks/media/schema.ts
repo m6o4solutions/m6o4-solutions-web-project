@@ -12,8 +12,8 @@ const Media: Block = {
 	interfaceName: "MediaBlock",
 	// human-readable labels for the admin ui.
 	labels: {
-		singular: "media block",
-		plural: "media blocks",
+		singular: "Media Block",
+		plural: "Media Blocks",
 	},
 	// field definitions for the block.
 	fields: [

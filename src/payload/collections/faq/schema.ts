@@ -41,7 +41,7 @@ const FAQ: CollectionConfig = {
 					// the question text, mandatory.
 					name: "question",
 					type: "text",
-					label: "question",
+					label: "Question",
 					required: true,
 					admin: {
 						// allocate 40% of the row width to the question field.
@@ -52,7 +52,7 @@ const FAQ: CollectionConfig = {
 					// the answer text, mandatory, using a larger textarea for detailed responses.
 					name: "answer",
 					type: "textarea",
-					label: "answer",
+					label: "Answer",
 					required: true,
 					admin: {
 						// allocate 60% of the row width to the answer field.

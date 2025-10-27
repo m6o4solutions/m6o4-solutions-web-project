@@ -25,19 +25,19 @@ const RowLabel = (_props: RowLabelProps) => {
 
 	// determines the section name by checking which array field path the data belongs to.
 	const sectionName = data.path.includes("socialItems")
-		? "social"
+		? "Social"
 		: data.path.includes("serviceItems")
-			? "service"
+			? "Service"
 			: data.path.includes("businessItems")
-				? "business"
+				? "Business"
 				: data.path.includes("legalItems")
-					? "legal"
-					: "navigation"; // fallback to 'navigation' if path is unexpected.
+					? "Legal"
+					: "Navigation"; // fallback to 'navigation' if path is unexpected.
 
 	// constructs the final label for the row.
 	const label = data?.data?.link?.label
 		? // if a link label exists, use it to form a descriptive label: "[section name] item [row number]: [link label]".
-			`${sectionName} item ${data.rowNumber !== undefined ? data.rowNumber + 1 : ""}: ${data?.data?.link?.label}`
+			`${sectionName} Item ${data.rowNumber !== undefined ? data.rowNumber + 1 : ""}: ${data?.data?.link?.label}`
 		: // if the link label is missing, use a generic label: "[section name] row".
 			`${sectionName} row`;
 

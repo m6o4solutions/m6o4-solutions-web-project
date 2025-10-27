@@ -18,7 +18,7 @@ const RowLabel = (_props: RowLabelProps) => {
 	const data = useRowLabel<HeaderItem>();
 
 	// constant for the general section name to ensure consistency.
-	const sectionName = "navigation";
+	const sectionName = "Navigation";
 
 	// logic to construct a meaningful label for the row.
 	const label = data?.data?.link?.label

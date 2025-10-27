@@ -25,7 +25,7 @@ const Footer: GlobalConfig = {
 					// the name of the organization, mandatory.
 					name: "organizationName",
 					type: "text",
-					label: "name",
+					label: "Name",
 					required: true,
 					admin: {
 						// allocate 50% of the row width to this field.
@@ -36,7 +36,7 @@ const Footer: GlobalConfig = {
 					// the organization's slogan or tagline, mandatory.
 					name: "organizationSlogan",
 					type: "text",
-					label: "slogan",
+					label: "Slogan",
 					required: true,
 					admin: {
 						// allocate 50% of the row width to this field.
@@ -48,7 +48,7 @@ const Footer: GlobalConfig = {
 		{
 			// the organization's logo, linked to the 'media' collection, mandatory.
 			name: "organizationLogo",
-			label: "logo",
+			label: "Logo",
 			type: "upload",
 			relationTo: "media",
 			required: true,
@@ -61,10 +61,10 @@ const Footer: GlobalConfig = {
 			// array of links for social media profiles.
 			name: "socialItems",
 			type: "array",
-			label: "social media",
+			label: "Social Media",
 			labels: {
-				singular: "social media link",
-				plural: "social media links",
+				singular: "Social Media Link",
+				plural: "Social Media Links",
 			},
 			fields: [
 				// imports the reusable link field configuration.
@@ -88,22 +88,22 @@ const Footer: GlobalConfig = {
 			// groups fields for the 'services' navigation column.
 			name: "services",
 			type: "group",
-			label: "services column",
+			label: "Services Column",
 			fields: [
 				{
 					// header text for the services column.
 					name: "serviceHeader",
 					type: "text",
-					label: "header",
+					label: "Header",
 				},
 				{
 					// array of links for services.
 					name: "serviceItems",
 					type: "array",
-					label: "service items",
+					label: "Service Items",
 					labels: {
-						singular: "service link",
-						plural: "service links",
+						singular: "Service Link",
+						plural: "Service Links",
 					},
 					fields: [
 						link({
@@ -125,22 +125,22 @@ const Footer: GlobalConfig = {
 			// groups fields for the 'business' navigation column.
 			name: "business",
 			type: "group",
-			label: "business column",
+			label: "Business Column",
 			fields: [
 				{
 					// header text for the business column.
 					name: "businessHeader",
 					type: "text",
-					label: "header",
+					label: "Header",
 				},
 				{
 					// array of links for business-related pages.
 					name: "businessItems",
 					type: "array",
-					label: "business items",
+					label: "Business Items",
 					labels: {
-						singular: "business link",
-						plural: "business links",
+						singular: "Business Link",
+						plural: "Business Links",
 					},
 					fields: [
 						link({
@@ -162,22 +162,22 @@ const Footer: GlobalConfig = {
 			// groups fields for the 'legal' navigation column.
 			name: "legal",
 			type: "group",
-			label: "legal column",
+			label: "Legal Column",
 			fields: [
 				{
 					// header text for the legal column.
 					name: "legalHeader",
 					type: "text",
-					label: "header",
+					label: "Header",
 				},
 				{
 					// array of links for legal pages (e.g., privacy, terms).
 					name: "legalItems",
 					type: "array",
-					label: "legal items",
+					label: "Legal Items",
 					labels: {
-						singular: "legal link",
-						plural: "legal links",
+						singular: "Legal Link",
+						plural: "Legal Links",
 					},
 					fields: [
 						link({
@@ -199,7 +199,7 @@ const Footer: GlobalConfig = {
 			// the main copyright text to display at the bottom of the footer, mandatory.
 			name: "copyright",
 			type: "text",
-			label: "copyright notice",
+			label: "Copyright Notice",
 			required: true,
 		},
 	],

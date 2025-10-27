@@ -12,8 +12,8 @@ const Banner: Block = {
 	interfaceName: "BannerBlock",
 	// human-readable labels for the admin ui.
 	labels: {
-		singular: "banner block",
-		plural: "banner blocks",
+		singular: "Banner Block",
+		plural: "Banner Blocks",
 	},
 	// field definitions for the block content.
 	fields: [
