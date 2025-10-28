@@ -1,5 +1,6 @@
 import { isAuthenticated, isAuthenticatedOrPublished } from "@/payload/access/access-control";
 import { Archive } from "@/payload/blocks/archive/schema";
+import { ContentCopy } from "@/payload/blocks/content-copy/schema";
 import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
 import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
 import { revalidateDelete, revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
@@ -96,7 +97,7 @@ const Pages: CollectionConfig<"pages"> = {
 								initCollapsed: true,
 							},
 							// specifies which blocks are available for use on a page.
-							blocks: [Archive, HeroPrimary, HeroSecondary],
+							blocks: [Archive, HeroPrimary, HeroSecondary, ContentCopy],
 						},
 					],
 				},
