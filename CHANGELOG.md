@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.4.0...v1.5.0) (2025-10-28)
+
+
+### Bug Fixes
+
+* update date display format in pages and posts collections ([b5f1952](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/b5f1952b8cb06531d41a7d404353442767483826))
+
+
+### Features
+
+* add HeroPrimary and HeroSecondary blocks with corresponding schemas ([ddf5536](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/ddf5536ca93f2eb1fa0284426839f86ac3e9dfc4))
+* add media field to HeroPrimary and HeroSecondary schemas ([866460f](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/866460f1ab840fe3be2ccd73366d663cdfb65355))
+* implement HeroPrimary block with schema, component, and rendering logic ([4040c7e](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/4040c7efadde6f894dc53ed3054350eb601cceaf))
+
 # [1.4.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.3.1...v1.4.0) (2025-10-26)
 
 
