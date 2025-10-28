@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.5.0...v1.6.0) (2025-10-28)
+
+
+### Features
+
+* add ContentCopy block and update related schemas and imports ([913a7dd](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/913a7dd0ec2e33a1249d4470fb824960f2043002))
+
 # [1.5.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.4.0...v1.5.0) (2025-10-28)
 
 
