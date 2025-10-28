@@ -31,6 +31,15 @@ const HeroPrimary: Block = {
 			required: true,
 		},
 		{
+			// field for selecting the main visual media (image) for the hero.
+			name: "media",
+			type: "upload",
+			label: "Media",
+			// relates this field to the 'media' collection.
+			relationTo: "media",
+			required: true,
+		},
+		{
 			// array field for one or more call-to-action buttons.
 			name: "ctaItems",
 			type: "array",
@@ -51,20 +60,11 @@ const HeroPrimary: Block = {
 			admin: {
 				components: {
 					// specifies a custom react component to provide a human-readable label for the array row in the admin ui.
-					RowLabel: "@/payload/blocks/hero-primary/row-label#rowlabel",
+					RowLabel: "@/payload/blocks/hero-primary/row-label#RowLabel",
 				},
 				// keeps the array field closed by default to reduce form clutter.
 				initCollapsed: true,
 			},
-		},
-		{
-			// field for selecting the main visual media (image) for the hero.
-			name: "media",
-			type: "upload",
-			label: "Media",
-			// relates this field to the 'media' collection.
-			relationTo: "media",
-			required: true,
 		},
 	],
 };

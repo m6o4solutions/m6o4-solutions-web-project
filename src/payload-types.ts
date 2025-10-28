@@ -398,6 +398,7 @@ export interface User {
 export interface HeroPrimary {
   headline: string;
   subHeadline: string;
+  media: string | Media;
   ctaItems?:
     | {
         link: {
@@ -418,7 +419,6 @@ export interface HeroPrimary {
         id?: string | null;
       }[]
     | null;
-  media: string | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'heroPrimary';
@@ -428,6 +428,9 @@ export interface HeroPrimary {
  * via the `definition` "HeroSecondary".
  */
 export interface HeroSecondary {
+  headline: string;
+  subHeadline: string;
+  media: string | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'heroSecondary';
@@ -1071,6 +1074,7 @@ export interface ArchiveSelect<T extends boolean = true> {
 export interface HeroPrimarySelect<T extends boolean = true> {
   headline?: T;
   subHeadline?: T;
+  media?: T;
   ctaItems?:
     | T
     | {
@@ -1085,7 +1089,6 @@ export interface HeroPrimarySelect<T extends boolean = true> {
             };
         id?: T;
       };
-  media?: T;
   id?: T;
   blockName?: T;
 }
@@ -1094,6 +1097,9 @@ export interface HeroPrimarySelect<T extends boolean = true> {
  * via the `definition` "HeroSecondary_select".
  */
 export interface HeroSecondarySelect<T extends boolean = true> {
+  headline?: T;
+  subHeadline?: T;
+  media?: T;
   id?: T;
   blockName?: T;
 }
