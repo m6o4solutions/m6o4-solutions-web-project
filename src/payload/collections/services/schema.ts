@@ -234,7 +234,7 @@ const Services: CollectionConfig = {
 							// toggle to enable a separate subscription pricing option.
 							name: "enableSubscription",
 							type: "checkbox",
-							label: "Enable Subscription",
+							label: "Enable subscription?",
 							defaultValue: false,
 						},
 						{

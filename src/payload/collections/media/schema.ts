@@ -39,14 +39,14 @@ const Media: CollectionConfig = {
 			// required description of the image content for accessibility.
 			name: "alt",
 			type: "text",
-			label: "alt text",
+			label: "Alt Text",
 			required: true,
 		},
 		{
 			// optional rich text field for a caption displayed below the media.
 			name: "caption",
 			type: "richText",
-			label: "caption",
+			label: "Caption",
 			// configures the lexical editor for the caption field.
 			editor: lexicalEditor({
 				// customizes the features available in the editor.

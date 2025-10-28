@@ -7,7 +7,7 @@ import { RowLabelProps, useRowLabel } from "@payloadcms/ui";
  * defines the union type for an item from either the 'navigationitems' or 'ctaitems'
  * array in the 'header' global, ensuring type safety for the row data.
  */
-type HeaderItem = NonNullable<Header["navigationItems"]>[number] | NonNullable<Header["ctaItems"]>[number];
+type HeaderItem = NonNullable<Header["ctaItems"]>[number];
 
 /**
  * a custom react component to generate a descriptive label for a row in a payload array field.
@@ -19,7 +19,7 @@ const RowLabel = (_props: RowLabelProps) => {
 	const data = useRowLabel<HeaderItem>();
 
 	// determines the section name based on the path of the array field being edited.
-	const sectionName = data.path.includes("navigationItems") ? "Navigation" : "Call to Action";
+	const sectionName = "Call to Action";
 
 	// logic to construct a meaningful label for the row.
 	const label = data?.data?.link?.label

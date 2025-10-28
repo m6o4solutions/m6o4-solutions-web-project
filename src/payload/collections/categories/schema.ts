@@ -42,7 +42,7 @@ const Categories: CollectionConfig = {
 					// the name of the category, mandatory.
 					name: "title",
 					type: "text",
-					label: "title",
+					label: "Title",
 					required: true,
 					admin: {
 						// allocate 20% of the row width to the title field for brevity.
@@ -53,7 +53,7 @@ const Categories: CollectionConfig = {
 					// a short description of the category's purpose or content.
 					name: "description",
 					type: "text",
-					label: "description",
+					label: "Description",
 					admin: {
 						// allocate 80% of the row width to the description field.
 						width: "80%",
@@ -67,7 +67,7 @@ const Categories: CollectionConfig = {
 			// field for relevant search terms to aid discovery or internal filtering.
 			name: "keywords",
 			type: "text",
-			label: "keywords",
+			label: "Keywords",
 		},
 	],
 };

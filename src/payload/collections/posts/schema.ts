@@ -213,7 +213,7 @@ const Posts: CollectionConfig<"posts"> = {
 					// display only the day.
 					pickerAppearance: "dayOnly",
 					// format for display in the admin ui.
-					displayFormat: "dd mmmm yyyy",
+					displayFormat: "d MMM yyy",
 				},
 				// places the field in the admin sidebar.
 				position: "sidebar",

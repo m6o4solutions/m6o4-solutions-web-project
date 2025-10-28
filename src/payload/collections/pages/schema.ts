@@ -1,5 +1,7 @@
 import { isAuthenticated, isAuthenticatedOrPublished } from "@/payload/access/access-control";
 import { Archive } from "@/payload/blocks/archive/schema";
+import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
+import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
 import { revalidateDelete, revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
 import { slugField } from "@/payload/fields/slug";
 import { populatePublishedAt } from "@/payload/hooks/populate-published-at";
@@ -74,6 +76,7 @@ const Pages: CollectionConfig<"pages"> = {
 			// main title of the page, mandatory.
 			name: "title",
 			type: "text",
+			label: "Title",
 			required: true,
 		},
 		{
@@ -93,7 +96,7 @@ const Pages: CollectionConfig<"pages"> = {
 								initCollapsed: true,
 							},
 							// specifies which blocks are available for use on a page.
-							blocks: [Archive],
+							blocks: [Archive, HeroPrimary, HeroSecondary],
 						},
 					],
 				},
@@ -140,7 +143,7 @@ const Pages: CollectionConfig<"pages"> = {
 					// display only the day.
 					pickerAppearance: "dayOnly",
 					// format for display in the admin ui.
-					displayFormat: "dd mmmm yyyy",
+					displayFormat: "d MMM yyy",
 				},
 				// places the field in the admin sidebar.
 				position: "sidebar",

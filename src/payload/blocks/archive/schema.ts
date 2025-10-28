@@ -13,8 +13,8 @@ const Archive: Block = {
 	interfaceName: "Archive",
 	// human-readable labels for the admin ui.
 	labels: {
-		singular: "post archive block",
-		plural: "post archive blocks",
+		singular: "Post Archive Block",
+		plural: "Post Archive Blocks",
 	},
 	// field definitions for the block content.
 	fields: [
@@ -23,7 +23,7 @@ const Archive: Block = {
 			// above the displayed archive list.
 			name: "introContent",
 			type: "richText",
-			label: "introductory content",
+			label: "Introductory Content",
 			editor: lexicalEditor({
 				features: ({ rootFeatures }) => {
 					// enables heading, fixed, and inline toolbars for editing the intro content.
@@ -40,17 +40,17 @@ const Archive: Block = {
 			// control field to determine the method of populating the archive list.
 			name: "populateBy",
 			type: "select",
-			label: "populate by",
+			label: "Populate by",
 			defaultValue: "collection",
 			options: [
 				{
 					// option to display posts based on collection/category filters.
-					label: "collection",
+					label: "Collection",
 					value: "collection",
 				},
 				{
 					// option to manually select individual posts.
-					label: "individual selection",
+					label: "Individual Selection",
 					value: "selection",
 				},
 			],
@@ -59,11 +59,11 @@ const Archive: Block = {
 			// specifies which collection to pull documents from when 'populate by' is 'collection'.
 			name: "relationTo",
 			type: "select",
-			label: "collections to show",
+			label: "Collections to Show",
 			defaultValue: "posts",
 			options: [
 				{
-					label: "posts",
+					label: "Posts",
 					value: "posts",
 				},
 			],
@@ -76,7 +76,7 @@ const Archive: Block = {
 			// allows filtering the documents by one or more categories when 'populate by' is 'collection'.
 			name: "categories",
 			type: "relationship",
-			label: "categories to show",
+			label: "Categories to Show",
 			relationTo: "categories",
 			hasMany: true,
 			admin: {
@@ -88,8 +88,8 @@ const Archive: Block = {
 			// sets a maximum number of documents to fetch and display when 'populate by' is 'collection'.
 			name: "limit",
 			type: "number",
-			label: "limit",
-			defaultValue: 10,
+			label: "Limit",
+			defaultValue: 9,
 			admin: {
 				// this field only appears if the population method is 'collection'.
 				condition: (_, siblingData) => siblingData.populateBy === "collection",
@@ -100,7 +100,7 @@ const Archive: Block = {
 			// a relationship field to manually select documents when 'populate by' is 'selection'.
 			name: "selectedDocs",
 			type: "relationship",
-			label: "selection",
+			label: "Selection",
 			relationTo: ["posts"],
 			hasMany: true,
 			admin: {
