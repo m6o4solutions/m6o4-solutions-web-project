@@ -1,0 +1,17 @@
+import { Container } from "@/components/container";
+import { RichText } from "@/components/rich-text";
+import { ContentCopy } from "@/payload-types";
+
+/* renders a structured text block within a responsive container.
+   intended for displaying editorial or marketing copy while preserving layout consistency. */
+const ContentCopyBlock = ({ copy }: ContentCopy) => {
+	return (
+		<Container className="px-3">
+			{/* only render if content exists to avoid empty layout space.
+			    limits text width for optimal readability and disables outer gutters for alignment control. */}
+			{copy && <RichText className="mx-auto mb-6 max-w-200" data={copy} enableGutter={false} />}
+		</Container>
+	);
+};
+
+export { ContentCopyBlock };

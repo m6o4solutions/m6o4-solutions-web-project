@@ -160,7 +160,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout?: (Archive | HeroPrimary | HeroSecondary)[] | null;
+  layout?: (Archive | HeroPrimary | HeroSecondary | ContentCopy)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -434,6 +434,30 @@ export interface HeroSecondary {
   id?: string | null;
   blockName?: string | null;
   blockType: 'heroSecondary';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentCopy".
+ */
+export interface ContentCopy {
+  copy?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentCopy';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1038,6 +1062,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveSelect<T>;
         heroPrimary?: T | HeroPrimarySelect<T>;
         heroSecondary?: T | HeroSecondarySelect<T>;
+        contentCopy?: T | ContentCopySelect<T>;
       };
   meta?:
     | T
@@ -1100,6 +1125,15 @@ export interface HeroSecondarySelect<T extends boolean = true> {
   headline?: T;
   subHeadline?: T;
   media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentCopy_select".
+ */
+export interface ContentCopySelect<T extends boolean = true> {
+  copy?: T;
   id?: T;
   blockName?: T;
 }

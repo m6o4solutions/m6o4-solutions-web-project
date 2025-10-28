@@ -1,5 +1,6 @@
 import type { Page } from "@/payload-types";
 import { ArchiveBlock } from "@/payload/blocks/archive/component";
+import { ContentCopyBlock } from "@/payload/blocks/content-copy/component";
 import { HeroPrimaryBlock } from "@/payload/blocks/hero-primary/component";
 import { HeroSecondaryBlock } from "@/payload/blocks/hero-secondary/component";
 import React, { ComponentType, Fragment } from "react";
@@ -8,6 +9,7 @@ import React, { ComponentType, Fragment } from "react";
    this acts as a registry that drives dynamic page rendering. */
 const blockComponents = {
 	archive: ArchiveBlock,
+	contentCopy: ContentCopyBlock,
 	heroPrimary: HeroPrimaryBlock,
 	heroSecondary: HeroSecondaryBlock,
 } as const;
