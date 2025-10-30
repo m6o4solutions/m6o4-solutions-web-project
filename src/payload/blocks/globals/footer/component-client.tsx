@@ -86,7 +86,7 @@ const FooterClient = async ({ data }: FooterClientProps) => {
 										<Link
 											key={index}
 											href={href}
-											target="_blank"
+											target={item.link?.newTab ? "_blank" : "_self"}
 											rel="noopener noreferrer"
 											// apply hover transition for visual feedback.
 											className="text-white/80 transition-colors hover:text-white"

@@ -48,7 +48,7 @@ const CallToActionBlock = async ({ cta }: CallToAction) => {
 								size="lg"
 								className="bg-brand-accent hover:bg-brand-accent-hover rounded-xl px-8 py-4 text-lg font-medium text-white shadow-md transition-all hover:shadow-lg"
 							>
-								<Link href={link.url || "#"} target="_blank">
+								<Link href={link.url || "#"} target={link.newTab ? "_blank" : "_self"}>
 									{link.label || "#"}
 								</Link>
 							</Button>

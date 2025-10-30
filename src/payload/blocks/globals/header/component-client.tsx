@@ -74,7 +74,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 								asChild
 								className="bg-brand-accent hover:bg-brand-accent-hover rounded-xl px-6 py-3 font-medium text-white shadow-md transition-all hover:shadow-lg"
 							>
-								<Link href={link.url || "#"} target="_blank">
+								<Link href={link.url || "#"} target={link.newTab ? "_blank" : "_self"}>
 									{link.label || "#"}
 								</Link>
 							</Button>
@@ -112,7 +112,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 										asChild
 										className="bg-brand-accent hover:bg-brand-accent-hover rounded-xl px-6 py-3 font-medium text-white shadow-md"
 									>
-										<Link href={link.url || "#"} target="_blank">
+										<Link href={link.url || "#"} target={link.newTab ? "_blank" : "_self"}>
 											{link.label || "#"}
 										</Link>
 									</Button>
