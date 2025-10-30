@@ -89,7 +89,7 @@ const ArchiveBlock = async (props: ArchiveBlockProps) => {
 							const image = post.meta?.image;
 
 							// safely extract the image url, falling back to a default asset path if the image object is missing or incomplete.
-							const imageSrc = typeof image === "string" ? image : (image?.url ?? "/way-finding-og.webp");
+							const imageSrc = typeof image === "string" ? image : (image?.url ?? "#");
 
 							// safely extract the image alt text, falling back to a generic description.
 							const imageAlt = typeof image === "string" ? "post image" : (image?.alt ?? "post image");

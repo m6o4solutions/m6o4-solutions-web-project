@@ -19,7 +19,7 @@ const revalidatePost: CollectionAfterChangeHook<Post> = ({ doc, previousDoc, req
 			// clear the next.js cache for the post's dynamic path.
 			revalidatePath(path);
 			// clear the next.js cache for the sitemap to include the new/updated post.
-			revalidateTag("posts-sitemap");
+			revalidateTag("default", "posts-sitemap");
 		}
 
 		// if the post was previously published but is no longer published (e.g., set to 'draft'),
@@ -33,7 +33,7 @@ const revalidatePost: CollectionAfterChangeHook<Post> = ({ doc, previousDoc, req
 			// clear the next.js cache for the post's former path.
 			revalidatePath(oldPath);
 			// clear the next.js cache for the sitemap to reflect the post's removal.
-			revalidateTag("posts-sitemap");
+			revalidateTag("default", "posts-sitemap");
 		}
 	}
 	// return the document data, as required by the hook signature.
@@ -53,7 +53,7 @@ const revalidateDelete: CollectionAfterDeleteHook<Post> = ({ doc, req: { context
 		// clear the next.js cache for the deleted path to ensure a 404 on the frontend.
 		revalidatePath(path);
 		// clear the next.js cache for the sitemap to remove the deleted post.
-		revalidateTag("posts-sitemap");
+		revalidateTag("default", "posts-sitemap");
 	}
 
 	// return the document data, as required by the hook signature.

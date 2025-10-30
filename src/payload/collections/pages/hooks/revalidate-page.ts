@@ -20,7 +20,7 @@ const revalidatePage: CollectionAfterChangeHook<Page> = ({ doc, previousDoc, req
 			// clear the next.js cache for the page's dynamic path.
 			revalidatePath(path);
 			// clear the next.js cache for the sitemap to include the new/updated page.
-			revalidateTag("pages-sitemap");
+			revalidateTag("default", "pages-sitemap");
 		}
 
 		// if the page was previously published but is now unpublished (e.g., set to 'draft'),
@@ -35,7 +35,7 @@ const revalidatePage: CollectionAfterChangeHook<Page> = ({ doc, previousDoc, req
 			// clear the next.js cache for the page's former path.
 			revalidatePath(oldPath);
 			// clear the next.js cache for the sitemap to reflect the page's change in status.
-			revalidateTag("pages-sitemap");
+			revalidateTag("default", "pages-sitemap");
 		}
 	}
 	// return the document data, as required by the hook signature.
@@ -55,7 +55,7 @@ const revalidateDelete: CollectionAfterDeleteHook<Page> = ({ doc, req: { context
 		// clear the next.js cache for the deleted path to ensure a 404 on the frontend.
 		revalidatePath(path);
 		// clear the next.js cache for the sitemap to remove the deleted page.
-		revalidateTag("pages-sitemap");
+		revalidateTag("default", "pages-sitemap");
 	}
 
 	// return the document data, as required by the hook signature.

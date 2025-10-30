@@ -13,7 +13,7 @@ const revalidateHeader: GlobalAfterChangeHook = ({ doc, req: { payload, context 
 		payload.logger.info(`revalidating header...`);
 
 		// invalidate the next.js cache for the specific tag used when fetching header data.
-		revalidateTag("global_header");
+		revalidateTag("default", "global_header");
 	}
 
 	// return the document data, as required by the hook signature.
