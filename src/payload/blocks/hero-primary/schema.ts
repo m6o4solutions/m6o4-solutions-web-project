@@ -27,7 +27,7 @@ const HeroPrimary: Block = {
 			// supporting text below the headline.
 			name: "subHeadline",
 			type: "textarea",
-			label: "Sub Headline",
+			label: "Subheadline",
 			required: true,
 		},
 		{
