@@ -74,6 +74,7 @@ export interface Config {
     faq: Faq;
     cta: Cta;
     testimonials: Testimonial;
+    logos: Logo;
     categories: Category;
     media: Media;
     users: User;
@@ -96,6 +97,7 @@ export interface Config {
     faq: FaqSelect<false> | FaqSelect<true>;
     cta: CtaSelect<false> | CtaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    logos: LogosSelect<false> | LogosSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -651,6 +653,17 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos".
+ */
+export interface Logo {
+  id: string;
+  company: string;
+  logo: string | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms".
  */
 export interface Form {
@@ -1024,6 +1037,10 @@ export interface PayloadLockedDocument {
         value: string | Testimonial;
       } | null)
     | ({
+        relationTo: 'logos';
+        value: string | Logo;
+      } | null)
+    | ({
         relationTo: 'categories';
         value: string | Category;
       } | null)
@@ -1381,6 +1398,16 @@ export interface TestimonialsSelect<T extends boolean = true> {
   job?: T;
   testimonial?: T;
   photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos_select".
+ */
+export interface LogosSelect<T extends boolean = true> {
+  company?: T;
+  logo?: T;
   updatedAt?: T;
   createdAt?: T;
 }
