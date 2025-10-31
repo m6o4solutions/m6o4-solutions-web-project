@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.6.0...v1.7.0) (2025-10-31)
+
+
+### Bug Fixes
+
+* update link target behavior based on newTab property ([8a239bc](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/8a239bcadf7b94623fceaa97244b59d8c81b0d2e))
+
+
+### Features
+
+* add CallToAction block and integrate into page schema ([f2a43ad](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/f2a43ad876877d649f8375e677cd15b653cf1174))
+* add ContentCards block with schema and rendering logic ([1a971ab](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/1a971abee79e302d103b042ebdbd6817688a2ebb))
+
 # [1.6.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.5.0...v1.6.0) (2025-10-28)
 
 
