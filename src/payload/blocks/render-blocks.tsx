@@ -1,14 +1,18 @@
 import type { Page } from "@/payload-types";
 import { ArchiveBlock } from "@/payload/blocks/archive/component";
+import { CallToActionBlock } from "@/payload/blocks/call-to-action/component";
+import { ContentCardsBlock } from "@/payload/blocks/content-cards/component";
 import { ContentCopyBlock } from "@/payload/blocks/content-copy/component";
 import { HeroPrimaryBlock } from "@/payload/blocks/hero-primary/component";
 import { HeroSecondaryBlock } from "@/payload/blocks/hero-secondary/component";
-import React, { ComponentType, Fragment } from "react";
+import { ComponentType, Fragment } from "react";
 
 /* defines which payload block types map to which react components.
    this acts as a registry that drives dynamic page rendering. */
 const blockComponents = {
 	archive: ArchiveBlock,
+	callToAction: CallToActionBlock,
+	contentCards: ContentCardsBlock,
 	contentCopy: ContentCopyBlock,
 	heroPrimary: HeroPrimaryBlock,
 	heroSecondary: HeroSecondaryBlock,

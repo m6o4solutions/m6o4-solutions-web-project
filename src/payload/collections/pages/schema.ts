@@ -1,5 +1,7 @@
 import { isAuthenticated, isAuthenticatedOrPublished } from "@/payload/access/access-control";
 import { Archive } from "@/payload/blocks/archive/schema";
+import { CallToAction } from "@/payload/blocks/call-to-action/schema";
+import { ContentCards } from "@/payload/blocks/content-cards/schema";
 import { ContentCopy } from "@/payload/blocks/content-copy/schema";
 import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
 import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
@@ -97,7 +99,7 @@ const Pages: CollectionConfig<"pages"> = {
 								initCollapsed: true,
 							},
 							// specifies which blocks are available for use on a page.
-							blocks: [Archive, HeroPrimary, HeroSecondary, ContentCopy],
+							blocks: [Archive, HeroPrimary, HeroSecondary, ContentCopy, ContentCards, CallToAction],
 						},
 					],
 				},

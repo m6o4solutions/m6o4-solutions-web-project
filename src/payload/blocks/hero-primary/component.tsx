@@ -31,12 +31,11 @@ const HeroPrimaryBlock = ({ ctaItems, headline, media, subHeadline }: HeroPrimar
 						<Button
 							key={index}
 							asChild
-							variant="default" // use 'default' variant from button component as a base.
-							// apply custom styling for the hero's primary cta.
-							className="bg-brand-accent hover:bg-brand-accent-hover rounded-xl px-6 py-3 font-medium text-white shadow-md transition-all hover:shadow-lg"
+							size="lg"
+							className="bg-brand-accent hover:bg-brand-accent-hover rounded-xl px-8 py-4 text-lg font-medium text-white shadow-md transition-all hover:shadow-lg"
 						>
 							{/* link component rendered inside the button due to 'aschild'. */}
-							<Link href={link.url || "#"} target="_blank">
+							<Link href={link.url || "#"} target={link.newTab ? "_blank" : "_self"}>
 								{link.label || "#"}
 							</Link>
 						</Button>

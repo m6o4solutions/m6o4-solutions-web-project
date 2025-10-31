@@ -6,7 +6,7 @@ import config from "@payload-config";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { getPayload } from "payload";
-import React, { cache } from "react";
+import { cache } from "react";
 
 /**
  * generates the static path segments for all published pages in the 'pages' collection.

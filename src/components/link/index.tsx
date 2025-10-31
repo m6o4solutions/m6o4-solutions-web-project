@@ -2,7 +2,7 @@ import { Button, type ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Page, Post } from "@/payload-types";
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 /**
  * defines the properties for the cmslink component, mirroring the

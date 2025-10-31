@@ -81,6 +81,7 @@ export interface Config {
     'form-submissions': FormSubmission;
     redirects: Redirect;
     search: Search;
+    'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -102,6 +103,7 @@ export interface Config {
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -160,7 +162,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout?: (Archive | HeroPrimary | HeroSecondary | ContentCopy)[] | null;
+  layout?: (Archive | HeroPrimary | HeroSecondary | ContentCopy | ContentCards | CallToAction)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -461,6 +463,65 @@ export interface ContentCopy {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentCards".
+ */
+export interface ContentCards {
+  headline: string;
+  subheadline: string;
+  services: {
+    image: string | Media;
+    title: string;
+    description: string;
+    link: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToAction".
+ */
+export interface CallToAction {
+  cta: string | Cta;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'callToAction';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta".
+ */
+export interface Cta {
+  id: string;
+  title: string;
+  content: string;
+  navigationItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services".
  */
 export interface Service {
@@ -572,37 +633,6 @@ export interface Faq {
   id: string;
   question: string;
   answer: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cta".
- */
-export interface Cta {
-  id: string;
-  title: string;
-  content: string;
-  navigationItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -851,6 +881,23 @@ export interface Search {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: string;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
@@ -1005,6 +1052,10 @@ export interface PayloadLockedDocument {
         value: string | Search;
       } | null)
     | ({
+        relationTo: 'payload-kv';
+        value: string | PayloadKv;
+      } | null)
+    | ({
         relationTo: 'payload-jobs';
         value: string | PayloadJob;
       } | null);
@@ -1063,6 +1114,8 @@ export interface PagesSelect<T extends boolean = true> {
         heroPrimary?: T | HeroPrimarySelect<T>;
         heroSecondary?: T | HeroSecondarySelect<T>;
         contentCopy?: T | ContentCopySelect<T>;
+        contentCards?: T | ContentCardsSelect<T>;
+        callToAction?: T | CallToActionSelect<T>;
       };
   meta?:
     | T
@@ -1134,6 +1187,34 @@ export interface HeroSecondarySelect<T extends boolean = true> {
  */
 export interface ContentCopySelect<T extends boolean = true> {
   copy?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentCards_select".
+ */
+export interface ContentCardsSelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
+  services?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        description?: T;
+        link?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToAction_select".
+ */
+export interface CallToActionSelect<T extends boolean = true> {
+  cta?: T;
   id?: T;
   blockName?: T;
 }
@@ -1606,6 +1687,14 @@ export interface SearchSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
