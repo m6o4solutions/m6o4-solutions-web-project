@@ -38,7 +38,7 @@ const Logos: CollectionConfig = {
 					label: "Company",
 					required: true,
 					admin: {
-						width: "80%",
+						width: "60%",
 					},
 				},
 				{
@@ -48,7 +48,7 @@ const Logos: CollectionConfig = {
 					relationTo: "media",
 					required: true,
 					admin: {
-						width: "20%",
+						width: "40%",
 					},
 				},
 			],
