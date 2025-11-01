@@ -491,7 +491,27 @@ export interface ContentGrid {
   headline: string;
   subheadline: string;
   gridItems: {
-    itemHead: string;
+    itemHead: {
+      type: 'text' | 'icon';
+      text?: string | null;
+      icon?:
+        | (
+            | 'ban'
+            | 'brain'
+            | 'check'
+            | 'chevronsDown'
+            | 'chevronsUp'
+            | 'cloud'
+            | 'cpu'
+            | 'dollarSign'
+            | 'globe'
+            | 'shield'
+            | 'trendingDown'
+            | 'trendingUp'
+            | 'zap'
+          )
+        | null;
+    };
     itemTitle: string;
     itemDescription: string;
     itemlink?: string | null;
@@ -1270,7 +1290,13 @@ export interface ContentGridSelect<T extends boolean = true> {
   gridItems?:
     | T
     | {
-        itemHead?: T;
+        itemHead?:
+          | T
+          | {
+              type?: T;
+              text?: T;
+              icon?: T;
+            };
         itemTitle?: T;
         itemDescription?: T;
         itemlink?: T;
