@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.7.0...v1.8.0) (2025-11-01)
+
+
+### Features
+
+* add Logos block with schema, rendering logic, and configuration ([6870045](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/68700453ce722903e267921d0d5c3fa8c1a9434d))
+* add Logos collection with access control and schema definition ([1646c13](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/1646c138208cabe6085ddc31aa558b0d7936be08))
+
 # [1.7.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.6.0...v1.7.0) (2025-10-31)
 
 
