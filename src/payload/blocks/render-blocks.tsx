@@ -5,6 +5,7 @@ import { ContentCardsBlock } from "@/payload/blocks/content-cards/component";
 import { ContentCopyBlock } from "@/payload/blocks/content-copy/component";
 import { HeroPrimaryBlock } from "@/payload/blocks/hero-primary/component";
 import { HeroSecondaryBlock } from "@/payload/blocks/hero-secondary/component";
+import { LogosBlock } from "@/payload/blocks/logos/component";
 import { ComponentType, Fragment } from "react";
 
 /* defines which payload block types map to which react components.
@@ -16,6 +17,7 @@ const blockComponents = {
 	contentCopy: ContentCopyBlock,
 	heroPrimary: HeroPrimaryBlock,
 	heroSecondary: HeroSecondaryBlock,
+	logos: LogosBlock,
 } as const;
 
 type BlockKey = keyof typeof blockComponents;

@@ -1,35 +1,16 @@
 import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
-import { CallToAction, Cta } from "@/payload-types";
-import config from "@payload-config";
+import { CallToAction } from "@/payload-types";
 import Link from "next/link";
-import { getPayload } from "payload";
 
 // renders a dynamic call-to-action section using cms data
 // accepts either a populated cta object or an id reference and resolves it before rendering
-const CallToActionBlock = async ({ cta }: CallToAction) => {
-	let data: Cta;
-
-	// when the cta relationship is already populated, use it directly
-	if (typeof cta === "object" && cta !== null && "title" in cta) {
-		data = cta as Cta;
-	}
-	// when only the cta id is available, fetch the full document from payload
-	else if (typeof cta === "string") {
-		const payload = await getPayload({ config });
-		const result = await payload.findByID({
-			collection: "cta",
-			id: cta,
-		});
-		data = result as Cta;
-	}
-	// throw an error if cta is neither a valid object nor an id reference
-	else {
-		throw new Error("invalid call to action data");
-	}
+const CallToActionBlock = ({ cta }: CallToAction) => {
+	// if cta is not populated for some reason, skip rendering
+	if (!cta || typeof cta !== "object") return null;
 
 	// destructure key fields for display
-	const { title, content, navigationItems } = data;
+	const { title, content, navigationItems } = cta;
 
 	return (
 		<section className="section-spacing bg-brand-primary text-white">

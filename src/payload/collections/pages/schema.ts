@@ -5,6 +5,7 @@ import { ContentCards } from "@/payload/blocks/content-cards/schema";
 import { ContentCopy } from "@/payload/blocks/content-copy/schema";
 import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
 import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
+import { Logos } from "@/payload/blocks/logos/schema";
 import { revalidateDelete, revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
 import { slugField } from "@/payload/fields/slug";
 import { populatePublishedAt } from "@/payload/hooks/populate-published-at";
@@ -99,7 +100,7 @@ const Pages: CollectionConfig<"pages"> = {
 								initCollapsed: true,
 							},
 							// specifies which blocks are available for use on a page.
-							blocks: [Archive, HeroPrimary, HeroSecondary, ContentCopy, ContentCards, CallToAction],
+							blocks: [Archive, HeroPrimary, HeroSecondary, ContentCopy, ContentCards, CallToAction, Logos],
 						},
 					],
 				},

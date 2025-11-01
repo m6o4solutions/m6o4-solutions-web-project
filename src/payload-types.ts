@@ -74,6 +74,7 @@ export interface Config {
     faq: Faq;
     cta: Cta;
     testimonials: Testimonial;
+    logos: Logo;
     categories: Category;
     media: Media;
     users: User;
@@ -96,6 +97,7 @@ export interface Config {
     faq: FaqSelect<false> | FaqSelect<true>;
     cta: CtaSelect<false> | CtaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    logos: LogosSelect1<false> | LogosSelect1<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -162,7 +164,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout?: (Archive | HeroPrimary | HeroSecondary | ContentCopy | ContentCards | CallToAction)[] | null;
+  layout?: (Archive | HeroPrimary | HeroSecondary | ContentCopy | ContentCards | CallToAction | Logos)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -517,6 +519,29 @@ export interface Cta {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos".
+ */
+export interface Logos {
+  headline: string;
+  subheadline: string;
+  companyLogos: (string | Logo)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos".
+ */
+export interface Logo {
+  id: string;
+  company: string;
+  logo: string | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1024,6 +1049,10 @@ export interface PayloadLockedDocument {
         value: string | Testimonial;
       } | null)
     | ({
+        relationTo: 'logos';
+        value: string | Logo;
+      } | null)
+    | ({
         relationTo: 'categories';
         value: string | Category;
       } | null)
@@ -1116,6 +1145,7 @@ export interface PagesSelect<T extends boolean = true> {
         contentCopy?: T | ContentCopySelect<T>;
         contentCards?: T | ContentCardsSelect<T>;
         callToAction?: T | CallToActionSelect<T>;
+        logos?: T | LogosSelect<T>;
       };
   meta?:
     | T
@@ -1215,6 +1245,17 @@ export interface ContentCardsSelect<T extends boolean = true> {
  */
 export interface CallToActionSelect<T extends boolean = true> {
   cta?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_select".
+ */
+export interface LogosSelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
+  companyLogos?: T;
   id?: T;
   blockName?: T;
 }
@@ -1381,6 +1422,16 @@ export interface TestimonialsSelect<T extends boolean = true> {
   job?: T;
   testimonial?: T;
   photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos_select".
+ */
+export interface LogosSelect1<T extends boolean = true> {
+  company?: T;
+  logo?: T;
   updatedAt?: T;
   createdAt?: T;
 }
