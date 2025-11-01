@@ -13,9 +13,10 @@ const CallToAction: Block = {
 		{
 			// connects this block to a specific cta document for dynamic reuse
 			name: "cta",
-			label: "Call to Action",
 			type: "relationship",
+			label: "Call to Action",
 			relationTo: "cta",
+			hasMany: false,
 			required: true,
 		},
 	],

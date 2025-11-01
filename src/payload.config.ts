@@ -50,6 +50,9 @@ export default buildConfig({
 	// configure database connection
 	db: mongooseAdapter({ url: process.env.DATABASE_URI! }),
 
+	// enable automatic relationship population globally
+	defaultDepth: 2,
+
 	// set up text editor and email service
 	editor: lexical,
 	email: resend,
