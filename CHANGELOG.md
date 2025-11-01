@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.8.0...v1.9.0) (2025-11-01)
+
+
+### Features
+
+* add ContentGrid block schema and component ([3ba0c54](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/3ba0c54bc90daab0f2dc9045477195c3fbce8440))
+
 # [1.8.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.7.0...v1.8.0) (2025-11-01)
 
 
