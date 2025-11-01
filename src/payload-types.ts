@@ -164,7 +164,9 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout?: (Archive | HeroPrimary | HeroSecondary | ContentCopy | ContentCards | CallToAction | Logos)[] | null;
+  layout?:
+    | (Archive | HeroPrimary | HeroSecondary | ContentCopy | ContentCards | ContentGrid | CallToAction | Logos)[]
+    | null;
   meta?: {
     title?: string | null;
     /**
@@ -470,16 +472,34 @@ export interface ContentCopy {
 export interface ContentCards {
   headline: string;
   subheadline: string;
-  services: {
-    image: string | Media;
-    title: string;
-    description: string;
-    link: string;
+  gridCards: {
+    cardImage: string | Media;
+    cardTitle: string;
+    cardDescription: string;
+    cardLink: string;
     id?: string | null;
   }[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'contentCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentGrid".
+ */
+export interface ContentGrid {
+  headline: string;
+  subheadline: string;
+  gridItems: {
+    itemHead: string;
+    itemTitle: string;
+    itemDescription: string;
+    itemlink?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentGrid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1144,6 +1164,7 @@ export interface PagesSelect<T extends boolean = true> {
         heroSecondary?: T | HeroSecondarySelect<T>;
         contentCopy?: T | ContentCopySelect<T>;
         contentCards?: T | ContentCardsSelect<T>;
+        contentGrid?: T | ContentGridSelect<T>;
         callToAction?: T | CallToActionSelect<T>;
         logos?: T | LogosSelect<T>;
       };
@@ -1227,13 +1248,32 @@ export interface ContentCopySelect<T extends boolean = true> {
 export interface ContentCardsSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
-  services?:
+  gridCards?:
     | T
     | {
-        image?: T;
-        title?: T;
-        description?: T;
-        link?: T;
+        cardImage?: T;
+        cardTitle?: T;
+        cardDescription?: T;
+        cardLink?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentGrid_select".
+ */
+export interface ContentGridSelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
+  gridItems?:
+    | T
+    | {
+        itemHead?: T;
+        itemTitle?: T;
+        itemDescription?: T;
+        itemlink?: T;
         id?: T;
       };
   id?: T;

@@ -3,6 +3,7 @@ import { Archive } from "@/payload/blocks/archive/schema";
 import { CallToAction } from "@/payload/blocks/call-to-action/schema";
 import { ContentCards } from "@/payload/blocks/content-cards/schema";
 import { ContentCopy } from "@/payload/blocks/content-copy/schema";
+import { ContentGrid } from "@/payload/blocks/content-grid/schema";
 import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
 import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
 import { Logos } from "@/payload/blocks/logos/schema";
@@ -100,7 +101,16 @@ const Pages: CollectionConfig<"pages"> = {
 								initCollapsed: true,
 							},
 							// specifies which blocks are available for use on a page.
-							blocks: [Archive, HeroPrimary, HeroSecondary, ContentCopy, ContentCards, CallToAction, Logos],
+							blocks: [
+								Archive,
+								HeroPrimary,
+								HeroSecondary,
+								ContentCopy,
+								ContentCards,
+								ContentGrid,
+								CallToAction,
+								Logos,
+							],
 						},
 					],
 				},
