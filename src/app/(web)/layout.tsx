@@ -6,7 +6,7 @@ import { getServerSideURL } from "@/payload/utilities/get-url";
 import { mergeOpenGraph } from "@/payload/utilities/merge-opengraph";
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 // import global tailwind and custom css styles.
 import "@/styles/globals.css";
@@ -46,9 +46,9 @@ const RootLayout = async (props: { children: ReactNode }) => {
 					disableTransitionOnChange
 				>
 					{/* header component, fetched and rendered on the server. */}
-					<div>
+					<>
 						<Header />
-					</div>
+					</>
 
 					{/* the main area where the content of the current page is rendered. */}
 					<main className="grow">{children}</main>
