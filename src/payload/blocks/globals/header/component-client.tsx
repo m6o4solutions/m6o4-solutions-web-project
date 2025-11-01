@@ -36,7 +36,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 
 	return (
 		// main header container, styled to be sticky at the top with a z-index.
-		<div className="sticky top-0 z-50 w-full bg-white shadow-sm">
+		<header className="sticky top-0 z-50 w-full bg-white shadow-sm">
 			<Container>
 				{/* inner content wrapper to align items and set height. */}
 				<div className="flex h-6 items-center justify-between">
@@ -122,7 +122,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 					</Sheet>
 				</div>
 			</Container>
-		</div>
+		</header>
 	);
 };
 
