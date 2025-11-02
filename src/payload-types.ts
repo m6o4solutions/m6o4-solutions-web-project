@@ -617,7 +617,6 @@ export interface Testimonial {
   name: string;
   job?: string | null;
   testimonial: string;
-  photo?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1546,7 +1545,6 @@ export interface TestimonialsSelect1<T extends boolean = true> {
   name?: T;
   job?: T;
   testimonial?: T;
-  photo?: T;
   updatedAt?: T;
   createdAt?: T;
 }
