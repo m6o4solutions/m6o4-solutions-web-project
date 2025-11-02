@@ -20,6 +20,8 @@ import {
 	HorizontalRuleFeature,
 	InlineToolbarFeature,
 	lexicalEditor,
+	OrderedListFeature,
+	UnorderedListFeature,
 } from "@payloadcms/richtext-lexical";
 import type { CollectionConfig } from "payload";
 
@@ -128,6 +130,10 @@ const Posts: CollectionConfig<"posts"> = {
 										InlineToolbarFeature(),
 										// enables horizontal rule insertion for content separation.
 										HorizontalRuleFeature(),
+										// enables support for ordered lists (ol).
+										OrderedListFeature(),
+										// enables support for unordered lists (ul).
+										UnorderedListFeature(),
 									];
 								},
 							}),
