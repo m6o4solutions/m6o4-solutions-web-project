@@ -1,6 +1,6 @@
 // import collection schemas from payloadcms
+import { CTA } from "@/payload/collections/call-to-action/schema";
 import { Categories } from "@/payload/collections/categories/schema";
-import { CTA } from "@/payload/collections/cta/schema";
 import { FAQ } from "@/payload/collections/faqs/schema";
 import { Logos } from "@/payload/collections/logos/schema";
 import { Media } from "@/payload/collections/media/schema";

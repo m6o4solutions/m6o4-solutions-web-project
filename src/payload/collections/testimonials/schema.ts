@@ -58,14 +58,6 @@ const Testimonials: CollectionConfig = {
 			label: "Testimonial",
 			required: true,
 		},
-		{
-			/* optional media attachment for visual authenticity and context */
-			name: "photo",
-			type: "upload",
-			relationTo: "media",
-			label: "Photo",
-			admin: { position: "sidebar" },
-		},
 	],
 };
 

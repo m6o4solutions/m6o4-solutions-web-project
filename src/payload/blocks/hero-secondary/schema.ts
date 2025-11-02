@@ -27,7 +27,6 @@ const HeroSecondary: Block = {
 			name: "subHeadline",
 			type: "textarea",
 			label: "Subheadline",
-			required: true,
 		},
 		{
 			// field for selecting the main visual media (image) for the hero.

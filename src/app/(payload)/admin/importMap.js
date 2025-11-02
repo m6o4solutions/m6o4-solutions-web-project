@@ -21,7 +21,7 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { SlugComponent as SlugComponent_60dacf04f87cd44337964496348f153c } from '@/payload/fields/slug/component'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { RowLabel as RowLabel_2e18e59d93f9ca157d61b06270fb1997 } from '@/payload/collections/services/row-label'
-import { RowLabel as RowLabel_12bbd6262d835312601664796f87a91a } from '@/payload/collections/cta/row-label'
+import { RowLabel as RowLabel_fdde8f31c1ce41705e76e468ab616b29 } from '@/payload/collections/call-to-action/row-label'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { RowLabel as RowLabel_5b4634141fdeb6a8d4d768540dd63bb0 } from '@/payload/blocks/globals/header/row-label'
@@ -54,7 +54,7 @@ export const importMap = {
   "@/payload/fields/slug/component#SlugComponent": SlugComponent_60dacf04f87cd44337964496348f153c,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/payload/collections/services/row-label#RowLabel": RowLabel_2e18e59d93f9ca157d61b06270fb1997,
-  "@/payload/collections/cta/row-label#RowLabel": RowLabel_12bbd6262d835312601664796f87a91a,
+  "@/payload/collections/call-to-action/row-label#RowLabel": RowLabel_fdde8f31c1ce41705e76e468ab616b29,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/payload/blocks/globals/header/row-label#RowLabel": RowLabel_5b4634141fdeb6a8d4d768540dd63bb0,

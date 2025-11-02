@@ -21,7 +21,6 @@ const ContentCards: Block = {
 			name: "subheadline",
 			type: "text",
 			label: "Subheadline",
-			required: true,
 		},
 		{
 			name: "gridCards",

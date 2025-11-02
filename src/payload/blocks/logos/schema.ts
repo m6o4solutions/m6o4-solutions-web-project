@@ -25,7 +25,6 @@ const Logos: Block = {
 			name: "subheadline",
 			type: "text",
 			label: "Subheadline",
-			required: true,
 		},
 
 		// relational field linking to company logo entries in the logos collection
