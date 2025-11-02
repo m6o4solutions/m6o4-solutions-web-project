@@ -1,3 +1,16 @@
+# [1.10.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.9.0...v1.10.0) (2025-11-02)
+
+
+### Bug Fixes
+
+* change header component to use semantic HTML ([f5e5d4e](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/f5e5d4e7815161b7e153d65c0558169190b45dac))
+
+
+### Features
+
+* add Frequently Asked Questions block with type-safe rendering and accordion UI ([7d554d9](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/7d554d98eff285ef121418ede409667092b27b99))
+* **content-grid:** add support for icon or text item heads ([6a314f8](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/6a314f88c799ef8737110842f47ebd4a5a393f27))
+
 # [1.9.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.8.0...v1.9.0) (2025-11-01)
 
 
