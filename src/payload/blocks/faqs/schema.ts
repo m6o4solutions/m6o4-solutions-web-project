@@ -22,7 +22,6 @@ const FrequentlyAskedQuestions: Block = {
 			name: "subheadline",
 			type: "text",
 			label: "Subheadline",
-			required: true,
 		},
 		{
 			name: "faqs",

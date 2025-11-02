@@ -22,7 +22,6 @@ const ContentGrid: Block = {
 			name: "subheadline",
 			type: "text",
 			label: "Subheadline",
-			required: true,
 		},
 		// grid content items representing individual points of focus
 		{
