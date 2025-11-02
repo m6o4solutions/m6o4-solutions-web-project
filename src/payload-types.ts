@@ -602,8 +602,8 @@ export interface Faq {
  */
 export interface Testimonials {
   headline: string;
-  subheadline: string;
-  testimonies: (string | Testimonial)[];
+  subheadline?: string | null;
+  testimonials: (string | Testimonial)[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonials';
@@ -1369,7 +1369,7 @@ export interface FrequentlyAskedQuestionsSelect<T extends boolean = true> {
 export interface TestimonialsSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
-  testimonies?: T;
+  testimonials?: T;
   id?: T;
   blockName?: T;
 }
