@@ -5,7 +5,6 @@ import { RichText } from "@/components/rich-text";
 import { cn } from "@/lib/utils";
 import type { MediaBlock as MediaBlockProps } from "@/payload-types";
 import type { StaticImageData } from "next/image";
-import React from "react";
 
 // extends the payload-defined block props with component-specific presentation and content overrides.
 type Props = MediaBlockProps & {

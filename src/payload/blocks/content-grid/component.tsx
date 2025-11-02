@@ -39,7 +39,7 @@ const iconMap: Record<string, ElementType> = {
 // used for highlighting features or key points in a consistent visual layout
 const ContentGridBlock = ({ gridItems, headline, subheadline }: ContentGrid) => {
 	return (
-		<section className="section-spacing bg-bg-subtle">
+		<section className="bg-bg-subtle section-spacing">
 			<Container>
 				{/* section header introducing the grid content and setting hierarchy */}
 				<div className="mb-16 space-y-4 text-center">

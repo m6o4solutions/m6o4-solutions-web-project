@@ -6,11 +6,13 @@ import { ContentCopy } from "@/payload-types";
    intended for displaying editorial or marketing copy while preserving layout consistency. */
 const ContentCopyBlock = ({ copy }: ContentCopy) => {
 	return (
-		<Container className="px-3">
-			{/* only render if content exists to avoid empty layout space.
+		<section className="px-3">
+			<Container>
+				{/* only render if content exists to avoid empty layout space.
 			    limits text width for optimal readability and disables outer gutters for alignment control. */}
-			{copy && <RichText className="mx-auto mb-6 max-w-200" data={copy} enableGutter={false} />}
-		</Container>
+				{copy && <RichText className="mx-auto mb-6 max-w-200" data={copy} enableGutter={false} />}
+			</Container>
+		</section>
 	);
 };
 
