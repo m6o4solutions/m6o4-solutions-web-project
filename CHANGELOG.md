@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.11.0...v1.12.0) (2025-11-02)
+
+
+### Features
+
+* add support for ordered and unordered lists in lexical editor ([4dd392c](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/4dd392ca527bab0d7001357125968f449c34f8d1))
+
 # [1.11.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.10.0...v1.11.0) (2025-11-02)
 
 
