@@ -167,7 +167,7 @@
 	}
 
 	h1 {
-		@apply text-5xl leading-tight font-extrabold md:text-6xl lg:text-7xl;
+		@apply text-4xl leading-tight font-extrabold md:text-5xl lg:text-6xl;
 	}
 
 	h2 {
@@ -199,5 +199,14 @@
 
 	.section-spacing {
 		@apply py-16 md:py-24;
+	}
+
+	.hide-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.hide-scrollbar::-webkit-scrollbar {
+		display: none;
 	}
 }

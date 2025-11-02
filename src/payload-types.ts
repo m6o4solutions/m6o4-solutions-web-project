@@ -96,7 +96,7 @@ export interface Config {
     work: WorkSelect<false> | WorkSelect<true>;
     faq: FaqSelect<false> | FaqSelect<true>;
     cta: CtaSelect<false> | CtaSelect<true>;
-    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    testimonials: TestimonialsSelect1<false> | TestimonialsSelect1<true>;
     logos: LogosSelect1<false> | LogosSelect1<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -174,6 +174,7 @@ export interface Page {
         | ContentGrid
         | CallToAction
         | FrequentlyAskedQuestions
+        | Testimonials
         | Logos
       )[]
     | null;
@@ -597,6 +598,31 @@ export interface Faq {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials".
+ */
+export interface Testimonials {
+  headline: string;
+  subheadline?: string | null;
+  testimonials: (string | Testimonial)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: string;
+  name: string;
+  job?: string | null;
+  testimonial: string;
+  photo?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Logos".
  */
 export interface Logos {
@@ -720,19 +746,6 @@ export interface Work {
     };
     [k: string]: unknown;
   };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials".
- */
-export interface Testimonial {
-  id: string;
-  name: string;
-  job?: string | null;
-  testimonial: string;
-  photo?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1209,6 +1222,7 @@ export interface PagesSelect<T extends boolean = true> {
         contentGrid?: T | ContentGridSelect<T>;
         callToAction?: T | CallToActionSelect<T>;
         frequentlyAskedQuestions?: T | FrequentlyAskedQuestionsSelect<T>;
+        testimonials?: T | TestimonialsSelect<T>;
         logos?: T | LogosSelect<T>;
       };
   meta?:
@@ -1345,6 +1359,17 @@ export interface FrequentlyAskedQuestionsSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
   faqs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
+  testimonials?: T;
   id?: T;
   blockName?: T;
 }
@@ -1517,7 +1542,7 @@ export interface CtaSelect<T extends boolean = true> {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials_select".
  */
-export interface TestimonialsSelect<T extends boolean = true> {
+export interface TestimonialsSelect1<T extends boolean = true> {
   name?: T;
   job?: T;
   testimonial?: T;

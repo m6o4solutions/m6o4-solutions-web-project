@@ -8,6 +8,7 @@ import { FrequentlyAskedQuestions } from "@/payload/blocks/faqs/schema";
 import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
 import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
 import { Logos } from "@/payload/blocks/logos/schema";
+import { Testimonials } from "@/payload/blocks/testimonials/schema";
 import { revalidateDelete, revalidatePage } from "@/payload/collections/pages/hooks/revalidate-page";
 import { slugField } from "@/payload/fields/slug";
 import { populatePublishedAt } from "@/payload/hooks/populate-published-at";
@@ -111,6 +112,7 @@ const Pages: CollectionConfig<"pages"> = {
 								ContentGrid,
 								CallToAction,
 								FrequentlyAskedQuestions,
+								Testimonials,
 								Logos,
 							],
 						},

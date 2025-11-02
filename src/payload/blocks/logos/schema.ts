@@ -11,7 +11,6 @@ const Logos: Block = {
 		singular: "Logo Block",
 		plural: "Logo Blocks",
 	},
-
 	fields: [
 		// primary title for the logo section
 		{

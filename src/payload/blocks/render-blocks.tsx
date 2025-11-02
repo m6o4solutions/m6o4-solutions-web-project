@@ -8,6 +8,7 @@ import { FrequentlyAskedQuestionsBlock } from "@/payload/blocks/faqs/components"
 import { HeroPrimaryBlock } from "@/payload/blocks/hero-primary/component";
 import { HeroSecondaryBlock } from "@/payload/blocks/hero-secondary/component";
 import { LogosBlock } from "@/payload/blocks/logos/component";
+import { TestimonialsBlock } from "@/payload/blocks/testimonials/component";
 import { ComponentType, Fragment } from "react";
 
 /* defines which payload block types map to which react components.
@@ -22,6 +23,7 @@ const blockComponents = {
 	heroPrimary: HeroPrimaryBlock,
 	heroSecondary: HeroSecondaryBlock,
 	logos: LogosBlock,
+	testimonials: TestimonialsBlock,
 } as const;
 
 type BlockKey = keyof typeof blockComponents;

@@ -8,55 +8,35 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { ReactNode } from "react";
 
-// import global tailwind and custom css styles.
-import "@/styles/globals.css";
+import "@/styles/globals.css"; // import global style definitions
 
-// configure the 'inter' font for general body text.
+// font configuration for consistent typography across the site
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-// configure the 'plus jakartasans' font for headings or display elements.
-const jakarta = Plus_Jakarta_Sans({
-	subsets: ["latin"],
-	variable: "--font-display",
-	display: "swap",
-});
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
 /**
- * the next.js root layout component. it wraps all pages, setting up the core html structure,
- * theme management, and global structural components (header and footer).
- *
- * @param props.children - the page content to be rendered in the <main> tag.
+ * root layout for the application defining global html structure, theme handling,
+ * and persistent components like header and footer.
  */
-const RootLayout = async (props: { children: ReactNode }) => {
-	const { children } = props;
-
+const RootLayout = async ({ children }: { children: ReactNode }) => {
 	return (
-		// base html structure, setting language and enabling theme attribute.
 		<html lang="en" suppressHydrationWarning>
-			{/* body applies base css, a flex column layout, antialiasing, and the font classes. */}
+			{/* main body uses a vertical layout, global fonts, and antialiasing for smoother text rendering */}
 			<body className={cn("flex h-screen flex-col font-sans antialiased", inter.className, jakarta.className)}>
-				{/* theme provider component for managing dark/light mode across the application. */}
-				<ThemeProvider
-					// uses a 'class' attribute on the html tag to denote the current theme.
-					attribute="class"
-					// default theme for initial load.
-					defaultTheme="light"
-					// allows the operating system's preference to dictate the theme.
-					enableSystem
-					// prevents theme changes from triggering animation flashes.
-					disableTransitionOnChange
-				>
-					{/* header component, fetched and rendered on the server. */}
-					<>
+				{/* theme provider manages light/dark modes and syncs theme preference across the app */}
+				<ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+					{/* global header displayed across all pages */}
+					<header>
 						<Header />
-					</>
+					</header>
 
-					{/* the main area where the content of the current page is rendered. */}
-					<main className="grow">{children}</main>
+					{/* main page content grows to fill available space, pushing footer downward */}
+					<main className="grow pt-20">{children}</main>
 
-					{/* footer component, using 'mt-auto' to push it to the bottom of the viewport. */}
-					<div className="mt-auto">
+					{/* global footer anchored to bottom when content height is small */}
+					<footer className="mt-auto">
 						<Footer />
-					</div>
+					</footer>
 				</ThemeProvider>
 			</body>
 		</html>
@@ -64,26 +44,18 @@ const RootLayout = async (props: { children: ReactNode }) => {
 };
 
 /**
- * next.js metadata object for site-wide seo and social sharing configuration.
- * this data will be inherited and merged by individual page metadata.
+ * shared metadata applied to all routes, setting up base seo and social preview defaults.
  */
 const metadata: Metadata = {
-	// sets the base url for all relative metadata urls (e.g., open graph images).
-	metadataBase: new URL(getServerSideURL()),
-	// merges in site-wide default open graph properties.
-	openGraph: mergeOpenGraph(),
-	// specific twitter card configuration.
+	metadataBase: new URL(getServerSideURL()), // establishes absolute base for metadata URLs
+	openGraph: mergeOpenGraph(), // imports shared open graph configuration
 	twitter: {
-		// ensures a large image preview is used on twitter.
-		card: "summary_large_image",
-		// identifies the twitter account of the content creator.
-		creator: "@m6o4solutions",
+		card: "summary_large_image", // ensures large preview on twitter
+		creator: "@m6o4solutions", // identifies publishing account
 	},
-	// defines site icons.
 	icons: {
-		icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+		icon: [{ url: "/favicon.svg", type: "image/svg+xml" }], // defines the main favicon
 	},
 };
 
-// export the layout as default and the metadata object for next.js to use.
 export { RootLayout as default, metadata };

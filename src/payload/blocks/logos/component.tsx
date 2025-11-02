@@ -6,7 +6,7 @@ import Image from "next/image";
    supports both populated logo objects and direct string references, ensuring flexibility across use cases. */
 const LogosBlock = ({ companyLogos, headline, subheadline }: Logos) => {
 	return (
-		<div className="bg-white py-16">
+		<section className="bg-white py-16">
 			<Container>
 				{/* section heading with centered layout for visual hierarchy */}
 				<div className="mb-16 space-y-4 text-center">
@@ -52,7 +52,7 @@ const LogosBlock = ({ companyLogos, headline, subheadline }: Logos) => {
 					})}
 				</div>
 			</Container>
-		</div>
+		</section>
 	);
 };
 
