@@ -446,7 +446,7 @@ export interface HeroPrimary {
  */
 export interface HeroSecondary {
   headline: string;
-  subHeadline: string;
+  subHeadline?: string | null;
   media: string | Media;
   id?: string | null;
   blockName?: string | null;
@@ -482,7 +482,7 @@ export interface ContentCopy {
  */
 export interface ContentCards {
   headline: string;
-  subheadline: string;
+  subheadline?: string | null;
   gridCards: {
     cardImage: string | Media;
     cardTitle: string;
@@ -500,7 +500,7 @@ export interface ContentCards {
  */
 export interface ContentGrid {
   headline: string;
-  subheadline: string;
+  subheadline?: string | null;
   gridItems: {
     itemHead: {
       type: 'text' | 'icon';
@@ -579,7 +579,7 @@ export interface Cta {
  */
 export interface FrequentlyAskedQuestions {
   headline: string;
-  subheadline: string;
+  subheadline?: string | null;
   faqs: (string | Faq)[];
   id?: string | null;
   blockName?: string | null;
@@ -627,7 +627,7 @@ export interface Testimonial {
  */
 export interface Logos {
   headline: string;
-  subheadline: string;
+  subheadline?: string | null;
   companyLogos: (string | Logo)[];
   id?: string | null;
   blockName?: string | null;
