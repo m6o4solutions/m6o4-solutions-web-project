@@ -52,7 +52,7 @@ const FooterClient = async ({ data }: FooterClientProps) => {
 
 	return (
 		// main footer container with dark background and light text.
-		<div className="bg-[#1C2A3A] text-white">
+		<footer className="bg-[#1C2A3A] text-white">
 			<Container>
 				{/* grid layout for the main content area, changing from a single column to a four-column layout on medium screens. */}
 				<div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-[2fr_1fr_1fr_1fr]">
@@ -166,7 +166,7 @@ const FooterClient = async ({ data }: FooterClientProps) => {
 					</div>
 				</div>
 			</Container>
-		</div>
+		</footer>
 	);
 };
 

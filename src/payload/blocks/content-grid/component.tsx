@@ -1,36 +1,77 @@
 import { Container } from "@/components/container";
 import { ContentGrid } from "@/payload-types";
+import {
+	Ban,
+	Brain,
+	Check,
+	ChevronsDown,
+	ChevronsUp,
+	Cloud,
+	Cpu,
+	DollarSign,
+	Globe,
+	Shield,
+	TrendingDown,
+	TrendingUp,
+	Zap,
+} from "lucide-react";
+import { ElementType } from "react";
 
-/* renders a content grid section with a headline, subheadline, and up to four content items.
-   designed for visually balanced layouts that highlight concise information blocks.
-   ideal for showcasing features, services, or key selling points in a structured format. */
+// maps string keys from the cms to lucide icon components
+// allows flexible icon selection without conditional imports
+const iconMap: Record<string, ElementType> = {
+	ban: Ban,
+	brain: Brain,
+	chevronsDown: ChevronsDown,
+	chevronsUp: ChevronsUp,
+	cloud: Cloud,
+	cpu: Cpu,
+	check: Check,
+	dollarSign: DollarSign,
+	globe: Globe,
+	shield: Shield,
+	trendingDown: TrendingDown,
+	trendingUp: TrendingUp,
+	zap: Zap,
+};
+
+// renders a structured content grid with optional icons or text markers
+// used for highlighting features or key points in a consistent visual layout
 const ContentGridBlock = ({ gridItems, headline, subheadline }: ContentGrid) => {
 	return (
 		<section className="section-spacing bg-bg-subtle">
 			<Container>
-				{/* section header providing context and visual hierarchy */}
+				{/* section header introducing the grid content and setting hierarchy */}
 				<div className="mb-16 space-y-4 text-center">
 					<h2 className="text-balance">{headline}</h2>
 					<p className="text-text-default mx-auto max-w-2xl text-lg">{subheadline}</p>
 				</div>
 
-				{/* responsive grid layout that adapts to screen size while maintaining clarity */}
+				{/* responsive grid maintaining balance across screen sizes */}
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-					{gridItems.map((item, index) => (
-						<div key={index} className="relative">
-							{/* card container using subtle elevation and spacing for readability */}
-							<div className="border-border-subtle h-full rounded-2xl border bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
-								{/* top marker or symbol giving each item visual distinction */}
-								<div className="text-brand-accent font-heading mb-4 text-6xl font-bold">{item.itemHead}</div>
+					{gridItems.map((item, index) => {
+						const headType = item.itemHead?.type;
+						const IconComponent = item.itemHead?.icon ? iconMap[item.itemHead.icon] : null;
 
-								{/* concise heading summarizing the content focus */}
-								<h3 className="text-text-primary font-heading mb-3 text-xl font-semibold">{item.itemTitle}</h3>
+						return (
+							<div key={index} className="relative">
+								{/* card container emphasizing structure and readability */}
+								<div className="border-border-subtle h-full rounded-2xl border bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
+									{/* header element giving each item a distinct visual marker */}
+									<div className="text-brand-accent font-heading justify-left mb-4 flex items-center text-6xl font-bold">
+										{headType === "text" && item.itemHead?.text}
+										{headType === "icon" && IconComponent && <IconComponent className="size-12" strokeWidth={2} />}
+									</div>
 
-								{/* supporting description conveying more context */}
-								<p className="text-text-muted leading-relaxed">{item.itemDescription}</p>
+									{/* primary item title summarizing its key message */}
+									<h3 className="text-text-primary font-heading mb-3 text-xl font-semibold">{item.itemTitle}</h3>
+
+									{/* supporting paragraph providing further context */}
+									<p className="text-text-muted leading-relaxed">{item.itemDescription}</p>
+								</div>
 							</div>
-						</div>
-					))}
+						);
+					})}
 				</div>
 			</Container>
 		</section>

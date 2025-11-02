@@ -4,6 +4,7 @@ import { CallToAction } from "@/payload/blocks/call-to-action/schema";
 import { ContentCards } from "@/payload/blocks/content-cards/schema";
 import { ContentCopy } from "@/payload/blocks/content-copy/schema";
 import { ContentGrid } from "@/payload/blocks/content-grid/schema";
+import { FrequentlyAskedQuestions } from "@/payload/blocks/faqs/schema";
 import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
 import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
 import { Logos } from "@/payload/blocks/logos/schema";
@@ -109,6 +110,7 @@ const Pages: CollectionConfig<"pages"> = {
 								ContentCards,
 								ContentGrid,
 								CallToAction,
+								FrequentlyAskedQuestions,
 								Logos,
 							],
 						},

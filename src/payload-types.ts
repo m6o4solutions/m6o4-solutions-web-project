@@ -165,7 +165,17 @@ export interface Page {
   id: string;
   title: string;
   layout?:
-    | (Archive | HeroPrimary | HeroSecondary | ContentCopy | ContentCards | ContentGrid | CallToAction | Logos)[]
+    | (
+        | Archive
+        | HeroPrimary
+        | HeroSecondary
+        | ContentCopy
+        | ContentCards
+        | ContentGrid
+        | CallToAction
+        | FrequentlyAskedQuestions
+        | Logos
+      )[]
     | null;
   meta?: {
     title?: string | null;
@@ -491,7 +501,27 @@ export interface ContentGrid {
   headline: string;
   subheadline: string;
   gridItems: {
-    itemHead: string;
+    itemHead: {
+      type: 'text' | 'icon';
+      text?: string | null;
+      icon?:
+        | (
+            | 'ban'
+            | 'brain'
+            | 'check'
+            | 'chevronsDown'
+            | 'chevronsUp'
+            | 'cloud'
+            | 'cpu'
+            | 'dollarSign'
+            | 'globe'
+            | 'shield'
+            | 'trendingDown'
+            | 'trendingUp'
+            | 'zap'
+          )
+        | null;
+    };
     itemTitle: string;
     itemDescription: string;
     itemlink?: string | null;
@@ -539,6 +569,29 @@ export interface Cta {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FrequentlyAskedQuestions".
+ */
+export interface FrequentlyAskedQuestions {
+  headline: string;
+  subheadline: string;
+  faqs: (string | Faq)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'frequentlyAskedQuestions';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: string;
+  question: string;
+  answer: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -667,17 +720,6 @@ export interface Work {
     };
     [k: string]: unknown;
   };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq".
- */
-export interface Faq {
-  id: string;
-  question: string;
-  answer: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -1166,6 +1208,7 @@ export interface PagesSelect<T extends boolean = true> {
         contentCards?: T | ContentCardsSelect<T>;
         contentGrid?: T | ContentGridSelect<T>;
         callToAction?: T | CallToActionSelect<T>;
+        frequentlyAskedQuestions?: T | FrequentlyAskedQuestionsSelect<T>;
         logos?: T | LogosSelect<T>;
       };
   meta?:
@@ -1270,7 +1313,13 @@ export interface ContentGridSelect<T extends boolean = true> {
   gridItems?:
     | T
     | {
-        itemHead?: T;
+        itemHead?:
+          | T
+          | {
+              type?: T;
+              text?: T;
+              icon?: T;
+            };
         itemTitle?: T;
         itemDescription?: T;
         itemlink?: T;
@@ -1285,6 +1334,17 @@ export interface ContentGridSelect<T extends boolean = true> {
  */
 export interface CallToActionSelect<T extends boolean = true> {
   cta?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FrequentlyAskedQuestions_select".
+ */
+export interface FrequentlyAskedQuestionsSelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
+  faqs?: T;
   id?: T;
   blockName?: T;
 }
