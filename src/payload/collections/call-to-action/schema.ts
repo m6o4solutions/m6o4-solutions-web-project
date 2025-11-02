@@ -81,7 +81,7 @@ const CTA: CollectionConfig = {
 					admin: {
 						components: {
 							// uses a custom component to generate a readable label for the row in the admin ui.
-							RowLabel: "@/payload/collections/cta/row-label#RowLabel",
+							RowLabel: "@/payload/collections/call-to-action/row-label#RowLabel",
 						},
 						// keeps the array field collapsed by default for a cleaner form.
 						initCollapsed: true,
