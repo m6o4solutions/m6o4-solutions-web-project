@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.10.0...v1.11.0) (2025-11-02)
+
+
+### Features
+
+* create the testimonials component with responsive scrollable area ([e40ec42](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/e40ec42d251d698d4c925a3ae0eb722a2b6ef24c))
+* scaffold testimonials block ([bab8432](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/bab84326fffb604b405d040e17e769e1104e91cb))
+
 # [1.10.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.9.0...v1.10.0) (2025-11-02)
 
 
