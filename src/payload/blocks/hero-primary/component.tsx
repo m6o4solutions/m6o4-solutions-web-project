@@ -15,7 +15,7 @@ const HeroPrimaryBlock = ({ ctaItems, headline, media, subHeadline }: HeroPrimar
 	const imageAlt = typeof media === "object" && "alt" in media && media.alt ? media.alt : "";
 
 	return (
-		<section className="section-spacing text-center">
+		<section className="section-spacing">
 			<Container>
 				{/* content area containing text and calls to action */}
 				<div className="mx-auto max-w-5xl space-y-6 text-center">

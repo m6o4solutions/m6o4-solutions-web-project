@@ -15,10 +15,10 @@ const HeroSecondaryBlock = ({ headline, subHeadline, media }: HeroSecondary) => 
 		<section className="section-spacing bg-white">
 			<Container>
 				{/* layout uses responsive two-column design for clear text-image separation */}
-				<div className="mx-auto flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-16">
+				<div className="flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-16">
 					{/* text column providing context and focus for accompanying media */}
-					<div className="w-full lg:w-1/2">
-						<h2 className="text-brand-primary text-4xl font-semibold md:text-5xl">{headline}</h2>
+					<div className="w-full space-y-6 lg:w-1/2">
+						<h1 className="text-brand-primary text-4xl font-semibold md:text-5xl">{headline}</h1>
 						<p className="text-text-default text-lg md:text-xl">{subHeadline}</p>
 					</div>
 
