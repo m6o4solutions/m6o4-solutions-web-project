@@ -8,44 +8,49 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPayload } from "payload";
 
-/* combines archive block data from payload with an optional block id */
+/* extends the archive block definition to include an optional id for section anchoring */
 type ArchiveBlockProps = Archive & { id?: string };
 
-/* server-side block for rendering a grid of posts.
-   supports automatic population from the posts collection or manual selection.
-   all data fetching happens on the server to ensure static optimization. */
+/* async server component responsible for rendering a post archive grid.
+   supports both dynamic population from the posts collection and manual selection from the cms.
+   all content fetching occurs server-side for performance and static optimization. */
 const ArchiveBlock = async (props: ArchiveBlockProps) => {
-	const { id, categories, limit: limitFromProps, headline, populateBy, selectedDocs, subheadline } = props;
+	const {
+		id,
+		backgroundColor,
+		categories,
+		limit: limitFromProps,
+		headline,
+		populateBy,
+		selectedDocs,
+		subheadline,
+	} = props;
 
-	/* define how many posts to show, defaulting to three for layout balance */
+	/* fallback ensures consistent layout even when limit is not explicitly set */
 	const limit = limitFromProps || 3;
 
 	let posts: Post[] = [];
 
-	/* when configured to pull posts dynamically from the collection */
+	/* handle auto population by querying posts directly from the payload collection */
 	if (populateBy === "collection") {
 		const payload = await getPayload({ config });
 
-		/* extract category ids from potentially nested objects */
+		/* normalize category references to raw ids to ensure reliable querying */
 		const flattenedCategories = categories?.map((category) => (typeof category === "object" ? category.id : category));
 
-		/* query posts with optional category filtering */
+		/* retrieve posts, optionally filtering by assigned categories */
 		const fetchedPosts = await payload.find({
 			collection: "posts",
 			depth: 1,
 			limit,
 			...(flattenedCategories && flattenedCategories.length > 0
-				? {
-						where: {
-							categories: { in: flattenedCategories },
-						},
-					}
+				? { where: { categories: { in: flattenedCategories } } }
 				: {}),
 		});
 
 		posts = fetchedPosts.docs;
 	} else {
-		/* if posts are chosen manually from the cms */
+		/* handle manual population by filtering selected cms entries */
 		if (selectedDocs?.length) {
 			const filteredSelectedPosts = selectedDocs
 				.map((post) => (typeof post.value === "object" ? post.value : undefined))
@@ -55,11 +60,14 @@ const ArchiveBlock = async (props: ArchiveBlockProps) => {
 		}
 	}
 
+	/* apply background color theme for visual contrast across sections */
+	const bgClass = backgroundColor === "subtle" ? "bg-[#f5f7fa]" : "bg-[#ffffff]";
+
 	return (
-		<section className="section-spacing bg-white">
+		<section className={`section-spacing ${bgClass}`}>
 			<Container>
 				<div className="px-3" id={`block-${id}`}>
-					{/* optional section heading and subtext */}
+					{/* display section heading if defined to provide content context */}
 					{(headline || subheadline) && (
 						<div className="mb-16 space-y-4 text-center">
 							{headline && <h2 className="text-balance">{headline}</h2>}
@@ -67,12 +75,12 @@ const ArchiveBlock = async (props: ArchiveBlockProps) => {
 						</div>
 					)}
 
-					{/* grid layout for displaying post cards */}
+					{/* render a responsive grid of posts */}
 					<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 						{posts.map((post) => {
 							const image = post.meta?.image;
 
-							/* resolve image url and alt text gracefully */
+							/* gracefully handle mixed image data types for consistency */
 							const imageSrc = typeof image === "string" ? image : (image?.url ?? "");
 							const imageAlt = typeof image === "string" ? "" : (image?.alt ?? "");
 
@@ -103,5 +111,5 @@ const ArchiveBlock = async (props: ArchiveBlockProps) => {
 	);
 };
 
-/* exported for use in page builder or layout configuration */
+/* exported for integration within dynamic page layouts or block builders */
 export { ArchiveBlock };

@@ -210,6 +210,7 @@ export interface Archive {
         value: string | Post;
       }[]
     | null;
+  backgroundColor?: ('white' | 'subtle') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
@@ -1237,6 +1238,7 @@ export interface ArchiveSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  backgroundColor?: T;
   id?: T;
   blockName?: T;
 }
