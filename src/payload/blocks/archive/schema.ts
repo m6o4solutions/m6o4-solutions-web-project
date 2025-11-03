@@ -1,115 +1,91 @@
-import { FixedToolbarFeature, HeadingFeature, InlineToolbarFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import type { Block } from "payload";
 
-/**
- * defines a reusable payload block for dynamically displaying an archive of documents,
- * primarily used for blog posts or similar content lists.
- * it allows content editors to either pull all posts from a collection or select specific posts.
- */
+/* defines a reusable payload block for listing documents such as blog posts.
+   gives editors flexibility to either auto-populate from a collection or manually select entries. */
 const Archive: Block = {
-	// unique identifier for the block.
 	slug: "archive",
-	// typescript interface name for type safety.
 	interfaceName: "Archive",
-	// human-readable labels for the admin ui.
+
+	/* defines how the block appears in the cms interface */
 	labels: {
 		singular: "Post Archive Block",
 		plural: "Post Archive Blocks",
 	},
-	// field definitions for the block content.
+
+	/* defines editable fields controlling how archive data is displayed and populated */
 	fields: [
 		{
-			// rich text area for content editors to add an introductory paragraph or heading
-			// above the displayed archive list.
-			name: "introContent",
-			type: "richText",
-			label: "Introductory Content",
-			editor: lexicalEditor({
-				features: ({ rootFeatures }) => {
-					// enables heading, fixed, and inline toolbars for editing the intro content.
-					return [
-						...rootFeatures,
-						HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
-						FixedToolbarFeature(),
-						InlineToolbarFeature(),
-					];
-				},
-			}),
+			/* heading displayed above the archive section */
+			name: "headline",
+			type: "text",
+			label: "Headline",
 		},
 		{
-			// control field to determine the method of populating the archive list.
+			/* optional supporting text providing context for the archive */
+			name: "subheadline",
+			type: "text",
+			label: "Subheadline",
+		},
+		{
+			/* determines whether posts are fetched automatically or selected manually */
 			name: "populateBy",
 			type: "select",
 			label: "Populate by",
 			defaultValue: "collection",
 			options: [
-				{
-					// option to display posts based on collection/category filters.
-					label: "Collection",
-					value: "collection",
-				},
-				{
-					// option to manually select individual posts.
-					label: "Individual Selection",
-					value: "selection",
-				},
+				{ label: "Collection", value: "collection" },
+				{ label: "Individual Selection", value: "selection" },
 			],
 		},
 		{
-			// specifies which collection to pull documents from when 'populate by' is 'collection'.
+			/* specifies the source collection when using automated population */
 			name: "relationTo",
 			type: "select",
 			label: "Collections to Show",
 			defaultValue: "posts",
-			options: [
-				{
-					label: "Posts",
-					value: "posts",
-				},
-			],
+			options: [{ label: "Posts", value: "posts" }],
 			admin: {
-				// this field only appears if the population method is 'collection'.
+				/* only visible when the block is set to populate by collection */
 				condition: (_, siblingData) => siblingData.populateBy === "collection",
 			},
 		},
 		{
-			// allows filtering the documents by one or more categories when 'populate by' is 'collection'.
+			/* allows category-based filtering for finer control of displayed items */
 			name: "categories",
 			type: "relationship",
 			label: "Categories to Show",
 			relationTo: "categories",
 			hasMany: true,
 			admin: {
-				// this field only appears if the population method is 'collection'.
+				/* only visible when using automated population */
 				condition: (_, siblingData) => siblingData.populateBy === "collection",
 			},
 		},
 		{
-			// sets a maximum number of documents to fetch and display when 'populate by' is 'collection'.
+			/* defines the maximum number of items to display when fetching from a collection */
 			name: "limit",
 			type: "number",
 			label: "Limit",
 			defaultValue: 9,
 			admin: {
-				// this field only appears if the population method is 'collection'.
 				condition: (_, siblingData) => siblingData.populateBy === "collection",
 				step: 1,
 			},
 		},
 		{
-			// a relationship field to manually select documents when 'populate by' is 'selection'.
+			/* enables manual selection of specific documents when not using collection mode */
 			name: "selectedDocs",
 			type: "relationship",
 			label: "Selection",
 			relationTo: ["posts"],
 			hasMany: true,
 			admin: {
-				// this field only appears if the population method is 'selection'.
+				/* only visible when populate mode is set to selection */
 				condition: (_, siblingData) => siblingData.populateBy === "selection",
 			},
 		},
 	],
 };
 
-// export the block configuration for use in collections/globals.
+/* exports the block definition for integration into payload collections or globals */
 export { Archive };

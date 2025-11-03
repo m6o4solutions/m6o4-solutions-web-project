@@ -198,21 +198,8 @@ export interface Page {
  * via the `definition` "Archive".
  */
 export interface Archive {
-  introContent?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  headline?: string | null;
+  subheadline?: string | null;
   populateBy?: ('collection' | 'selection') | null;
   relationTo?: 'posts' | null;
   categories?: (string | Category)[] | null;
@@ -1243,7 +1230,8 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "Archive_select".
  */
 export interface ArchiveSelect<T extends boolean = true> {
-  introContent?: T;
+  headline?: T;
+  subheadline?: T;
   populateBy?: T;
   relationTo?: T;
   categories?: T;
