@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.13.0...v1.14.0) (2025-11-03)
+
+
+### Features
+
+* **blocks/archive:** add configurable background color option via CMS ([2a6f8bc](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/2a6f8bc016f25c03f7a5a6e9ad8a8ce17f73f3c0))
+
 # [1.13.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.12.0...v1.13.0) (2025-11-03)
 
 
