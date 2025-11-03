@@ -489,6 +489,7 @@ export interface ContentCards {
 export interface ContentGrid {
   headline: string;
   subheadline?: string | null;
+  columns?: ('3' | '4') | null;
   gridItems: {
     itemHead: {
       type: 'text' | 'icon';
@@ -1313,6 +1314,7 @@ export interface ContentCardsSelect<T extends boolean = true> {
 export interface ContentGridSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
+  columns?: T;
   gridItems?:
     | T
     | {

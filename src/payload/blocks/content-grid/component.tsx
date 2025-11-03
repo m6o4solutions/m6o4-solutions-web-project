@@ -35,7 +35,7 @@ const iconMap: Record<string, ElementType> = {
 };
 
 // renders a structured content grid with optional icons or text markers
-const ContentGridBlock = ({ gridItems, headline, subheadline }: ContentGrid) => {
+const ContentGridBlock = ({ columns, gridItems, headline, subheadline }: ContentGrid) => {
 	return (
 		<section className="bg-bg-subtle section-spacing">
 			<Container>
@@ -46,7 +46,9 @@ const ContentGridBlock = ({ gridItems, headline, subheadline }: ContentGrid) => 
 				</div>
 
 				{/* responsive grid maintaining balance across screen sizes */}
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+				<div
+					className={`grid grid-cols-1 gap-8 md:grid-cols-2 ${columns === "3" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}
+				>
 					{gridItems.map((item, index) => {
 						const headType = item.itemHead?.type;
 						const IconComponent = item.itemHead?.icon ? iconMap[item.itemHead.icon] : null;

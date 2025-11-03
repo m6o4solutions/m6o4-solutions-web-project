@@ -23,6 +23,16 @@ const ContentGrid: Block = {
 			type: "text",
 			label: "Subheadline",
 		},
+		{
+			name: "columns",
+			type: "select",
+			label: "Columns on Large Screens",
+			defaultValue: "4",
+			options: [
+				{ label: "3 Columns", value: "3" },
+				{ label: "4 Columns", value: "4" },
+			],
+		},
 		// grid content items representing individual points of focus
 		{
 			name: "gridItems",
