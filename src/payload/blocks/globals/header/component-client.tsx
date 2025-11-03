@@ -48,7 +48,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 							<Image src={imageSrc} alt={imageAlt} fill priority className="text-brand-primary object-cover" />
 						</div>
 						{/* organization name display. */}
-						<div className="text-brand-primary text-2xl font-semibold">{name}</div>
+						<div className="text-text-default hover:text-brand-primary-light text-2xl font-semibold">{name}</div>
 					</Link>
 
 					{/* primary navigation links, hidden on mobile screens. */}

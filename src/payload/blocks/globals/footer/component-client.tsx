@@ -52,7 +52,7 @@ const FooterClient = async ({ data }: FooterClientProps) => {
 
 	return (
 		// main footer container with dark background and light text.
-		<footer className="bg-[#1C2A3A] text-white">
+		<footer className="bg-bg-dark text-white">
 			<Container>
 				{/* grid layout for the main content area, changing from a single column to a four-column layout on medium screens. */}
 				<div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-[2fr_1fr_1fr_1fr]">
@@ -66,7 +66,7 @@ const FooterClient = async ({ data }: FooterClientProps) => {
 								<Image src={imageSrc} alt={imageAlt} fill priority className="object-cover text-white/80" />
 							</div>
 							{/* organization name display. */}
-							<div className="text-2xl font-semibold text-white/80">{name}</div>
+							<div className="text-2xl font-semibold text-white/80 transition-colors hover:text-white">{name}</div>
 						</Link>
 
 						{/* organization slogan text. */}

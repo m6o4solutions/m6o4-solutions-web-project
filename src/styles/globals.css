@@ -16,6 +16,7 @@
 	--text-default: #1c2a3a; /* graphite */
 	--bg-subtle: #f5f7fa; /* cloud grey */
 	--bg-white: #ffffff; /* pure white */
+	--bg-dark: #1c2a3a; /* graphite */
 	--border-subtle: #e0e0e0; /* subtle stroke */
 
 	/* semantic design tokens */
@@ -105,6 +106,7 @@
 	--color-text-default: var(--text-default);
 	--color-bg-subtle: var(--bg-subtle);
 	--color-bg-white: var(--bg-white);
+	--color-bg-dark: var(--bg-dark);
 	--color-border-subtle: var(--border-subtle);
 
 	/* semantic tokens */
