@@ -23,6 +23,7 @@ const ContentGrid: Block = {
 			type: "text",
 			label: "Subheadline",
 		},
+		// defines layout control for large screen grid columns
 		{
 			name: "columns",
 			type: "select",
