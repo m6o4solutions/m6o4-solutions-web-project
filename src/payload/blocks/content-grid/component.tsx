@@ -18,7 +18,6 @@ import {
 import { ElementType } from "react";
 
 // maps string keys from the cms to lucide icon components
-// allows flexible icon selection without conditional imports
 const iconMap: Record<string, ElementType> = {
 	ban: Ban,
 	brain: Brain,
@@ -36,7 +35,6 @@ const iconMap: Record<string, ElementType> = {
 };
 
 // renders a structured content grid with optional icons or text markers
-// used for highlighting features or key points in a consistent visual layout
 const ContentGridBlock = ({ gridItems, headline, subheadline }: ContentGrid) => {
 	return (
 		<section className="bg-bg-subtle section-spacing">
@@ -58,9 +56,14 @@ const ContentGridBlock = ({ gridItems, headline, subheadline }: ContentGrid) => 
 								{/* card container emphasizing structure and readability */}
 								<div className="border-border-subtle h-full rounded-2xl border bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
 									{/* header element giving each item a distinct visual marker */}
-									<div className="text-brand-accent font-heading justify-left mb-4 flex items-center text-6xl font-bold">
+									<div className="font-heading text-brand-accent mb-4 flex items-center justify-start text-6xl font-bold">
 										{headType === "text" && item.itemHead?.text}
-										{headType === "icon" && IconComponent && <IconComponent className="size-12" strokeWidth={2} />}
+
+										{headType === "icon" && IconComponent && (
+											<div className="bg-brand-accent/10 mb-4 flex size-12 items-center justify-center rounded-lg">
+												<IconComponent className="text-brand-accent size-8" strokeWidth={1.5} />
+											</div>
+										)}
 									</div>
 
 									{/* primary item title summarizing its key message */}
