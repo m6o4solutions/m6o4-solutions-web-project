@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.12.0...v1.13.0) (2025-11-03)
+
+
+### Features
+
+* add unordered and ordered list features to lexical plugin ([4af2285](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/4af228587976fee2c2eea60d8cba00ac00ef4c9b))
+* implement insights/posts colection, block and component ([5cb51ab](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/5cb51ab016d36c8472710865285fe6c948564128))
+
 # [1.12.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.11.0...v1.12.0) (2025-11-02)
 
 
