@@ -1,33 +1,33 @@
 import type { Block } from "payload";
 
-/* defines a reusable payload block for listing documents such as blog posts.
-   gives editors flexibility to either auto-populate from a collection or manually select entries. */
+/* defines a payload block for displaying lists of documents such as blog posts.
+   designed to offer editors control over how entries are chosen and presented. */
 const Archive: Block = {
 	slug: "archive",
 	interfaceName: "Archive",
 
-	/* defines how the block appears in the cms interface */
+	/* identifies the block in the cms editor */
 	labels: {
 		singular: "Post Archive Block",
 		plural: "Post Archive Blocks",
 	},
 
-	/* defines editable fields controlling how archive data is displayed and populated */
+	/* configures the block fields that control display and data sourcing */
 	fields: [
 		{
-			/* heading displayed above the archive section */
+			/* main title introducing the archive section */
 			name: "headline",
 			type: "text",
 			label: "Headline",
 		},
 		{
-			/* optional supporting text providing context for the archive */
+			/* optional short description providing context for the section */
 			name: "subheadline",
 			type: "text",
 			label: "Subheadline",
 		},
 		{
-			/* determines whether posts are fetched automatically or selected manually */
+			/* defines whether items are pulled automatically or selected manually */
 			name: "populateBy",
 			type: "select",
 			label: "Populate by",
@@ -38,31 +38,30 @@ const Archive: Block = {
 			],
 		},
 		{
-			/* specifies the source collection when using automated population */
+			/* selects which collection to pull data from when auto-populating */
 			name: "relationTo",
 			type: "select",
 			label: "Collections to Show",
 			defaultValue: "posts",
 			options: [{ label: "Posts", value: "posts" }],
 			admin: {
-				/* only visible when the block is set to populate by collection */
+				/* visible only when auto mode is active */
 				condition: (_, siblingData) => siblingData.populateBy === "collection",
 			},
 		},
 		{
-			/* allows category-based filtering for finer control of displayed items */
+			/* enables filtering by specific categories when fetching automatically */
 			name: "categories",
 			type: "relationship",
 			label: "Categories to Show",
 			relationTo: "categories",
 			hasMany: true,
 			admin: {
-				/* only visible when using automated population */
 				condition: (_, siblingData) => siblingData.populateBy === "collection",
 			},
 		},
 		{
-			/* defines the maximum number of items to display when fetching from a collection */
+			/* sets the maximum number of documents displayed in auto mode */
 			name: "limit",
 			type: "number",
 			label: "Limit",
@@ -73,19 +72,29 @@ const Archive: Block = {
 			},
 		},
 		{
-			/* enables manual selection of specific documents when not using collection mode */
+			/* allows manual document selection when auto-population is disabled */
 			name: "selectedDocs",
 			type: "relationship",
 			label: "Selection",
 			relationTo: ["posts"],
 			hasMany: true,
 			admin: {
-				/* only visible when populate mode is set to selection */
 				condition: (_, siblingData) => siblingData.populateBy === "selection",
 			},
+		},
+		{
+			/* defines the background tone for the archive block’s visual presentation */
+			name: "backgroundColor",
+			type: "select",
+			label: "Background Color",
+			defaultValue: "white",
+			options: [
+				{ label: "White", value: "white" },
+				{ label: "Subtle Gray", value: "subtle" },
+			],
 		},
 	],
 };
 
-/* exports the block definition for integration into payload collections or globals */
+/* exports the archive block for use in payload layouts and page builders */
 export { Archive };
