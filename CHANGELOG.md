@@ -1,3 +1,12 @@
+# [1.15.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.14.0...v1.15.0) (2025-11-04)
+
+
+### Features
+
+* **blocks/content-grid:** improve visual hierarchy with styled icon wrapper ([c98641c](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/c98641c303a3927567a9ed4817a0e5a62ca27845))
+* **content-grid:** add configurable column layout for large screens ([9f9b118](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/9f9b1187b3676dd5acc545b4a5b9211af1b5e204))
+* scaffold services collection ([ccf804b](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/ccf804bb8ac9fa2aba4eafaa5d580f9460af5786))
+
 # [1.14.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.13.0...v1.14.0) (2025-11-03)
 
 
