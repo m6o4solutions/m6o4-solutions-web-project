@@ -25,7 +25,7 @@ const Services: CollectionConfig = {
 
 	/* configures admin behavior for easier navigation and display consistency */
 	admin: {
-		defaultColumns: ["title", "description", "createdAt", "updatedAt"],
+		defaultColumns: ["title", "createdAt", "updatedAt"],
 		useAsTitle: "title",
 	},
 
@@ -196,7 +196,7 @@ const Services: CollectionConfig = {
 									fields: [
 										{ name: "priceTitle", type: "text", label: "Price Title", required: true },
 										{ name: "priceDescription", type: "text", label: "Price Description" },
-										{ name: "price", type: "number", label: "Price", required: true, min: 0.0 },
+										{ name: "price", type: "text", label: "Price", required: true },
 										{
 											name: "popularSubscription",
 											type: "checkbox",
@@ -212,9 +212,8 @@ const Services: CollectionConfig = {
 										/* conditionally exposes recurring pricing for subscription services */
 										{
 											name: "subscriptionPrice",
-											type: "number",
+											type: "text",
 											label: "Subscription Price",
-											min: 0.0,
 											admin: {
 												condition: (_, siblingData) => siblingData?.enableSubscription === true,
 											},

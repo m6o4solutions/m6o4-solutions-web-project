@@ -240,13 +240,13 @@ const Page = async ({ params: paramsPromise }: Args) => {
 										<CardTitle className="mb-2 text-2xl">{price.priceTitle}</CardTitle>
 										<CardDescription className="text-base">{price.priceDescription}</CardDescription>
 										<div className="mt-4">
-											<div className="text-muted-foreground mb-1 text-sm">Setup Fee</div>
-											<div className="text-brand-primary text-3xl font-bold">${price.price}</div>
+											<div className="text-muted-foreground mb-1 text-sm">Project-Based Setup Fee</div>
+											<div className="text-brand-primary text-3xl font-bold">{price.price}</div>
 											{Boolean(price.enableSubscription) && (
 												<>
 													<div className="text-muted-foreground mt-3 mb-1 text-sm">Monthly Subscription</div>
 													<div className="text-2xl font-bold">
-														${price.subscriptionPrice}
+														{price.subscriptionPrice}
 														<span className="text-muted-foreground text-base font-normal">/month</span>
 													</div>
 												</>

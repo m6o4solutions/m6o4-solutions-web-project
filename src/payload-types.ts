@@ -702,10 +702,10 @@ export interface Service {
       | {
           priceTitle: string;
           priceDescription?: string | null;
-          price: number;
+          price: string;
           popularSubscription?: boolean | null;
           enableSubscription?: boolean | null;
-          subscriptionPrice?: number | null;
+          subscriptionPrice?: string | null;
           perks?:
             | {
                 perk?: string | null;
