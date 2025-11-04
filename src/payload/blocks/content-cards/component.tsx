@@ -24,8 +24,8 @@ const ContentCardsBlock = ({ gridCards, headline, subheadline }: ContentCards) =
 					{gridCards?.map((card, index) => {
 						// safely extract image details and fall back to empty strings if undefined
 						const image = card?.cardImage;
-						const imageSrc = typeof image === "object" && "url" in image && image.url ? image.url : "";
-						const imageAlt = typeof image === "object" && "alt" in image && image.alt ? image.alt : "";
+						const imageSrc = image && typeof image === "object" && "url" in image && image.url ? image.url : "";
+						const imageAlt = image && typeof image === "object" && "alt" in image && image.alt ? image.alt : "";
 
 						return (
 							// entire card acts as a link for better accessibility and UX

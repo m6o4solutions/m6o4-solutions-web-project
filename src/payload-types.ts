@@ -505,6 +505,7 @@ export interface ContentGrid {
             | 'cpu'
             | 'dollarSign'
             | 'globe'
+            | 'search'
             | 'shield'
             | 'trendingDown'
             | 'trendingUp'
@@ -639,10 +640,6 @@ export interface Logo {
 export interface Service {
   id: string;
   title: string;
-  description?: string | null;
-  columns?: ('3' | '4') | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
   hero: {
     headline: string;
     subHeadline?: string | null;
@@ -693,7 +690,8 @@ export interface Service {
         }[]
       | null;
   };
-  pricing: {
+  enablePricing?: boolean | null;
+  pricing?: {
     headline: string;
     subheadline?: string | null;
     servicePricing?:
@@ -743,11 +741,40 @@ export interface Service {
           saasName?: string | null;
           saasDescription?: string | null;
           saasImage?: (string | null) | Media;
-          saasLink?: string | null;
+          cta?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
           id?: string | null;
         }[]
       | null;
   };
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1185,14 +1212,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'search';
         value: string | Search;
-      } | null)
-    | ({
-        relationTo: 'payload-kv';
-        value: string | PayloadKv;
-      } | null)
-    | ({
-        relationTo: 'payload-jobs';
-        value: string | PayloadJob;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1455,10 +1474,6 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
-  description?: T;
-  columns?: T;
-  slug?: T;
-  slugLock?: T;
   hero?:
     | T
     | {
@@ -1500,6 +1515,7 @@ export interface ServicesSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  enablePricing?: T;
   pricing?:
     | T
     | {
@@ -1549,10 +1565,32 @@ export interface ServicesSelect<T extends boolean = true> {
               saasName?: T;
               saasDescription?: T;
               saasImage?: T;
-              saasLink?: T;
+              cta?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
               id?: T;
             };
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }
