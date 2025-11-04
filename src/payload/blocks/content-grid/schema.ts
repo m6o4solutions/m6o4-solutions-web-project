@@ -91,6 +91,7 @@ const ContentGrid: Block = {
 								{ label: "CPU", value: "cpu" },
 								{ label: "Dollar Sign", value: "dollarSign" },
 								{ label: "Globe", value: "globe" },
+								{ label: "Search", value: "search" },
 								{ label: "Shield", value: "shield" },
 								{ label: "Trending Down", value: "trendingDown" },
 								{ label: "Trending Up", value: "trendingUp" },
