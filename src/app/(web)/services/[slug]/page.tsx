@@ -14,6 +14,7 @@ import {
 	Check,
 	ChevronsDown,
 	ChevronsUp,
+	Clock,
 	Cloud,
 	Cpu,
 	DollarSign,
@@ -22,6 +23,7 @@ import {
 	Shield,
 	TrendingDown,
 	TrendingUp,
+	Users,
 	Zap,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -38,6 +40,7 @@ const iconMap: Record<string, ElementType> = {
 	chevronsDown: ChevronsDown,
 	chevronsUp: ChevronsUp,
 	cloud: Cloud,
+	clock: Clock,
 	cpu: Cpu,
 	check: Check,
 	dollarSign: DollarSign,
@@ -46,6 +49,7 @@ const iconMap: Record<string, ElementType> = {
 	shield: Shield,
 	trendingDown: TrendingDown,
 	trendingUp: TrendingUp,
+	users: Users,
 	zap: Zap,
 };
 

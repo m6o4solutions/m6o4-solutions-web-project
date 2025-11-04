@@ -501,6 +501,7 @@ export interface ContentGrid {
             | 'check'
             | 'chevronsDown'
             | 'chevronsUp'
+            | 'clock'
             | 'cloud'
             | 'cpu'
             | 'dollarSign'
@@ -509,6 +510,7 @@ export interface ContentGrid {
             | 'shield'
             | 'trendingDown'
             | 'trendingUp'
+            | 'users'
             | 'zap'
           )
         | null;
@@ -660,6 +662,7 @@ export interface Service {
                   | 'check'
                   | 'chevronsDown'
                   | 'chevronsUp'
+                  | 'clock'
                   | 'cloud'
                   | 'cpu'
                   | 'dollarSign'
@@ -668,6 +671,7 @@ export interface Service {
                   | 'shield'
                   | 'trendingDown'
                   | 'trendingUp'
+                  | 'users'
                   | 'zap'
                 )
               | null;
