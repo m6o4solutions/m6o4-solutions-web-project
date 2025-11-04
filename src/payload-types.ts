@@ -489,6 +489,7 @@ export interface ContentCards {
 export interface ContentGrid {
   headline: string;
   subheadline?: string | null;
+  columns?: ('3' | '4') | null;
   gridItems: {
     itemHead: {
       type: 'text' | 'icon';
@@ -639,39 +640,68 @@ export interface Service {
   id: string;
   title: string;
   description?: string | null;
+  columns?: ('3' | '4') | null;
   slug?: string | null;
   slugLock?: boolean | null;
+  hero: {
+    headline: string;
+    subHeadline?: string | null;
+    media: string | Media;
+  };
   benefits: {
-    title: string;
-    subtitle: string;
+    headline: string;
+    subheadline?: string | null;
     serviceBenefits?:
       | {
-          benefitTitle: string;
-          benefitDescription: string;
+          benefitSymbol?: {
+            type?: ('icon' | 'text') | null;
+            text?: string | null;
+            icon?:
+              | (
+                  | 'ban'
+                  | 'brain'
+                  | 'check'
+                  | 'chevronsDown'
+                  | 'chevronsUp'
+                  | 'cloud'
+                  | 'cpu'
+                  | 'dollarSign'
+                  | 'globe'
+                  | 'search'
+                  | 'shield'
+                  | 'trendingDown'
+                  | 'trendingUp'
+                  | 'zap'
+                )
+              | null;
+          };
+          benefitTitle?: string | null;
+          benefitDescription?: string | null;
           id?: string | null;
         }[]
       | null;
   };
   features: {
-    title: string;
-    subtitle: string;
+    headline: string;
+    subheadline?: string | null;
     serviceFeatures?:
       | {
-          featureTitle: string;
-          featureDescription: string;
+          featureTitle?: string | null;
+          featureDescription?: string | null;
           featureImage?: (string | null) | Media;
           id?: string | null;
         }[]
       | null;
   };
   pricing: {
-    title: string;
-    subtitle: string;
+    headline: string;
+    subheadline?: string | null;
     servicePricing?:
       | {
           priceTitle: string;
           priceDescription?: string | null;
           price: number;
+          popularSubscription?: boolean | null;
           enableSubscription?: boolean | null;
           subscriptionPrice?: number | null;
           perks?:
@@ -680,30 +710,44 @@ export interface Service {
                 id?: string | null;
               }[]
             | null;
+          cta?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
           id?: string | null;
         }[]
       | null;
   };
-  ctaItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  enableSaaS?: boolean | null;
+  saas?: {
+    headline?: string | null;
+    subheadline?: string | null;
+    saasDetails?:
+      | {
+          saasName?: string | null;
+          saasDescription?: string | null;
+          saasImage?: (string | null) | Media;
+          saasLink?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1313,6 +1357,7 @@ export interface ContentCardsSelect<T extends boolean = true> {
 export interface ContentGridSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
+  columns?: T;
   gridItems?:
     | T
     | {
@@ -1411,16 +1456,31 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  columns?: T;
   slug?: T;
   slugLock?: T;
+  hero?:
+    | T
+    | {
+        headline?: T;
+        subHeadline?: T;
+        media?: T;
+      };
   benefits?:
     | T
     | {
-        title?: T;
-        subtitle?: T;
+        headline?: T;
+        subheadline?: T;
         serviceBenefits?:
           | T
           | {
+              benefitSymbol?:
+                | T
+                | {
+                    type?: T;
+                    text?: T;
+                    icon?: T;
+                  };
               benefitTitle?: T;
               benefitDescription?: T;
               id?: T;
@@ -1429,8 +1489,8 @@ export interface ServicesSelect<T extends boolean = true> {
   features?:
     | T
     | {
-        title?: T;
-        subtitle?: T;
+        headline?: T;
+        subheadline?: T;
         serviceFeatures?:
           | T
           | {
@@ -1443,14 +1503,15 @@ export interface ServicesSelect<T extends boolean = true> {
   pricing?:
     | T
     | {
-        title?: T;
-        subtitle?: T;
+        headline?: T;
+        subheadline?: T;
         servicePricing?:
           | T
           | {
               priceTitle?: T;
               priceDescription?: T;
               price?: T;
+              popularSubscription?: T;
               enableSubscription?: T;
               subscriptionPrice?: T;
               perks?:
@@ -1459,22 +1520,38 @@ export interface ServicesSelect<T extends boolean = true> {
                     perk?: T;
                     id?: T;
                   };
+              cta?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
               id?: T;
             };
       };
-  ctaItems?:
+  enableSaaS?: T;
+  saas?:
     | T
     | {
-        link?:
+        headline?: T;
+        subheadline?: T;
+        saasDetails?:
           | T
           | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
+              saasName?: T;
+              saasDescription?: T;
+              saasImage?: T;
+              saasLink?: T;
+              id?: T;
             };
-        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

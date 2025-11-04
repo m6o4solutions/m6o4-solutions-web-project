@@ -23,6 +23,17 @@ const ContentGrid: Block = {
 			type: "text",
 			label: "Subheadline",
 		},
+		// defines layout control for large screen grid columns
+		{
+			name: "columns",
+			type: "select",
+			label: "Columns on Large Screens",
+			defaultValue: "4",
+			options: [
+				{ label: "3 Columns", value: "3" },
+				{ label: "4 Columns", value: "4" },
+			],
+		},
 		// grid content items representing individual points of focus
 		{
 			name: "gridItems",
@@ -80,6 +91,7 @@ const ContentGrid: Block = {
 								{ label: "CPU", value: "cpu" },
 								{ label: "Dollar Sign", value: "dollarSign" },
 								{ label: "Globe", value: "globe" },
+								{ label: "Search", value: "search" },
 								{ label: "Shield", value: "shield" },
 								{ label: "Trending Down", value: "trendingDown" },
 								{ label: "Trending Up", value: "trendingUp" },
