@@ -790,24 +790,19 @@ export interface Work {
   id: string;
   title: string;
   industry?: string | null;
+  service: 'waas' | 'ctoaas';
+  solutionLink?: string | null;
+  challenge: string;
+  solution: string;
+  results?:
+    | {
+        result?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   slug?: string | null;
   slugLock?: boolean | null;
-  solution: 'waas' | 'ctoaas';
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  image: string | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1605,10 +1600,19 @@ export interface ServicesSelect<T extends boolean = true> {
 export interface WorkSelect<T extends boolean = true> {
   title?: T;
   industry?: T;
+  service?: T;
+  solutionLink?: T;
+  challenge?: T;
+  solution?: T;
+  results?:
+    | T
+    | {
+        result?: T;
+        id?: T;
+      };
   slug?: T;
   slugLock?: T;
-  solution?: T;
-  content?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
 }

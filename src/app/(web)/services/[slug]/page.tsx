@@ -226,7 +226,7 @@ const Page = async ({ params: paramsPromise }: Args) => {
 							{pricingCard?.map((price, index) => (
 								<Card
 									key={index}
-									className={`relative ${price.popularSubscription ? "border-brand-accent border-2 shadow-lg" : ""}`}
+									className={`relative ${price.popularSubscription ? "border-brand-accent border-2 bg-white shadow-lg" : "bg-white"}`}
 								>
 									{/* visual highlight for the most popular subscription tier */}
 									{price.popularSubscription && (
