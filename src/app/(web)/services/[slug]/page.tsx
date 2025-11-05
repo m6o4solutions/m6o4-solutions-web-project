@@ -14,6 +14,7 @@ import {
 	Check,
 	ChevronsDown,
 	ChevronsUp,
+	Clock,
 	Cloud,
 	Cpu,
 	DollarSign,
@@ -22,6 +23,7 @@ import {
 	Shield,
 	TrendingDown,
 	TrendingUp,
+	Users,
 	Zap,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -38,6 +40,7 @@ const iconMap: Record<string, ElementType> = {
 	chevronsDown: ChevronsDown,
 	chevronsUp: ChevronsUp,
 	cloud: Cloud,
+	clock: Clock,
 	cpu: Cpu,
 	check: Check,
 	dollarSign: DollarSign,
@@ -46,6 +49,7 @@ const iconMap: Record<string, ElementType> = {
 	shield: Shield,
 	trendingDown: TrendingDown,
 	trendingUp: TrendingUp,
+	users: Users,
 	zap: Zap,
 };
 
@@ -236,13 +240,13 @@ const Page = async ({ params: paramsPromise }: Args) => {
 										<CardTitle className="mb-2 text-2xl">{price.priceTitle}</CardTitle>
 										<CardDescription className="text-base">{price.priceDescription}</CardDescription>
 										<div className="mt-4">
-											<div className="text-muted-foreground mb-1 text-sm">Setup Fee</div>
-											<div className="text-brand-primary text-3xl font-bold">${price.price}</div>
+											<div className="text-muted-foreground mb-1 text-sm">Project-Based Setup Fee</div>
+											<div className="text-brand-primary text-3xl font-bold">{price.price}</div>
 											{Boolean(price.enableSubscription) && (
 												<>
 													<div className="text-muted-foreground mt-3 mb-1 text-sm">Monthly Subscription</div>
 													<div className="text-2xl font-bold">
-														${price.subscriptionPrice}
+														{price.subscriptionPrice}
 														<span className="text-muted-foreground text-base font-normal">/month</span>
 													</div>
 												</>
@@ -308,12 +312,12 @@ const Page = async ({ params: paramsPromise }: Args) => {
 												/>
 											</div>
 											<div className="px-6 pt-6 pb-2">
-												<CardTitle className="text-text-default group-hover:text-brand-primary transition-colors">
+												<CardTitle className="text-text-default group-hover:text-brand-primary px-3 transition-colors">
 													{app.saasName}
 												</CardTitle>
 											</div>
 											<CardContent className="space-y-6 px-6 pt-2 pb-6">
-												<CardDescription className="text-text-default/80 text-base leading-relaxed">
+												<CardDescription className="text-text-default/80 mb-6 space-y-3 px-3 text-base leading-relaxed">
 													{app.saasDescription}
 												</CardDescription>
 												<div>

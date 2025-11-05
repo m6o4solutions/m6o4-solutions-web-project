@@ -501,6 +501,7 @@ export interface ContentGrid {
             | 'check'
             | 'chevronsDown'
             | 'chevronsUp'
+            | 'clock'
             | 'cloud'
             | 'cpu'
             | 'dollarSign'
@@ -509,6 +510,7 @@ export interface ContentGrid {
             | 'shield'
             | 'trendingDown'
             | 'trendingUp'
+            | 'users'
             | 'zap'
           )
         | null;
@@ -660,6 +662,7 @@ export interface Service {
                   | 'check'
                   | 'chevronsDown'
                   | 'chevronsUp'
+                  | 'clock'
                   | 'cloud'
                   | 'cpu'
                   | 'dollarSign'
@@ -668,6 +671,7 @@ export interface Service {
                   | 'shield'
                   | 'trendingDown'
                   | 'trendingUp'
+                  | 'users'
                   | 'zap'
                 )
               | null;
@@ -698,10 +702,10 @@ export interface Service {
       | {
           priceTitle: string;
           priceDescription?: string | null;
-          price: number;
+          price: string;
           popularSubscription?: boolean | null;
           enableSubscription?: boolean | null;
-          subscriptionPrice?: number | null;
+          subscriptionPrice?: string | null;
           perks?:
             | {
                 perk?: string | null;
