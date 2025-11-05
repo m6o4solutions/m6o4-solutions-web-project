@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.17.0...v1.18.0) (2025-11-05)
+
+
+### Features
+
+* **work:** define work collection schema ([7cbe641](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/7cbe641d72b14988f2c20e72cb0f00c4d3ed68d9))
+
 # [1.17.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.16.0...v1.17.0) (2025-11-05)
 
 
