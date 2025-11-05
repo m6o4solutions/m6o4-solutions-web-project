@@ -312,12 +312,12 @@ const Page = async ({ params: paramsPromise }: Args) => {
 												/>
 											</div>
 											<div className="px-6 pt-6 pb-2">
-												<CardTitle className="text-text-default group-hover:text-brand-primary transition-colors">
+												<CardTitle className="text-text-default group-hover:text-brand-primary px-3 transition-colors">
 													{app.saasName}
 												</CardTitle>
 											</div>
 											<CardContent className="space-y-6 px-6 pt-2 pb-6">
-												<CardDescription className="text-text-default/80 text-base leading-relaxed">
+												<CardDescription className="text-text-default/80 mb-6 space-y-3 px-3 text-base leading-relaxed">
 													{app.saasDescription}
 												</CardDescription>
 												<div>
