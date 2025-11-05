@@ -3,11 +3,11 @@
 import { formatSlug } from "@/payload/fields/slug/format-slug";
 import { Button, FieldLabel, TextInput, useField, useForm, useFormFields } from "@payloadcms/ui";
 import { TextFieldClientProps } from "payload";
-import React, { useCallback } from "react";
+import { MouseEvent, useCallback } from "react";
 
 import "@/payload/fields/slug/index.scss";
 
-type MouseEventType = React.MouseEvent<Element>;
+type MouseEventType = MouseEvent<Element>;
 
 /* props for the slug component including field and checkbox references */
 type SlugComponentProps = {
