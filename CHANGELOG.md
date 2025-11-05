@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.16.0...v1.17.0) (2025-11-05)
+
+
+### Features
+
+* add two more icons to local icon library ([5654dbc](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/5654dbc2dff887593b1f224b5a3f3e26b42872b1))
+
 # [1.16.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.15.0...v1.16.0) (2025-11-04)
 
 
