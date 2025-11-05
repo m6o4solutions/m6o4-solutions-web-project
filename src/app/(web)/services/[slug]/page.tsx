@@ -302,7 +302,7 @@ const Page = async ({ params: paramsPromise }: Args) => {
 								return (
 									<div key={index} className="group">
 										<Card className="border-border-subtle hover:border-brand-primary-light h-full overflow-hidden rounded-xl bg-white p-0 transition-all duration-300 hover:shadow-lg">
-											<div className="relative h-48 w-full overflow-hidden">
+											<div className="relative h-96 w-full overflow-hidden">
 												<Image
 													src={imageSrc}
 													alt={imageAlt}
