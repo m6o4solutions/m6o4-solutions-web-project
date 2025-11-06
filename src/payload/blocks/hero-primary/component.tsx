@@ -4,26 +4,32 @@ import { HeroPrimary } from "@/payload-types";
 import Image from "next/image";
 import Link from "next/link";
 
-/* 
-   defines the primary hero block used for high-impact page intros.
-   emphasizes headline clarity, visual hierarchy, and a strong call to action.
-   layout remains vertically stacked for simplicity and readability across devices.
-*/
+/* renders a visually dominant hero section for primary page intros
+   focuses on clarity, emotional impact, and a direct conversion path
+   combines background imagery, headline hierarchy, and cta actions in a centered layout */
 const HeroPrimaryBlock = ({ ctaItems, headline, media, subHeadline }: HeroPrimary) => {
-	// extract image data safely from payload input to prevent runtime errors
+	/* safely resolve image source and alt text to handle variable payload input structures */
 	const imageSrc = typeof media === "object" && "url" in media && media.url ? media.url : "";
 	const imageAlt = typeof media === "object" && "alt" in media && media.alt ? media.alt : "";
 
 	return (
-		<section className="section-spacing">
-			<Container>
-				{/* content area containing text and calls to action */}
-				<div className="mx-auto max-w-5xl space-y-6 text-center">
-					<h1 className="text-brand-primary text-balance">{headline}</h1>
-					<p className="text-text-default mx-auto max-w-3xl text-xl md:text-2xl">{subHeadline}</p>
+		<section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden">
+			{/* background layer with image and overlay for readability and depth */}
+			<div className="absolute inset-0 z-0">
+				<Image src={imageSrc} alt={imageAlt} fill priority className="h-full w-full object-cover" />
+				<div className="absolute inset-0 bg-linear-to-br from-black/70 via-black/60 to-black/70" />
+			</div>
 
-					{/* render mapped cta buttons for navigation or conversion */}
-					<div>
+			{/* foreground layer containing text and calls to action */}
+			<Container className="relative z-10 py-20">
+				<div className="mx-auto max-w-5xl space-y-6 text-center">
+					<h1 className="text-balance text-white drop-shadow-lg">{headline}</h1>
+					<p className="mx-auto max-w-3xl text-xl leading-relaxed text-white/90 drop-shadow-md md:text-2xl">
+						{subHeadline}
+					</p>
+
+					{/* dynamically render cta buttons to guide user actions */}
+					<div className="flex justify-center pt-4">
 						{ctaItems?.map(({ link }, index) => (
 							<Button
 								key={index}
@@ -38,16 +44,10 @@ const HeroPrimaryBlock = ({ ctaItems, headline, media, subHeadline }: HeroPrimar
 						))}
 					</div>
 				</div>
-
-				{/* responsive image area maintaining visual focus below content */}
-				<div className="pt-12">
-					<div className="from-brand-primary to-brand-primary-light relative aspect-video h-96 w-full overflow-hidden rounded-2xl bg-linear-to-br shadow-2xl">
-						<Image src={imageSrc} alt={imageAlt} fill priority className="object-cover" />
-					</div>
-				</div>
 			</Container>
 		</section>
 	);
 };
 
+/* exported for integration into dynamic page layouts or reusable hero sections */
 export { HeroPrimaryBlock };

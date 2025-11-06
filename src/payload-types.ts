@@ -171,7 +171,7 @@ export interface Page {
         | HeroSecondary
         | ContentCopy
         | ContentCards
-        | ContentCardsWide
+        | ContentCardsWork
         | ContentGrid
         | CallToAction
         | FrequentlyAskedQuestions
@@ -485,12 +485,39 @@ export interface ContentCards {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentCardsWide".
+ * via the `definition` "ContentCardsWork".
  */
-export interface ContentCardsWide {
+export interface ContentCardsWork {
+  headline: string;
+  subheadline?: string | null;
+  work: (string | Work)[];
   id?: string | null;
   blockName?: string | null;
-  blockType: 'contentCardsWide';
+  blockType: 'contentCardsWork';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "work".
+ */
+export interface Work {
+  id: string;
+  title: string;
+  industry?: string | null;
+  service: 'waas' | 'ctoaas';
+  solutionLink?: string | null;
+  challenge: string;
+  solution: string;
+  results?:
+    | {
+        result?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  image: string | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -789,30 +816,6 @@ export interface Service {
   };
   slug?: string | null;
   slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "work".
- */
-export interface Work {
-  id: string;
-  title: string;
-  industry?: string | null;
-  service: 'waas' | 'ctoaas';
-  solutionLink?: string | null;
-  challenge: string;
-  solution: string;
-  results?:
-    | {
-        result?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  image: string | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -1278,7 +1281,7 @@ export interface PagesSelect<T extends boolean = true> {
         heroSecondary?: T | HeroSecondarySelect<T>;
         contentCopy?: T | ContentCopySelect<T>;
         contentCards?: T | ContentCardsSelect<T>;
-        contentCardsWide?: T | ContentCardsWideSelect<T>;
+        contentCardsWork?: T | ContentCardsWorkSelect<T>;
         contentGrid?: T | ContentGridSelect<T>;
         callToAction?: T | CallToActionSelect<T>;
         frequentlyAskedQuestions?: T | FrequentlyAskedQuestionsSelect<T>;
@@ -1381,9 +1384,12 @@ export interface ContentCardsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentCardsWide_select".
+ * via the `definition` "ContentCardsWork_select".
  */
-export interface ContentCardsWideSelect<T extends boolean = true> {
+export interface ContentCardsWorkSelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
+  work?: T;
   id?: T;
   blockName?: T;
 }
