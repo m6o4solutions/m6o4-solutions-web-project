@@ -171,6 +171,7 @@ export interface Page {
         | HeroSecondary
         | ContentCopy
         | ContentCards
+        | ContentCardsWide
         | ContentGrid
         | CallToAction
         | FrequentlyAskedQuestions
@@ -481,6 +482,15 @@ export interface ContentCards {
   id?: string | null;
   blockName?: string | null;
   blockType: 'contentCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentCardsWide".
+ */
+export interface ContentCardsWide {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentCardsWide';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1268,6 +1278,7 @@ export interface PagesSelect<T extends boolean = true> {
         heroSecondary?: T | HeroSecondarySelect<T>;
         contentCopy?: T | ContentCopySelect<T>;
         contentCards?: T | ContentCardsSelect<T>;
+        contentCardsWide?: T | ContentCardsWideSelect<T>;
         contentGrid?: T | ContentGridSelect<T>;
         callToAction?: T | CallToActionSelect<T>;
         frequentlyAskedQuestions?: T | FrequentlyAskedQuestionsSelect<T>;
@@ -1365,6 +1376,14 @@ export interface ContentCardsSelect<T extends boolean = true> {
         cardLink?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentCardsWide_select".
+ */
+export interface ContentCardsWideSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }

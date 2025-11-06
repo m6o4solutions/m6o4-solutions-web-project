@@ -7,8 +7,8 @@ const ContentCards: Block = {
 	slug: "contentCards",
 	interfaceName: "ContentCards",
 	labels: {
-		singular: "Content Card Block",
-		plural: "Content Card Blocks",
+		singular: "Content Cards Block",
+		plural: "Content Cards Blocks",
 	},
 	fields: [
 		{

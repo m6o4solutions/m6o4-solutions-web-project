@@ -1,6 +1,7 @@
 import type { Page } from "@/payload-types";
 import { ArchiveBlock } from "@/payload/blocks/archive/component";
 import { CallToActionBlock } from "@/payload/blocks/call-to-action/component";
+import { ContentCardsWideBlock } from "@/payload/blocks/content-cards-wide/component";
 import { ContentCardsBlock } from "@/payload/blocks/content-cards/component";
 import { ContentCopyBlock } from "@/payload/blocks/content-copy/component";
 import { ContentGridBlock } from "@/payload/blocks/content-grid/component";
@@ -17,6 +18,7 @@ const blockComponents = {
 	archive: ArchiveBlock,
 	callToAction: CallToActionBlock,
 	contentCards: ContentCardsBlock,
+	contentCardsWide: ContentCardsWideBlock,
 	contentCopy: ContentCopyBlock,
 	contentGrid: ContentGridBlock,
 	frequentlyAskedQuestions: FrequentlyAskedQuestionsBlock,
