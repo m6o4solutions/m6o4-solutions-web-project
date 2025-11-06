@@ -4,8 +4,8 @@ const ContentCardsWork: Block = {
 	slug: "contentCardsWork",
 	interfaceName: "ContentCardsWork",
 	labels: {
-		singular: "Content Cards Block",
-		plural: "Content Cards Blocks",
+		singular: "Content Cards Work Block",
+		plural: "Content Cards Work Blocks",
 	},
 	fields: [
 		{
