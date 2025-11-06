@@ -1,3 +1,13 @@
+# [1.19.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.18.0...v1.19.0) (2025-11-06)
+
+
+### Features
+
+* **blocks:** add content cards work block with image rendering and responsive layout ([73fc047](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/73fc0473990397f813e2e5309d063b919a3f3b7a))
+* changed layout of primary hero block ([a39a746](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/a39a7468ace18a4e0cedc8f61794c29bf524fbe1))
+* **payload:** add work collection schema ([26d38b3](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/26d38b3329df3768982c5ec4fdc3d75d1c583d8b))
+* scaffold wide content blocks schema and component ([825bfe0](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/825bfe0aa339a8f407e6880d93a315682ffb4de8))
+
 # [1.18.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.17.0...v1.18.0) (2025-11-05)
 
 
