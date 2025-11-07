@@ -50,11 +50,10 @@ const ContentCardServicesBlock = ({ gridCards, headline, subheadline }: ContentC
 									</div>
 
 									{/* content container: flexible column layout to vertically center content. */}
-									<CardContent className="flex flex-col justify-center p-3">
-										<div className="px-3">
-											<h3 className="mb-5 text-2xl font-bold lg:text-3xl">{card.cardTitle}</h3>
-											<p className="text-muted-foreground mb-10 text-lg">{card.cardDescription}</p>
-										</div>
+									<CardContent className="flex flex-col justify-center p-8">
+										<h3 className="mb-5 text-2xl font-bold lg:text-3xl">{card.cardTitle}</h3>
+										<p className="text-muted-foreground mb-10 text-lg">{card.cardDescription}</p>
+
 										{/* button uses 'asChild' to render the link inside the button styles. */}
 										<Button
 											asChild
