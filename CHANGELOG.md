@@ -1,3 +1,13 @@
+# [1.20.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.19.0...v1.20.0) (2025-11-07)
+
+
+### Features
+
+* add 3 new icons to ContentGrid and Services blocks ([f6bbeb3](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/f6bbeb34fba2d170db7905cdc238ace9ac49da8c))
+* add new icon to ContentGrid and Service blocks ([72584da](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/72584daf29bed6a1c48d75b27738fd5a348bdc88))
+* define the background tone for the ContentGrid block’s visual presentation ([bf4a0bd](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/bf4a0bdb51a76fc5727a9a81b59a1899a4053d14))
+* **payload:** add structured documentation to contentCopy block schema ([4f94e40](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/4f94e40aca4069108768bf4a7eb518245623d3a4))
+
 # [1.19.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.18.0...v1.19.0) (2025-11-06)
 
 
