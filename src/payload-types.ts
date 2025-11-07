@@ -171,7 +171,7 @@ export interface Page {
         | HeroSecondary
         | ContentCopy
         | ContentCards
-        | ContentCardServices
+        | ContentCardsServices
         | ContentCardsWork
         | ContentGrid
         | CallToAction
@@ -488,9 +488,9 @@ export interface ContentCards {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentCardServices".
+ * via the `definition` "ContentCardsServices".
  */
-export interface ContentCardServices {
+export interface ContentCardsServices {
   headline: string;
   subheadline?: string | null;
   gridCards: {
@@ -502,7 +502,7 @@ export interface ContentCardServices {
   }[];
   id?: string | null;
   blockName?: string | null;
-  blockType: 'contentCardServices';
+  blockType: 'contentCardsServices';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1311,7 +1311,7 @@ export interface PagesSelect<T extends boolean = true> {
         heroSecondary?: T | HeroSecondarySelect<T>;
         contentCopy?: T | ContentCopySelect<T>;
         contentCards?: T | ContentCardsSelect<T>;
-        contentCardServices?: T | ContentCardServicesSelect<T>;
+        contentCardsServices?: T | ContentCardsServicesSelect<T>;
         contentCardsWork?: T | ContentCardsWorkSelect<T>;
         contentGrid?: T | ContentGridSelect<T>;
         callToAction?: T | CallToActionSelect<T>;
@@ -1417,9 +1417,9 @@ export interface ContentCardsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentCardServices_select".
+ * via the `definition` "ContentCardsServices_select".
  */
-export interface ContentCardServicesSelect<T extends boolean = true> {
+export interface ContentCardsServicesSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
   gridCards?:

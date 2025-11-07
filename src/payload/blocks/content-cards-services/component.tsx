@@ -1,13 +1,13 @@
 import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ContentCardServices } from "@/payload-types";
+import { ContentCardsServices } from "@/payload-types";
 import Image from "next/image";
 import Link from "next/link";
 
 // renders a feature section displaying a series of service cards in a grid-like layout.
 // this component consumes data from the 'ContentCardServices' Payload block.
-const ContentCardServicesBlock = ({ gridCards, headline, subheadline }: ContentCardServices) => {
+const ContentCardsServicesBlock = ({ gridCards, headline, subheadline }: ContentCardsServices) => {
 	return (
 		// section provides consistent spacing and a subtle background for visual separation.
 		<section className="section-spacing bg-bg-subtle">
@@ -50,11 +50,10 @@ const ContentCardServicesBlock = ({ gridCards, headline, subheadline }: ContentC
 									</div>
 
 									{/* content container: flexible column layout to vertically center content. */}
-									<CardContent className="flex flex-col justify-center p-3">
-										<div className="px-3">
-											<h3 className="mb-5 text-2xl font-bold lg:text-3xl">{card.cardTitle}</h3>
-											<p className="text-muted-foreground mb-10 text-lg">{card.cardDescription}</p>
-										</div>
+									<CardContent className="flex flex-col justify-center p-8">
+										<h3 className="mb-5 text-2xl font-bold lg:text-3xl">{card.cardTitle}</h3>
+										<p className="text-muted-foreground mb-10 text-lg">{card.cardDescription}</p>
+
 										{/* button uses 'asChild' to render the link inside the button styles. */}
 										<Button
 											asChild
@@ -76,4 +75,4 @@ const ContentCardServicesBlock = ({ gridCards, headline, subheadline }: ContentC
 	);
 };
 
-export { ContentCardServicesBlock };
+export { ContentCardsServicesBlock };
