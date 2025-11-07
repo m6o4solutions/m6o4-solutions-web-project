@@ -49,9 +49,12 @@ const iconMap: Record<string, ElementType> = {
 };
 
 // renders a structured content grid with optional icons or text markers
-const ContentGridBlock = ({ columns, gridItems, headline, subheadline }: ContentGrid) => {
+const ContentGridBlock = ({ backgroundColor, columns, gridItems, headline, subheadline }: ContentGrid) => {
+	/* apply background color theme for visual contrast across sections */
+	const bgClass = backgroundColor === "subtle" ? "bg-[#f5f7fa]" : "bg-[#ffffff]";
+
 	return (
-		<section className="bg-bg-subtle section-spacing">
+		<section className={`section-spacing ${bgClass}`}>
 			<Container>
 				{/* section header introducing the grid content and setting hierarchy */}
 				<div className="mb-16 space-y-4 text-center">

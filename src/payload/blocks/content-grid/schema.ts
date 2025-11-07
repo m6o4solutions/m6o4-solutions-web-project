@@ -34,6 +34,17 @@ const ContentGrid: Block = {
 				{ label: "4 Columns", value: "4" },
 			],
 		},
+		// defines the background tone for the component grid block’s visual presentation
+		{
+			name: "backgroundColor",
+			type: "select",
+			label: "Background Color",
+			defaultValue: "subtle",
+			options: [
+				{ label: "White", value: "white" },
+				{ label: "Subtle Gray", value: "subtle" },
+			],
+		},
 		// grid content items representing individual points of focus
 		{
 			name: "gridItems",

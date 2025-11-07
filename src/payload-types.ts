@@ -529,6 +529,7 @@ export interface ContentGrid {
   headline: string;
   subheadline?: string | null;
   columns?: ('3' | '4') | null;
+  backgroundColor?: ('white' | 'subtle') | null;
   gridItems: {
     itemHead: {
       type: 'text' | 'icon';
@@ -545,6 +546,7 @@ export interface ContentGrid {
             | 'cloud'
             | 'cpu'
             | 'dollarSign'
+            | 'eye'
             | 'globe'
             | 'handshake'
             | 'lightbulb'
@@ -709,6 +711,7 @@ export interface Service {
                   | 'cloud'
                   | 'cpu'
                   | 'dollarSign'
+                  | 'eye'
                   | 'globe'
                   | 'handshake'
                   | 'lightbulb'
@@ -1411,6 +1414,7 @@ export interface ContentGridSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
   columns?: T;
+  backgroundColor?: T;
   gridItems?:
     | T
     | {
