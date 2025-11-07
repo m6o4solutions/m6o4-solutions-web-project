@@ -1,6 +1,7 @@
 import { isAuthenticated, isAuthenticatedOrPublished } from "@/payload/access/access-control";
 import { Archive } from "@/payload/blocks/archive/schema";
 import { CallToAction } from "@/payload/blocks/call-to-action/schema";
+import { ContentCardServices } from "@/payload/blocks/content-card-services/schema";
 import { ContentCardsWork } from "@/payload/blocks/content-cards-work/schema";
 import { ContentCards } from "@/payload/blocks/content-cards/schema";
 import { ContentCopy } from "@/payload/blocks/content-copy/schema";
@@ -110,6 +111,7 @@ const Pages: CollectionConfig<"pages"> = {
 								HeroSecondary,
 								ContentCopy,
 								ContentCards,
+								ContentCardServices,
 								ContentCardsWork,
 								ContentGrid,
 								CallToAction,

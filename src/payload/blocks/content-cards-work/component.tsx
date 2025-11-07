@@ -48,7 +48,7 @@ const ContentCardsWorkBlock = ({ headline, subheadline, work }: ContentCardsWork
 								<div className={`grid gap-0 lg:grid-cols-2 ${index % 2 === 1 ? "lg:grid-flow-dense" : ""}`}>
 									{/* image container maintaining consistent framing */}
 									<div
-										className={`relative flex h-[300px] items-center justify-center bg-white p-5 lg:h-auto ${index % 2 === 1 ? "lg:col-start-2" : ""}`}
+										className={`relative flex h-[300px] items-center justify-center bg-white p-3 lg:h-auto ${index % 2 === 1 ? "lg:col-start-2" : ""}`}
 									>
 										<div className="relative h-full w-full overflow-hidden rounded-xl border-2">
 											{imageSrc && (
