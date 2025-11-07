@@ -2,14 +2,28 @@ import { Container } from "@/components/container";
 import { RichText } from "@/components/rich-text";
 import { ContentCopy } from "@/payload-types";
 
-/* renders a structured text block within a responsive container.
-   intended for displaying editorial or marketing copy while preserving layout consistency. */
-const ContentCopyBlock = ({ copy }: ContentCopy) => {
+// renders a full-width section for displaying structured text from Payload CMS.
+// the block includes an optional header and rich text content.
+const ContentCopyBlock = ({ copy, headline, subheadline }: ContentCopy) => {
 	return (
+		// section provides consistent padding and a subtle background for visual separation.
 		<section className="section-spacing bg-bg-subtle">
 			<Container>
-				{/* only render if content exists to avoid empty layout space.
-			    limits text width for optimal readability and disables outer gutters for alignment control. */}
+				{/* render header block only if a headline or subheadline is present.
+            this prevents an empty div with unwanted margin from rendering. */}
+				{(headline || subheadline) && (
+					<div className="mb-16 space-y-4 text-center">
+						{/* render primary title only if the 'headline' string has content. */}
+						{headline && <h2 className="text-balance">{headline}</h2>}
+
+						{/* render secondary text only if the 'subheadline' string has content. */}
+						{subheadline && <p className="text-text-default mx-auto max-w-2xl text-lg">{subheadline}</p>}
+					</div>
+				)}
+
+				{/* render the rich text content only if the 'copy' array is populated.
+            it centers the text and restricts the width for optimal readability.
+            'enableGutter={false}' is used to control alignment here instead of in the rich text component. */}
 				{copy && <RichText className="mx-auto max-w-4xl" data={copy} enableGutter={false} />}
 			</Container>
 		</section>

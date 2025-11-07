@@ -446,6 +446,8 @@ export interface HeroSecondary {
  * via the `definition` "ContentCopy".
  */
 export interface ContentCopy {
+  headline?: string | null;
+  subheadline?: string | null;
   copy?: {
     root: {
       type: string;
@@ -1359,6 +1361,8 @@ export interface HeroSecondarySelect<T extends boolean = true> {
  * via the `definition` "ContentCopy_select".
  */
 export interface ContentCopySelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
   copy?: T;
   id?: T;
   blockName?: T;
