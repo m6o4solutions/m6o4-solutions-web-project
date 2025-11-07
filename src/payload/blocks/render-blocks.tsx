@@ -1,6 +1,7 @@
 import type { Page } from "@/payload-types";
 import { ArchiveBlock } from "@/payload/blocks/archive/component";
 import { CallToActionBlock } from "@/payload/blocks/call-to-action/component";
+import { ContentCardServicesBlock } from "@/payload/blocks/content-card-services/component";
 import { ContentCardsWorkBlock } from "@/payload/blocks/content-cards-work/component";
 import { ContentCardsBlock } from "@/payload/blocks/content-cards/component";
 import { ContentCopyBlock } from "@/payload/blocks/content-copy/component";
@@ -18,6 +19,7 @@ const blockComponents = {
 	archive: ArchiveBlock,
 	callToAction: CallToActionBlock,
 	contentCards: ContentCardsBlock,
+	contentCardServices: ContentCardServicesBlock,
 	contentCardsWork: ContentCardsWorkBlock,
 	contentCopy: ContentCopyBlock,
 	contentGrid: ContentGridBlock,
