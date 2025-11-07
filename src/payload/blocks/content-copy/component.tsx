@@ -6,7 +6,7 @@ import { ContentCopy } from "@/payload-types";
    intended for displaying editorial or marketing copy while preserving layout consistency. */
 const ContentCopyBlock = ({ copy }: ContentCopy) => {
 	return (
-		<section className="pb-20">
+		<section className="section-spacing bg-bg-subtle">
 			<Container>
 				{/* only render if content exists to avoid empty layout space.
 			    limits text width for optimal readability and disables outer gutters for alignment control. */}
