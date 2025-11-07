@@ -12,12 +12,12 @@ const ContentCopyBlock = ({ copy, headline, subheadline }: ContentCopy) => {
 				{/* render header block only if a headline or subheadline is present.
             this prevents an empty div with unwanted margin from rendering. */}
 				{(headline || subheadline) && (
-					<div className="mx-auto mb-16 space-y-4 text-center">
+					<div className="mb-16 space-y-4 text-center">
 						{/* render primary title only if the 'headline' string has content. */}
 						{headline && <h2 className="text-balance">{headline}</h2>}
 
 						{/* render secondary text only if the 'subheadline' string has content. */}
-						{subheadline && <p className="text-text-default max-w-2xl text-lg">{subheadline}</p>}
+						{subheadline && <p className="text-text-default mx-auto max-w-2xl text-lg">{subheadline}</p>}
 					</div>
 				)}
 

@@ -126,6 +126,7 @@ const Services: CollectionConfig = {
 														{ label: "Cloud", value: "cloud" },
 														{ label: "CPU", value: "cpu" },
 														{ label: "Dollar Sign", value: "dollarSign" },
+														{ label: "Eye", value: "eye" },
 														{ label: "Globe", value: "globe" },
 														{ label: "Handshake", value: "handshake" },
 														{ label: "Lightbulb", value: "lightbulb" },

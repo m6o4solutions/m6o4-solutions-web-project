@@ -535,6 +535,7 @@ export interface ContentGrid {
       text?: string | null;
       icon?:
         | (
+            | 'award'
             | 'ban'
             | 'brain'
             | 'check'
@@ -545,6 +546,8 @@ export interface ContentGrid {
             | 'cpu'
             | 'dollarSign'
             | 'globe'
+            | 'handshake'
+            | 'lightbulb'
             | 'search'
             | 'shield'
             | 'trendingDown'
@@ -696,6 +699,7 @@ export interface Service {
             text?: string | null;
             icon?:
               | (
+                  | 'award'
                   | 'ban'
                   | 'brain'
                   | 'check'
@@ -706,6 +710,8 @@ export interface Service {
                   | 'cpu'
                   | 'dollarSign'
                   | 'globe'
+                  | 'handshake'
+                  | 'lightbulb'
                   | 'search'
                   | 'shield'
                   | 'trendingDown'
