@@ -1,6 +1,7 @@
 import { Container } from "@/components/container";
 import { ContentGrid } from "@/payload-types";
 import {
+	Award,
 	Ban,
 	Brain,
 	Check,
@@ -11,6 +12,8 @@ import {
 	Cpu,
 	DollarSign,
 	Globe,
+	Handshake,
+	Lightbulb,
 	Search,
 	Shield,
 	TrendingDown,
@@ -22,6 +25,7 @@ import { ElementType } from "react";
 
 // maps string keys from the cms to lucide icon components
 const iconMap: Record<string, ElementType> = {
+	award: Award,
 	ban: Ban,
 	brain: Brain,
 	chevronsDown: ChevronsDown,
@@ -32,6 +36,8 @@ const iconMap: Record<string, ElementType> = {
 	check: Check,
 	dollarSign: DollarSign,
 	globe: Globe,
+	handshake: Handshake,
+	lightbulb: Lightbulb,
 	search: Search,
 	shield: Shield,
 	trendingDown: TrendingDown,

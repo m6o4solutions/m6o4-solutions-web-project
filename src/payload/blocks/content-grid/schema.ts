@@ -82,6 +82,7 @@ const ContentGrid: Block = {
 								condition: (_, siblingData) => siblingData?.type === "icon",
 							},
 							options: [
+								{ label: "Award", value: "award" },
 								{ label: "Ban", value: "ban" },
 								{ label: "Brain", value: "brain" },
 								{ label: "Check", value: "check" },
@@ -92,6 +93,8 @@ const ContentGrid: Block = {
 								{ label: "CPU", value: "cpu" },
 								{ label: "Dollar Sign", value: "dollarSign" },
 								{ label: "Globe", value: "globe" },
+								{ label: "Handshake", value: "handshake" },
+								{ label: "Lightbulb", value: "lightbulb" },
 								{ label: "Search", value: "search" },
 								{ label: "Shield", value: "shield" },
 								{ label: "Trending Down", value: "trendingDown" },
