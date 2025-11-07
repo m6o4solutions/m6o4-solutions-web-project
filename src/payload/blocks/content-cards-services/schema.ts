@@ -1,9 +1,9 @@
 import type { Block } from "payload";
 
 // defines a structured block for displaying a section of services or features using a card grid.
-const ContentCardServices: Block = {
-	slug: "contentCardServices",
-	interfaceName: "ContentCardServices",
+const ContentCardsServices: Block = {
+	slug: "contentCardsServices",
+	interfaceName: "ContentCardsServices",
 	labels: {
 		singular: "Content Cards Services Block",
 		plural: "Content Cards Services Blocks",
@@ -61,4 +61,4 @@ const ContentCardServices: Block = {
 	],
 };
 
-export { ContentCardServices };
+export { ContentCardsServices };

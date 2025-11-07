@@ -1,13 +1,13 @@
 import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ContentCardServices } from "@/payload-types";
+import { ContentCardsServices } from "@/payload-types";
 import Image from "next/image";
 import Link from "next/link";
 
 // renders a feature section displaying a series of service cards in a grid-like layout.
 // this component consumes data from the 'ContentCardServices' Payload block.
-const ContentCardServicesBlock = ({ gridCards, headline, subheadline }: ContentCardServices) => {
+const ContentCardsServicesBlock = ({ gridCards, headline, subheadline }: ContentCardsServices) => {
 	return (
 		// section provides consistent spacing and a subtle background for visual separation.
 		<section className="section-spacing bg-bg-subtle">
@@ -75,4 +75,4 @@ const ContentCardServicesBlock = ({ gridCards, headline, subheadline }: ContentC
 	);
 };
 
-export { ContentCardServicesBlock };
+export { ContentCardsServicesBlock };
