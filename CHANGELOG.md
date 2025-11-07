@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.20.0...v1.21.0) (2025-11-07)
+
+
+### Features
+
+* create the ContentCardServices block schema and component ([5254274](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/52542749c9913addebaf24934a8079da9054a9f4))
+
 # [1.20.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.19.0...v1.20.0) (2025-11-07)
 
 
