@@ -116,6 +116,7 @@ const Services: CollectionConfig = {
 														condition: (_, siblingData) => siblingData?.type === "icon",
 													},
 													options: [
+														{ label: "Award", value: "award" },
 														{ label: "Ban", value: "ban" },
 														{ label: "Brain", value: "brain" },
 														{ label: "Check", value: "check" },
@@ -125,7 +126,10 @@ const Services: CollectionConfig = {
 														{ label: "Cloud", value: "cloud" },
 														{ label: "CPU", value: "cpu" },
 														{ label: "Dollar Sign", value: "dollarSign" },
+														{ label: "Eye", value: "eye" },
 														{ label: "Globe", value: "globe" },
+														{ label: "Handshake", value: "handshake" },
+														{ label: "Lightbulb", value: "lightbulb" },
 														{ label: "Search", value: "search" },
 														{ label: "Shield", value: "shield" },
 														{ label: "Trending Down", value: "trendingDown" },

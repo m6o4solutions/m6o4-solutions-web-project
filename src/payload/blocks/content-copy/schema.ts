@@ -10,8 +10,8 @@ import {
 } from "@payloadcms/richtext-lexical";
 import type { Block } from "payload";
 
-/* defines a reusable payload block for rich text content with configurable formatting.
-   designed to support structured writing with headings, inline styling, and embedded blocks like banners. */
+// defines a reusable Payload CMS block for content sections.
+// it combines optional metadata (headlines) with a rich text editor for the main body.
 const ContentCopy: Block = {
 	slug: "contentCopy",
 	interfaceName: "ContentCopy",
@@ -21,20 +21,35 @@ const ContentCopy: Block = {
 	},
 	fields: [
 		{
+			name: "headline",
+			type: "text",
+			label: "Headline",
+		},
+		{
+			name: "subheadline",
+			type: "text",
+			label: "Subheadline",
+		},
+		{
 			name: "copy",
 			type: "richText",
 			label: false,
-			/* uses lexical as the rich text editor to provide a balance of structured and flexible content editing.
-			   the feature set prioritizes readability and editorial control while maintaining consistent formatting. */
+			// configures the lexical editor for structured, easy-to-use content editing.
 			editor: lexicalEditor({
 				features: ({ rootFeatures }) => [
 					...rootFeatures,
-					FixedToolbarFeature(), // keeps key formatting tools visible for better authoring UX
-					HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }), // restricts heading sizes for design consistency
-					BlocksFeature({ blocks: [Banner] }), // allows inline embedding of banner components
-					InlineToolbarFeature(), // enables contextual text formatting
-					OrderedListFeature(), // supports structured lists for clarity
-					UnorderedListFeature(), // supports bullet lists for readability
+					// keeps the primary formatting toolbar visible at all times, improving editor user experience.
+					FixedToolbarFeature(),
+					// restricts available heading sizes to maintain design and typographic consistency on the frontend.
+					HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
+					// allows content editors to embed other blocks, specifically the 'banner' component, within the rich text flow.
+					BlocksFeature({ blocks: [Banner] }),
+					// enables a floating toolbar for text selection-based formatting.
+					InlineToolbarFeature(),
+					// enables standard ordered lists for sequential information.
+					OrderedListFeature(),
+					// enables standard unordered lists for general bulleted items.
+					UnorderedListFeature(),
 				],
 			}),
 		},

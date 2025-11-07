@@ -1,6 +1,7 @@
 import { Container } from "@/components/container";
 import { ContentGrid } from "@/payload-types";
 import {
+	Award,
 	Ban,
 	Brain,
 	Check,
@@ -10,7 +11,10 @@ import {
 	Cloud,
 	Cpu,
 	DollarSign,
+	Eye,
 	Globe,
+	Handshake,
+	Lightbulb,
 	Search,
 	Shield,
 	TrendingDown,
@@ -22,6 +26,7 @@ import { ElementType } from "react";
 
 // maps string keys from the cms to lucide icon components
 const iconMap: Record<string, ElementType> = {
+	award: Award,
 	ban: Ban,
 	brain: Brain,
 	chevronsDown: ChevronsDown,
@@ -31,7 +36,10 @@ const iconMap: Record<string, ElementType> = {
 	cpu: Cpu,
 	check: Check,
 	dollarSign: DollarSign,
+	eye: Eye,
 	globe: Globe,
+	handshake: Handshake,
+	lightbulb: Lightbulb,
 	search: Search,
 	shield: Shield,
 	trendingDown: TrendingDown,
@@ -41,9 +49,12 @@ const iconMap: Record<string, ElementType> = {
 };
 
 // renders a structured content grid with optional icons or text markers
-const ContentGridBlock = ({ columns, gridItems, headline, subheadline }: ContentGrid) => {
+const ContentGridBlock = ({ backgroundColor, columns, gridItems, headline, subheadline }: ContentGrid) => {
+	/* apply background color theme for visual contrast across sections */
+	const bgClass = backgroundColor === "subtle" ? "bg-[#f5f7fa]" : "bg-[#ffffff]";
+
 	return (
-		<section className="bg-bg-subtle section-spacing">
+		<section className={`section-spacing ${bgClass}`}>
 			<Container>
 				{/* section header introducing the grid content and setting hierarchy */}
 				<div className="mb-16 space-y-4 text-center">

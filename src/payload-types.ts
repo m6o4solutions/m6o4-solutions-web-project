@@ -446,6 +446,8 @@ export interface HeroSecondary {
  * via the `definition` "ContentCopy".
  */
 export interface ContentCopy {
+  headline?: string | null;
+  subheadline?: string | null;
   copy?: {
     root: {
       type: string;
@@ -527,12 +529,14 @@ export interface ContentGrid {
   headline: string;
   subheadline?: string | null;
   columns?: ('3' | '4') | null;
+  backgroundColor?: ('white' | 'subtle') | null;
   gridItems: {
     itemHead: {
       type: 'text' | 'icon';
       text?: string | null;
       icon?:
         | (
+            | 'award'
             | 'ban'
             | 'brain'
             | 'check'
@@ -542,7 +546,10 @@ export interface ContentGrid {
             | 'cloud'
             | 'cpu'
             | 'dollarSign'
+            | 'eye'
             | 'globe'
+            | 'handshake'
+            | 'lightbulb'
             | 'search'
             | 'shield'
             | 'trendingDown'
@@ -694,6 +701,7 @@ export interface Service {
             text?: string | null;
             icon?:
               | (
+                  | 'award'
                   | 'ban'
                   | 'brain'
                   | 'check'
@@ -703,7 +711,10 @@ export interface Service {
                   | 'cloud'
                   | 'cpu'
                   | 'dollarSign'
+                  | 'eye'
                   | 'globe'
+                  | 'handshake'
+                  | 'lightbulb'
                   | 'search'
                   | 'shield'
                   | 'trendingDown'
@@ -1359,6 +1370,8 @@ export interface HeroSecondarySelect<T extends boolean = true> {
  * via the `definition` "ContentCopy_select".
  */
 export interface ContentCopySelect<T extends boolean = true> {
+  headline?: T;
+  subheadline?: T;
   copy?: T;
   id?: T;
   blockName?: T;
@@ -1401,6 +1414,7 @@ export interface ContentGridSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
   columns?: T;
+  backgroundColor?: T;
   gridItems?:
     | T
     | {

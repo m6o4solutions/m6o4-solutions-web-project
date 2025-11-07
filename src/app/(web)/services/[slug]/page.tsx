@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { generateMeta } from "@/payload/utilities/generate-meta";
 import config from "@payload-config";
 import {
+	Award,
 	Ban,
 	Brain,
 	Check,
@@ -18,7 +19,10 @@ import {
 	Cloud,
 	Cpu,
 	DollarSign,
+	Eye,
 	Globe,
+	Handshake,
+	Lightbulb,
 	Search,
 	Shield,
 	TrendingDown,
@@ -35,6 +39,7 @@ import { cache, ElementType } from "react";
 
 // maps string identifiers from the CMS to lucide icons for visual consistency
 const iconMap: Record<string, ElementType> = {
+	award: Award,
 	ban: Ban,
 	brain: Brain,
 	chevronsDown: ChevronsDown,
@@ -44,7 +49,10 @@ const iconMap: Record<string, ElementType> = {
 	cpu: Cpu,
 	check: Check,
 	dollarSign: DollarSign,
+	eye: Eye,
 	globe: Globe,
+	handshake: Handshake,
+	lightbulb: Lightbulb,
 	search: Search,
 	shield: Shield,
 	trendingDown: TrendingDown,
