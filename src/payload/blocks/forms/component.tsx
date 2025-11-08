@@ -1,5 +1,6 @@
 "use client";
 
+import { Container } from "@/components/container";
 import { RichText } from "@/components/rich-text";
 import { Button } from "@/components/ui/button";
 import { fields } from "@/payload/blocks/forms/fields";
@@ -127,59 +128,60 @@ const FormBlock = (props: FormBlockProps) => {
 	);
 
 	return (
-		// primary container with max-width restriction.
-		<div className="container lg:max-w-3xl">
-			{/* displays the introductory content if enabled and not yet submitted. */}
-			{enableIntro && introContent && !hasSubmitted && (
-				<RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
-			)}
-			<div className="border-border rounded-[0.8rem] border p-4 lg:p-6">
-				{/* provides form methods to all nested field components. */}
-				<FormProvider {...formMethods}>
-					{/* shows the confirmation message if submission was successful and confirmation type is 'message'. */}
-					{!isLoading && hasSubmitted && confirmationType === "message" && <RichText data={confirmationMessage} />}
-					{/* displays a simple loading state while waiting for the api response. */}
-					{isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-					{/* displays the error status and message if the submission failed. */}
-					{error && <div>{`${error.status || "500"}: ${error.message || ""}`}</div>}
-					{/* renders the form and fields only if submission has not occurred. */}
-					{!hasSubmitted && (
-						<form id={formID} onSubmit={handleSubmit(onSubmit)}>
-							<div className="mb-4 last:mb-0">
-								{formFromProps &&
-									formFromProps.fields &&
-									formFromProps.fields?.map((field, index) => {
-										// disables type checking for dynamic component selection from the field map.
-										// eslint-disable-next-line @typescript-eslint/no-explicit-any
-										const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields];
-										if (Field) {
-											// dynamically renders the correct field component based on the blockType.
-											return (
-												<div className="mb-6 last:mb-0" key={index}>
-													<Field
-														form={formFromProps}
-														{...field}
-														{...formMethods}
-														control={control}
-														errors={errors}
-														register={register}
-													/>
-												</div>
-											);
-										}
-										return null;
-									})}
-							</div>
+		<section className="section-spacing bg-bg-subtle">
+			<Container className="lg:max-w-3xl">
+				{/* displays the introductory content if enabled and not yet submitted. */}
+				{enableIntro && introContent && !hasSubmitted && (
+					<RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
+				)}
+				<div className="border-border rounded-[0.8rem] border p-4 lg:p-6">
+					{/* provides form methods to all nested field components. */}
+					<FormProvider {...formMethods}>
+						{/* shows the confirmation message if submission was successful and confirmation type is 'message'. */}
+						{!isLoading && hasSubmitted && confirmationType === "message" && <RichText data={confirmationMessage} />}
+						{/* displays a simple loading state while waiting for the api response. */}
+						{isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
+						{/* displays the error status and message if the submission failed. */}
+						{error && <div>{`${error.status || "500"}: ${error.message || ""}`}</div>}
+						{/* renders the form and fields only if submission has not occurred. */}
+						{!hasSubmitted && (
+							<form id={formID} onSubmit={handleSubmit(onSubmit)}>
+								<div className="mb-4 last:mb-0">
+									{formFromProps &&
+										formFromProps.fields &&
+										formFromProps.fields?.map((field, index) => {
+											// disables type checking for dynamic component selection from the field map.
+											// eslint-disable-next-line @typescript-eslint/no-explicit-any
+											const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields];
+											if (Field) {
+												// dynamically renders the correct field component based on the blockType.
+												return (
+													<div className="mb-6 last:mb-0" key={index}>
+														<Field
+															form={formFromProps}
+															{...field}
+															{...formMethods}
+															control={control}
+															errors={errors}
+															register={register}
+														/>
+													</div>
+												);
+											}
+											return null;
+										})}
+								</div>
 
-							{/* renders the submit button with the custom label from the cms. */}
-							<Button form={formID} type="submit" variant="default">
-								{submitButtonLabel}
-							</Button>
-						</form>
-					)}
-				</FormProvider>
-			</div>
-		</div>
+								{/* renders the submit button with the custom label from the cms. */}
+								<Button form={formID} type="submit" variant="default">
+									{submitButtonLabel}
+								</Button>
+							</form>
+						)}
+					</FormProvider>
+				</div>
+			</Container>
+		</section>
 	);
 };
 
