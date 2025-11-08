@@ -7,6 +7,7 @@ import { ContentCardsBlock } from "@/payload/blocks/content-cards/component";
 import { ContentCopyBlock } from "@/payload/blocks/content-copy/component";
 import { ContentGridBlock } from "@/payload/blocks/content-grid/component";
 import { FrequentlyAskedQuestionsBlock } from "@/payload/blocks/faqs/components";
+import { FormBlock } from "@/payload/blocks/forms/component";
 import { HeroPrimaryBlock } from "@/payload/blocks/hero-primary/component";
 import { HeroSecondaryBlock } from "@/payload/blocks/hero-secondary/component";
 import { LogosBlock } from "@/payload/blocks/logos/component";
@@ -24,6 +25,7 @@ const blockComponents = {
 	contentCopy: ContentCopyBlock,
 	contentGrid: ContentGridBlock,
 	frequentlyAskedQuestions: FrequentlyAskedQuestionsBlock,
+	form: FormBlock,
 	heroPrimary: HeroPrimaryBlock,
 	heroSecondary: HeroSecondaryBlock,
 	logos: LogosBlock,

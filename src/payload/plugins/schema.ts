@@ -19,39 +19,32 @@ import {
 import { s3Storage } from "@payloadcms/storage-s3";
 import { Plugin } from "payload";
 
-/* 
-defines a dynamic seo title generator for pages and posts
-adds the document title followed by the company name if available
-*/
+// defines a dynamic seo title generator for pages and posts.
+// adds the document title followed by the company name, M6O4 Solutions.
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
 	return doc?.title ? `${doc.title} | M6O4 Solutions` : "M6O4 Solutions";
 };
 
-/* 
-defines a dynamic canonical url generator for pages and posts
-uses the server-side base url and the document slug if present
-*/
+// defines a dynamic canonical url generator for pages and posts.
+// uses the server-side base url and the document slug to construct the full url.
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 	const url = getServerSideURL();
 	return doc?.slug ? `${url}/${doc.slug}` : url;
 };
 
-/* 
-central plugin registry for the payload cms instance
-registers all key plugins: forms, seo, redirects, search, s3, and cloud integration
-*/
+// central plugin registry for the payload cms instance.
+// registers all key plugins: forms, seo, redirects, search, s3, and cloud integration.
 const plugins: Plugin[] = [
-	/* 
-	form builder plugin configuration
-	disables unused default fields and extends the confirmation message field 
-	to support a lexical rich text editor with heading and toolbar features
-	*/
+	// configures the form builder plugin.
+	// disables default fields (country, payment, state) and customizes the confirmation message editor.
 	formBuilderPlugin({
 		fields: { country: false, payment: false, state: false },
 		formOverrides: {
 			fields: ({ defaultFields }) => {
-				return defaultFields.map((field) => {
+				// maps over default fields to customize the confirmation message field.
+				const customizedFields = defaultFields.map((field) => {
 					if ("name" in field && field.name === "confirmationMessage") {
+						// overrides the editor to use lexical with fixed toolbar, headings, and lists.
 						return {
 							...field,
 							editor: lexicalEditor({
@@ -69,24 +62,35 @@ const plugins: Plugin[] = [
 					}
 					return field;
 				});
+
+				// returns all customized fields and appends the custom recaptcha field.
+				return [
+					...customizedFields,
+					{
+						name: "requireRecaptcha",
+						type: "checkbox",
+						label: "Require reCAPTCHA",
+						admin: {
+							position: "sidebar", // positions the field in the admin sidebar.
+						},
+					},
+				];
 			},
 		},
 	}),
 
-	/* integrates with payload cloud for hosting and deployment */
+	// integrates with payload cloud for hosting and deployment.
 	payloadCloudPlugin(),
 
-	/* 
-	redirects plugin configuration
-	enables redirect management for pages and posts
-	adds a descriptive admin note and triggers site revalidation after changes
-	*/
+	// configures the redirects plugin for pages and posts collections.
+	// adds a rebuild warning to the 'from' field and revalidates the site after a redirect change.
 	redirectsPlugin({
 		collections: ["pages", "posts"],
 		overrides: {
 			fields: ({ defaultFields }) => {
 				return defaultFields.map((field) => {
 					if (typeof field === "object" && "name" in field && field.name === "from") {
+						// adds an admin note instructing the user to rebuild the site upon changing a redirect source.
 						return {
 							...field,
 							admin: {
@@ -99,15 +103,13 @@ const plugins: Plugin[] = [
 				}) as typeof defaultFields;
 			},
 			hooks: {
-				afterChange: [revalidateRedirects],
+				afterChange: [revalidateRedirects], // triggers site revalidation hook.
 			},
 		},
 	}),
 
-	/* 
-	s3 storage plugin configuration
-	sets s3 as the media storage provider using environment credentials
-	*/
+	// configures s3 storage as the media storage provider.
+	// uses environment variables for bucket name and access credentials.
 	s3Storage({
 		collections: {
 			media: true,
@@ -120,27 +122,23 @@ const plugins: Plugin[] = [
 			},
 			region: process.env.S3_REGION!,
 			endpoint: process.env.S3_ENDPOINT!,
-			forcePathStyle: true,
+			forcePathStyle: true, // required for minio or self-hosted s3 systems.
 		},
 	}),
 
-	/* 
-	search plugin configuration
-	indexes posts and extends default search fields
-	preprocesses content before indexing for better search quality
-	*/
+	// configures the search plugin.
+	// indexes the posts collection, uses a custom hook for content preprocessing, and includes custom search fields.
 	searchPlugin({
 		collections: ["posts"],
-		beforeSync: beforeSyncWithSearch,
+		beforeSync: beforeSyncWithSearch, // hook to clean or modify content before it's indexed.
 		searchOverrides: {
+			// combines default search fields with custom defined fields for indexing.
 			fields: ({ defaultFields }) => [...defaultFields, ...searchFields],
 		},
 	}),
 
-	/* 
-	seo plugin configuration
-	enables automatic seo metadata generation with dynamic title and url handling
-	*/
+	// configures the seo plugin.
+	// uses custom functions to dynamically generate page titles and canonical urls.
 	seoPlugin({ generateTitle, generateURL }),
 ];
 
