@@ -1,4 +1,5 @@
 import {
+	AlignFeature,
 	FixedToolbarFeature,
 	HeadingFeature,
 	InlineToolbarFeature,
@@ -28,7 +29,7 @@ const Form: Block = {
 		{
 			name: "enableIntro",
 			type: "checkbox",
-			label: "Enable Intro Content",
+			label: "Enable Introductory Content",
 		},
 		{
 			name: "introContent",
@@ -43,6 +44,7 @@ const Form: Block = {
 						InlineToolbarFeature(),
 						OrderedListFeature(),
 						UnorderedListFeature(),
+						AlignFeature(),
 					];
 				},
 			}),

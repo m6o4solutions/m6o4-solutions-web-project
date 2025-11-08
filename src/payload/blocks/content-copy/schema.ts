@@ -1,5 +1,6 @@
 import { Banner } from "@/payload/blocks/banner/schema";
 import {
+	AlignFeature,
 	BlocksFeature,
 	FixedToolbarFeature,
 	HeadingFeature,
@@ -21,14 +22,21 @@ const ContentCopy: Block = {
 	},
 	fields: [
 		{
-			name: "headline",
-			type: "text",
-			label: "Headline",
-		},
-		{
-			name: "subheadline",
-			type: "text",
-			label: "Subheadline",
+			name: "headerBanner",
+			type: "group",
+			label: false,
+			fields: [
+				{
+					name: "headline",
+					type: "text",
+					label: "Headline",
+				},
+				{
+					name: "subheadline",
+					type: "text",
+					label: "Subheadline",
+				},
+			],
 		},
 		{
 			name: "copy",
@@ -50,6 +58,8 @@ const ContentCopy: Block = {
 					OrderedListFeature(),
 					// enables standard unordered lists for general bulleted items.
 					UnorderedListFeature(),
+					// adds support for text alignment.
+					AlignFeature(),
 				],
 			}),
 		},

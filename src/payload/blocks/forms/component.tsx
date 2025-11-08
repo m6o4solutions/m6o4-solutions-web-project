@@ -8,7 +8,8 @@ import { getClientSideURL } from "@/payload/utilities/get-url";
 import type { FormFieldBlock, Form as FormType } from "@payloadcms/plugin-form-builder/types";
 import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { FormProvider, useForm } from "react-hook-form";
 
 // defines the structure of the form configuration block data coming from payload cms.
@@ -152,7 +153,8 @@ const FormBlock = (props: FormBlockProps) => {
 										formFromProps.fields?.map((field, index) => {
 											// disables type checking for dynamic component selection from the field map.
 											// eslint-disable-next-line @typescript-eslint/no-explicit-any
-											const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields];
+											const Field: FC<any> = fields?.[field.blockType as keyof typeof fields];
+
 											if (Field) {
 												// dynamically renders the correct field component based on the blockType.
 												return (
