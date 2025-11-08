@@ -34,7 +34,7 @@ const Form: Block = {
 		{
 			name: "introContent",
 			type: "richText",
-			label: "Intro Content",
+			label: "Introductory Content",
 			editor: lexicalEditor({
 				features: ({ rootFeatures }) => {
 					return [

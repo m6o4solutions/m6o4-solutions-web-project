@@ -27,7 +27,7 @@ const Select = ({ name, control, errors, label, options, required, width, defaul
 				{label}
 				{/* indicates to the user that the field is mandatory. */}
 				{required && (
-					<span className="required">
+					<span className="text-red-400">
 						* <span className="sr-only">(required)</span>
 					</span>
 				)}

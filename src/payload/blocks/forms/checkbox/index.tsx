@@ -37,7 +37,7 @@ const Checkbox = ({ name, defaultValue, errors, label, register, required, width
 				<Label htmlFor={name}>
 					{/* visually marks the field as required for the user. */}
 					{required && (
-						<span className="required">
+						<span className="text-red-400">
 							* <span className="sr-only">(required)</span>
 						</span>
 					)}

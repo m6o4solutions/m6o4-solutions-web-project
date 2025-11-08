@@ -21,7 +21,7 @@ const Email = ({ name, defaultValue, errors, label, register, required, width }:
 
 				{/* shows the required asterisk for users who can see the field. */}
 				{required && (
-					<span className="required">
+					<span className="text-red-400">
 						* <span className="sr-only">(required)</span>
 					</span>
 				)}

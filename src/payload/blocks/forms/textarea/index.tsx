@@ -22,7 +22,7 @@ const Textarea = ({ name, defaultValue, errors, label, register, required, rows 
 
 				{/* renders a visual indicator if the field is mandatory. */}
 				{required && (
-					<span className="required">
+					<span className="text-red-400">
 						* <span className="sr-only">(required)</span>
 					</span>
 				)}

@@ -21,7 +21,7 @@ const Number = ({ name, defaultValue, errors, label, register, required, width }
 
 				{/* renders a visual indicator if the field is mandatory. */}
 				{required && (
-					<span className="required">
+					<span className="text-red-400">
 						* <span className="sr-only">(required)</span>
 					</span>
 				)}

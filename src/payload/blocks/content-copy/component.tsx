@@ -4,20 +4,23 @@ import { ContentCopy } from "@/payload-types";
 
 // renders a full-width section for displaying structured text from Payload CMS.
 // the block includes an optional header and rich text content.
-const ContentCopyBlock = ({ copy, headline, subheadline }: ContentCopy) => {
+const ContentCopyBlock = ({ copy, headerBanner }: ContentCopy) => {
+	const head = headerBanner?.headline;
+	const sub = headerBanner?.subheadline;
+
 	return (
 		// section provides consistent padding and a subtle background for visual separation.
 		<section className="section-spacing bg-bg-subtle">
 			<Container>
 				{/* render header block only if a headline or subheadline is present.
             this prevents an empty div with unwanted margin from rendering. */}
-				{(headline || subheadline) && (
+				{(head || sub) && (
 					<div className="mb-16 space-y-4 text-center">
 						{/* render primary title only if the 'headline' string has content. */}
-						{headline && <h2 className="text-balance">{headline}</h2>}
+						{head && <h2 className="text-balance">{head}</h2>}
 
 						{/* render secondary text only if the 'subheadline' string has content. */}
-						{subheadline && <p className="text-text-default mx-auto max-w-2xl text-lg">{subheadline}</p>}
+						{sub && <p className="text-text-default mx-auto max-w-2xl text-lg">{sub}</p>}
 					</div>
 				)}
 

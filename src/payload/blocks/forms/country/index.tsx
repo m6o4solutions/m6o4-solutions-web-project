@@ -23,7 +23,7 @@ const Country = ({ name, control, errors, label, required, width }: CountryProps
 
 				{/* visually marks the field as required. */}
 				{required && (
-					<span className="required">
+					<span className="text-red-400">
 						* <span className="sr-only">(required)</span>
 					</span>
 				)}
