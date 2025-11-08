@@ -78,7 +78,7 @@ export interface Config {
     categories: Category;
     media: Media;
     users: User;
-    forms: Form;
+    forms: Form1;
     'form-submissions': FormSubmission;
     redirects: Redirect;
     search: Search;
@@ -178,6 +178,7 @@ export interface Page {
         | FrequentlyAskedQuestions
         | Testimonials
         | Logos
+        | Form
       )[]
     | null;
   meta?: {
@@ -700,160 +701,35 @@ export interface Logo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "services".
+ * via the `definition` "Form".
  */
-export interface Service {
-  id: string;
-  title: string;
-  hero: {
-    headline: string;
-    subHeadline?: string | null;
-    media: string | Media;
-  };
-  benefits: {
-    headline: string;
-    subheadline?: string | null;
-    serviceBenefits?:
-      | {
-          benefitSymbol?: {
-            type?: ('icon' | 'text') | null;
-            text?: string | null;
-            icon?:
-              | (
-                  | 'award'
-                  | 'ban'
-                  | 'brain'
-                  | 'check'
-                  | 'chevronsDown'
-                  | 'chevronsUp'
-                  | 'clock'
-                  | 'cloud'
-                  | 'cpu'
-                  | 'dollarSign'
-                  | 'eye'
-                  | 'globe'
-                  | 'handshake'
-                  | 'lightbulb'
-                  | 'search'
-                  | 'shield'
-                  | 'trendingDown'
-                  | 'trendingUp'
-                  | 'users'
-                  | 'zap'
-                )
-              | null;
-          };
-          benefitTitle?: string | null;
-          benefitDescription?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  features: {
-    headline: string;
-    subheadline?: string | null;
-    serviceFeatures?:
-      | {
-          featureTitle?: string | null;
-          featureDescription?: string | null;
-          featureImage?: (string | null) | Media;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  enablePricing?: boolean | null;
-  pricing?: {
-    headline: string;
-    subheadline?: string | null;
-    servicePricing?:
-      | {
-          priceTitle: string;
-          priceDescription?: string | null;
-          price: string;
-          popularSubscription?: boolean | null;
-          enableSubscription?: boolean | null;
-          subscriptionPrice?: string | null;
-          perks?:
-            | {
-                perk?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-          cta?:
-            | {
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  enableSaaS?: boolean | null;
-  saas?: {
-    headline?: string | null;
-    subheadline?: string | null;
-    saasDetails?:
-      | {
-          saasName?: string | null;
-          saasDescription?: string | null;
-          saasImage?: (string | null) | Media;
-          cta?:
-            | {
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
+export interface Form {
+  form: string | Form1;
+  enableIntro?: boolean | null;
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'form';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms".
  */
-export interface Form {
+export interface Form1 {
   id: string;
   title: string;
   fields?:
@@ -1007,11 +883,162 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: string;
+  title: string;
+  hero: {
+    headline: string;
+    subHeadline?: string | null;
+    media: string | Media;
+  };
+  benefits: {
+    headline: string;
+    subheadline?: string | null;
+    serviceBenefits?:
+      | {
+          benefitSymbol?: {
+            type?: ('icon' | 'text') | null;
+            text?: string | null;
+            icon?:
+              | (
+                  | 'award'
+                  | 'ban'
+                  | 'brain'
+                  | 'check'
+                  | 'chevronsDown'
+                  | 'chevronsUp'
+                  | 'clock'
+                  | 'cloud'
+                  | 'cpu'
+                  | 'dollarSign'
+                  | 'eye'
+                  | 'globe'
+                  | 'handshake'
+                  | 'lightbulb'
+                  | 'search'
+                  | 'shield'
+                  | 'trendingDown'
+                  | 'trendingUp'
+                  | 'users'
+                  | 'zap'
+                )
+              | null;
+          };
+          benefitTitle?: string | null;
+          benefitDescription?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  features: {
+    headline: string;
+    subheadline?: string | null;
+    serviceFeatures?:
+      | {
+          featureTitle?: string | null;
+          featureDescription?: string | null;
+          featureImage?: (string | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  enablePricing?: boolean | null;
+  pricing?: {
+    headline: string;
+    subheadline?: string | null;
+    servicePricing?:
+      | {
+          priceTitle: string;
+          priceDescription?: string | null;
+          price: string;
+          popularSubscription?: boolean | null;
+          enableSubscription?: boolean | null;
+          subscriptionPrice?: string | null;
+          perks?:
+            | {
+                perk?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          cta?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  enableSaaS?: boolean | null;
+  saas?: {
+    headline?: string | null;
+    subheadline?: string | null;
+    saasDetails?:
+      | {
+          saasName?: string | null;
+          saasDescription?: string | null;
+          saasImage?: (string | null) | Media;
+          cta?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "form-submissions".
  */
 export interface FormSubmission {
   id: string;
-  form: string | Form;
+  form: string | Form1;
   submissionData?:
     | {
         field: string;
@@ -1241,7 +1268,7 @@ export interface PayloadLockedDocument {
       } | null)
     | ({
         relationTo: 'forms';
-        value: string | Form;
+        value: string | Form1;
       } | null)
     | ({
         relationTo: 'form-submissions';
@@ -1318,6 +1345,7 @@ export interface PagesSelect<T extends boolean = true> {
         frequentlyAskedQuestions?: T | FrequentlyAskedQuestionsSelect<T>;
         testimonials?: T | TestimonialsSelect<T>;
         logos?: T | LogosSelect<T>;
+        form?: T | FormSelect<T>;
       };
   meta?:
     | T
@@ -1511,6 +1539,17 @@ export interface LogosSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
   companyLogos?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Form_select".
+ */
+export interface FormSelect<T extends boolean = true> {
+  form?: T;
+  enableIntro?: T;
+  introContent?: T;
   id?: T;
   blockName?: T;
 }

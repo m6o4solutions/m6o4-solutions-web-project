@@ -7,6 +7,7 @@ import { ContentCards } from "@/payload/blocks/content-cards/schema";
 import { ContentCopy } from "@/payload/blocks/content-copy/schema";
 import { ContentGrid } from "@/payload/blocks/content-grid/schema";
 import { FrequentlyAskedQuestions } from "@/payload/blocks/faqs/schema";
+import { Form } from "@/payload/blocks/forms/schema";
 import { HeroPrimary } from "@/payload/blocks/hero-primary/schema";
 import { HeroSecondary } from "@/payload/blocks/hero-secondary/schema";
 import { Logos } from "@/payload/blocks/logos/schema";
@@ -118,6 +119,7 @@ const Pages: CollectionConfig<"pages"> = {
 								FrequentlyAskedQuestions,
 								Testimonials,
 								Logos,
+								Form,
 							],
 						},
 					],
