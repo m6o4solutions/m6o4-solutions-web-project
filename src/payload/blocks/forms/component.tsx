@@ -22,9 +22,7 @@ export type FormBlockType = {
 };
 
 // defines the props structure for the component, combining cms block data with optional id.
-type FormBlockProps = {
-	id?: string;
-} & FormBlockType;
+type FormBlockProps = { id?: string } & FormBlockType;
 
 // renders a full form block, handling state, validation, submission, and confirmation.
 const FormBlock = (props: FormBlockProps) => {
@@ -135,7 +133,7 @@ const FormBlock = (props: FormBlockProps) => {
 				{enableIntro && introContent && !hasSubmitted && (
 					<RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
 				)}
-				<div className="border-border rounded-[0.8rem] border p-4 lg:p-6">
+				<div className="border-border-subtle rounded-[0.8rem] border bg-white p-3 lg:p-5">
 					{/* provides form methods to all nested field components. */}
 					<FormProvider {...formMethods}>
 						{/* shows the confirmation message if submission was successful and confirmation type is 'message'. */}
