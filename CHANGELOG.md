@@ -1,3 +1,11 @@
+# [1.22.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.21.0...v1.22.0) (2025-11-08)
+
+
+### Features
+
+* implement forms ([204ad93](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/204ad936f226b88c2cdf10fcbc411f01c3a0d25e))
+* implement message form ([fe1a6ce](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/fe1a6cef4abb7761cf3a87c530e546117aa43ecb))
+
 # [1.21.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.20.0...v1.21.0) (2025-11-07)
 
 
