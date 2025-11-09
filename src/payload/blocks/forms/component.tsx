@@ -137,12 +137,6 @@ export function FormBlock(props: FormBlockProps) {
 				{/* show intro and companion content before submission */}
 				{!hasSubmitted && (
 					<>
-						{enableIntro && introContent && (
-							<RichText
-								className="mb-8 text-center md:text-start lg:mb-12"
-								data={introContent || ({} as DefaultTypedEditorState)}
-							/>
-						)}
 						{enableCompanionText && companionText && (
 							<RichText
 								className="mb-8 text-center md:text-start lg:mb-12"
@@ -168,7 +162,7 @@ export function FormBlock(props: FormBlockProps) {
 						)}
 
 						{/* display descriptive error if submission fails */}
-						{error && <div className="mb-4 text-red-500">{`${error.status || "error"}: ${error.message || ""}`}</div>}
+						{error && <div className="mb-4 text-red-400">{`${error.status || "error"}: ${error.message || ""}`}</div>}
 
 						{/* render all form fields before submission */}
 						{!hasSubmitted && (

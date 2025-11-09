@@ -1,45 +1,51 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Error } from "@/payload/blocks/forms/error";
+import { Input } from "@/payload/blocks/forms/input";
 import { Width } from "@/payload/blocks/forms/width";
 import type { TextField } from "@payloadcms/plugin-form-builder/types";
 import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
 
-// combines the payload cms field definition (textfield is used for number in form builder) with react-hook-form types.
-type NumberProps = TextField & {
-	errors: Partial<FieldErrorsImpl>;
-	register: UseFormRegister<FieldValues>;
-};
+// defines the combined props required for the number input component
+type NumberProps = {
+	// errors object from react-hook-form to display validation feedback
+	errors: Partial<FieldErrorsImpl<{ [x: string]: any }>>;
+	// register function from react-hook-form to connect the input field to the form state
+	register: UseFormRegister<any & FieldValues>;
+} & TextField & {
+		// a boolean to visually hide the field
+		hidden: boolean;
+		// a string defining the column width in the layout (e.g., '1/2', 'full')
+		width: string;
+		// optional text hint displayed inside the input
+		placeholder?: string;
+		// the user-friendly name displayed above the input
+		label: string;
+	};
 
-// renders a standard HTML number input field, managed by react-hook-form.
-const Number = ({ name, defaultValue, errors, label, register, required, width }: NumberProps) => {
+// this component serves as a wrapper to render a number input field, applying layout rules and reusing the base FormInput
+const Number = ({
+	name,
+	errors,
+	label,
+	register,
+	required: requiredFromProps,
+	hidden: hiddenFromProps,
+	width,
+	placeholder,
+}: NumberProps) => {
 	return (
-		// wraps the input in the width component to respect the configured column layout.
+		// uses the custom width component to control the field's column size
 		<Width width={width}>
-			<Label htmlFor={name}>
-				{label}
-
-				{/* renders a visual indicator if the field is mandatory. */}
-				{required && (
-					<span className="text-red-400">
-						* <span className="sr-only">(required)</span>
-					</span>
-				)}
-			</Label>
+			{/* reuses the generic FormInput component, setting the native type to 'number' 
+      to restrict input to digits and enable spinner controls */}
 			<Input
-				defaultValue={defaultValue}
-				id={name}
-				// sets the input type to 'number' to restrict input to numeric values and improve mobile keyboard experience.
-				type="number"
-				// spreads the registration props to integrate the input into the form state and validation logic.
-				{...register(name, {
-					// applies the required validation rule from the cms settings.
-					required,
-				})}
+				errors={errors}
+				name={name}
+				label={label}
+				type="number" // explicitly sets the type to 'number'
+				placeholder={placeholder}
+				required={requiredFromProps}
+				hidden={hiddenFromProps}
+				register={register}
 			/>
-
-			{/* displays the error component if a validation error exists for this field's name. */}
-			{errors[name] && <Error name={name} />}
 		</Width>
 	);
 };

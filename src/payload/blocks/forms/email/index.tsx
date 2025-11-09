@@ -1,48 +1,51 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Error } from "@/payload/blocks/forms/error";
+import { Input } from "@/payload/blocks/forms/input";
 import { Width } from "@/payload/blocks/forms/width";
 import type { EmailField } from "@payloadcms/plugin-form-builder/types";
 import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
 
-// combines the payload cms field definition with react-hook-form utilities for comprehensive typing.
-type EmailProps = EmailField & {
-	errors: Partial<FieldErrorsImpl>;
-	register: UseFormRegister<FieldValues>;
-};
+// defines the combined props required for the email input component
+type EmailProps = {
+	// errors object from react-hook-form to display validation feedback
+	errors: Partial<FieldErrorsImpl<{ [x: string]: any }>>;
+	// register function from react-hook-form to connect the input field to the form state
+	register: UseFormRegister<any & FieldValues>;
+} & EmailField & {
+		// a boolean to visually hide the field
+		hidden: boolean;
+		// a string defining the column width in the layout (e.g., '1/2', 'full')
+		width: string;
+		// optional text hint displayed inside the input
+		placeholder?: string;
+		// the user-friendly name displayed above the input
+		label: string;
+	};
 
-// renders an email input field and integrates it with react-hook-form for state and validation.
-const Email = ({ name, defaultValue, errors, label, register, required, width }: EmailProps) => {
+// this component serves as a wrapper to render an email field, applying layout rules and reusing the base FormInput
+export const Email = ({
+	name,
+	errors,
+	label,
+	register,
+	required: requiredFromProps,
+	hidden: hiddenFromProps,
+	width,
+	placeholder,
+}: EmailProps) => {
 	return (
-		// wraps the field in the width component to respect the configured column size.
+		// uses the custom width component to control the field's column size
 		<Width width={width}>
-			<Label htmlFor={name}>
-				{label}
-
-				{/* shows the required asterisk for users who can see the field. */}
-				{required && (
-					<span className="text-red-400">
-						* <span className="sr-only">(required)</span>
-					</span>
-				)}
-			</Label>
+			{/* reuses the generic FormInput component, setting the native type to 'email' 
+      for built-in browser validation and keyboard display */}
 			<Input
-				defaultValue={defaultValue}
-				id={name}
-				type="text"
-				// registers the input with react-hook-form, enabling validation and data collection.
-				{...register(name, {
-					// uses a regex pattern to ensure the entered value resembles an email address.
-					pattern: /^\S[^\s@]*@\S+$/,
-					// applies mandatory field checking from the cms settings.
-					required,
-				})}
+				errors={errors}
+				name={name}
+				label={label}
+				type="email" // explicitly sets the type to 'email'
+				placeholder={placeholder}
+				required={requiredFromProps}
+				hidden={hiddenFromProps}
+				register={register}
 			/>
-
-			{/* displays a specific error message if validation for this field fails. */}
-			{errors[name] && <Error name={name} />}
 		</Width>
 	);
 };
-
-export { Email };
