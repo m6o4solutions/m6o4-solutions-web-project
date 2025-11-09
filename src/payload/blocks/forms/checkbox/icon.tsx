@@ -30,7 +30,7 @@ const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({ className, ...p
 	</CheckboxPrimitive.Root>
 ));
 
-export { Checkbox };
-
 // sets a display name for easier debugging in react dev tools
-Checkbox.displayName = CheckboxPrimitive.Root.displayName;
+Checkbox.displayName = "Checkbox";
+
+export { Checkbox };
