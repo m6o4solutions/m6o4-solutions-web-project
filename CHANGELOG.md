@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.23.0...v1.23.1) (2025-11-10)
+
+
+### Bug Fixes
+
+* show confirmation message after successful submission ([fbf9a3d](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/fbf9a3d5a7b7f7026ce8f2f933466441a93907bd))
+
 # [1.23.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.22.0...v1.23.0) (2025-11-10)
 
 
