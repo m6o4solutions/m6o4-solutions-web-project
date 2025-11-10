@@ -1,53 +1,55 @@
-import { Checkbox as CheckboxUI } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Checkbox as CheckboxUI } from "@/payload/blocks/forms/checkbox/icon";
 import { Error } from "@/payload/blocks/forms/error";
 import { Width } from "@/payload/blocks/forms/width";
 import type { CheckboxField } from "@payloadcms/plugin-form-builder/types";
 import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
 import { useFormContext } from "react-hook-form";
 
-// defines the combined properties required by the component, blending payloadcms config and react-hook-form utilities.
+// defines all properties required for the checkbox field
 type CheckboxProps = CheckboxField & {
+	// errors object from react-hook-form to check for validation issues
 	errors: Partial<FieldErrorsImpl>;
+	// register function from react-hook-form to wire up the input
 	register: UseFormRegister<FieldValues>;
+} & {
+	// a string defining the column width in the layout (e.g., '1/2', 'full')
+	width: string;
 };
 
-// renders a form checkbox field, integrating with react-hook-form for state management and validation.
-const Checkbox = ({ name, defaultValue, errors, label, register, required, width }: CheckboxProps) => {
-	// registers the field with react-hook-form to enable tracking and apply the required validation rule.
+// this component renders a custom checkbox field, integrating with Payload fields, react-hook-form, and layout rules
+export const Checkbox = ({ name, defaultValue, errors, label, register, required, width }: CheckboxProps) => {
+	// register the field with react-hook-form and capture its resulting props
 	const props = register(name, { required: required });
-	// retrieves the function used to manually set form values, necessary for custom components like the checkboxui.
+	// retrieve the setValue function to manually update the form state
 	const { setValue } = useFormContext();
 
 	return (
-		// wraps the field in a container that controls its maximum width based on payload cms configuration.
+		// uses the custom width component to control the field's column size
 		<Width width={width}>
 			<div className="flex items-center gap-2">
+				{/* CheckboxUi is the presentation layer, receiving props from react-hook-form */}
 				<CheckboxUI
 					defaultChecked={defaultValue}
 					id={name}
-					// spreads react-hook-form properties onto the checkbox to handle ref and blur events.
 					{...props}
-					// manually updates the form state using setvalue when the checkbox state changes.
-					// this is needed because the shadcn/ui checkbox does not natively pass an event object compatible with register's onChange.
+					// intercepts the onCheckedChange event to manually update react-hook-form state
 					onCheckedChange={(checked) => {
+						// updates the form state using the setValue method
 						setValue(props.name, checked);
 					}}
 				/>
-				<Label htmlFor={name}>
-					{/* visually marks the field as required for the user. */}
+				<label htmlFor={name}>
+					{/* displays an asterisk if the field is marked as required */}
 					{required && (
-						<span className="text-red-400">
+						<span className="ms-1 text-red-500">
 							* <span className="sr-only">(required)</span>
 						</span>
 					)}
 					{label}
-				</Label>
+				</label>
 			</div>
-			{/* displays the specific validation message if an error exists for this field name. */}
+			{/* displays the error component only if a validation error exists for this field */}
 			{errors[name] && <Error name={name} />}
 		</Width>
 	);
 };
-
-export { Checkbox };

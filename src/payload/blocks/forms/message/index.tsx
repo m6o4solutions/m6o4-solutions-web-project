@@ -1,20 +1,21 @@
 import { RichText } from "@/components/rich-text";
-import { Width } from "@/payload/blocks/forms/width";
-import { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
+import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 
-// defines the required prop for the rich text editor's state object.
+// defines the single prop required: the serialized content from a lexical rich text editor
 type MessageProps = {
+	// uses the payload-specific rich text type to ensure compatibility with RichText component
 	message: DefaultTypedEditorState;
 };
 
-// displays rich text content from a payload CMS lexical field.
+// this component is a dedicated wrapper for rendering serialized lexical rich text content
 const Message = ({ message }: MessageProps) => {
 	return (
-		// contains the rich text content, setting full width and providing vertical spacing for visual separation.
-		<Width className="my-12" width="100">
-			{/* prevents rendering the rich text component if the message data is null or undefined. */}
+		// container ensures the rich text occupies the full width
+		<div className={`w-full`}>
+			{/* conditionally renders the RichText component only if the message data exists,
+      passing the message as the 'data' prop to the RichText renderer */}
 			{message && <RichText data={message} />}
-		</Width>
+		</div>
 	);
 };
 

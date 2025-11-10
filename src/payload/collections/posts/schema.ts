@@ -57,6 +57,8 @@ const Posts: CollectionConfig<"posts"> = {
 	admin: {
 		// columns displayed by default in the list view.
 		defaultColumns: ["title", "slug", "createdAt", "updatedAt"],
+		// group the collection in the content group
+		group: "Content",
 		// configuration for the live preview feature in the admin ui.
 		livePreview: {
 			// function to generate the url for the live preview iframe.

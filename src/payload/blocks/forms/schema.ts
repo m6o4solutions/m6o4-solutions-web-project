@@ -16,9 +16,6 @@ const Form: Block = {
 		singular: "Form Block",
 		plural: "Form Blocks",
 	},
-	graphQL: {
-		singularName: "Form",
-	},
 	fields: [
 		{
 			name: "form",
@@ -27,14 +24,14 @@ const Form: Block = {
 			required: true,
 		},
 		{
-			name: "enableIntro",
+			name: "enableCompanionText",
+			label: "Enable Companion Text",
 			type: "checkbox",
-			label: "Enable Introductory Content",
 		},
 		{
-			name: "introContent",
+			name: "companionText",
 			type: "richText",
-			label: "Introductory Content",
+			label: "Companion Text",
 			editor: lexicalEditor({
 				features: ({ rootFeatures }) => {
 					return [
@@ -49,7 +46,7 @@ const Form: Block = {
 				},
 			}),
 			admin: {
-				condition: (_, { enableIntro }) => Boolean(enableIntro),
+				condition: (_, { enableCompanionText }) => Boolean(enableCompanionText),
 			},
 		},
 	],

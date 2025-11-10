@@ -1,48 +1,47 @@
-import { Label } from "@/components/ui/label";
-import { Textarea as TextAreaComponent } from "@/components/ui/textarea";
 import { Error } from "@/payload/blocks/forms/error";
-import { Width } from "@/payload/blocks/forms/width";
-import type { TextField } from "@payloadcms/plugin-form-builder/types";
+import type { TextAreaField } from "@payloadcms/plugin-form-builder/types";
 import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
 
-// combines the payload cms field definition with react-hook-form utilities and an optional row count.
-type TextareaProps = TextField & {
-	errors: Partial<FieldErrorsImpl>;
-	register: UseFormRegister<FieldValues>;
+// defines the combined props required for the textarea component
+type TextareaProps = {
+	// errors object from react-hook-form to display validation feedback
+	errors: Partial<FieldErrorsImpl<{ [x: string]: any }>>;
+	// register function from react-hook-form to connect the input field to the form state
+	register: UseFormRegister<any & FieldValues>;
+	// number of lines the textarea should display by default
 	rows?: number;
-};
+} & TextAreaField;
 
-// renders a multi-line text input (textarea), managed by react-hook-form.
-const Textarea = ({ name, defaultValue, errors, label, register, required, rows = 3, width }: TextareaProps) => {
+// this component renders a textarea input field, handling form state and error display
+const Textarea = ({ name, errors, label, register, required: requiredFromProps, rows = 3 }: TextareaProps) => {
 	return (
-		// applies the maximum width configuration from the cms field settings.
-		<Width width={width}>
-			<Label htmlFor={name}>
-				{label}
-
-				{/* renders a visual indicator if the field is mandatory. */}
-				{required && (
-					<span className="text-red-400">
-						* <span className="sr-only">(required)</span>
-					</span>
-				)}
-			</Label>
-
-			<TextAreaComponent
-				defaultValue={defaultValue}
-				id={name}
-				// sets the visual height of the textarea, defaulting to 3 lines.
-				rows={rows}
-				// registers the input with react-hook-form and applies validation rules.
-				{...register(name, {
-					// applies the required validation rule from the cms settings.
-					required: required,
-				})}
-			/>
-
-			{/* displays the error component if validation fails for this specific field. */}
-			{errors[name] && <Error name={name} />}
-		</Width>
+		// ensures the component occupies the full width of its container
+		<div className={`w-full`}>
+			<div className={`relative mb-4`}>
+				{/* label includes an asterisk and screen reader text if the field is required */}
+				<label className={`mb-4 block`} htmlFor={name}>
+					{label}
+					{requiredFromProps ? (
+						<span className={"ms-1 text-red-500"}>
+							* <span className="sr-only">{"required)"}</span>
+						</span>
+					) : (
+						""
+					)}
+				</label>
+				<textarea
+					// uses tailwind css for consistent styling
+					className={`w-full rounded-md border border-emerald-950 bg-white p-2 leading-tight text-emerald-950`}
+					id={name}
+					// sets the visible height of the textarea
+					rows={rows}
+					// registers the textarea with react-hook-form, applying the required rule if set
+					{...register(name, { required: requiredFromProps })}
+				/>
+				{/* displays the error component only if a validation error exists for this field */}
+				{errors[name] && <Error name={name} />}
+			</div>
+		</div>
 	);
 };
 

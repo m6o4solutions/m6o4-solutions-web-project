@@ -1,23 +1,21 @@
 import { ReactNode } from "react";
 
-// defines the accepted properties for the width component.
-type WidthProps = {
-	children: ReactNode;
-	className?: string; // allows passing custom tailwind classes for styling.
-	width?: number | string; // sets the max-width value, expected to be a percentage.
-};
-
-// component wraps children in a div and conditionally sets a maximum width style.
-const Width = ({ children, className, width }: WidthProps) => {
-	return (
-		<div
-			className={className}
-			// dynamically applies max-width to the div, appending '%' if a width value is provided.
-			style={{ maxWidth: width ? `${width}%` : undefined }}
-		>
-			{children}
-		</div>
-	);
+const Width = ({ children, width }: { children: ReactNode; width: string }) => {
+	// calculates the required width for the component based on the prop
+	let calcWidth: string;
+	switch (width) {
+		case "full":
+			// ensures 'full' fills the entire space
+			calcWidth = `100%`;
+			break;
+		default:
+			// converts fractional width (e.g., '1/2', '1/3') into a percentage,
+			// and subtracts a small amount for necessary internal guttering
+			calcWidth = `calc(${width} * 100% - 0.5rem)`;
+			break;
+	}
+	// uses flexBasis to set the calculated width, allowing it to behave within a flex container
+	return <div style={{ flexBasis: calcWidth }}>{children}</div>;
 };
 
 export { Width };
