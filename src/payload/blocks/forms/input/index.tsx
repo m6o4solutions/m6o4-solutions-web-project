@@ -37,7 +37,7 @@ const Input = (props: Props) => {
 			pattern = {
 				required: props.required,
 				pattern: {
-					message: "Please format your phone number like this: +254 722 123456.",
+					message: "Please format your phone number like this: +123 456 789012.",
 					value: /^\+\d{1,4}\s?\d{2,3}\s?\d{3}\s?\d{4,6}$/,
 				},
 			};

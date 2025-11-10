@@ -125,11 +125,6 @@ const plugins: Plugin[] = [
 						};
 					}
 
-					// hide the 'confirmationType' field.
-					if (field.type === "radio" && field.name === "confirmationType") {
-						return { ...field, hidden: true };
-					}
-
 					// return the field unchanged if no customization applies.
 					return field;
 				});

@@ -9,7 +9,7 @@ import { mapPayloadFieldsToRHFDefaults, rhfdefaultvalues } from "@/payload/utili
 import type { Form as FormType } from "@payloadcms/plugin-form-builder/types";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import { LoaderCircle } from "lucide-react";
-//import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ComponentType, useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -39,7 +39,7 @@ const FormBlock = (props: FormBlockProps) => {
 	} = props;
 
 	// track current route for potential use in submission context
-	//const pathname = usePathname();
+	const pathname = usePathname();
 
 	// initialize form control with default values based on payload configuration
 	const formMethods = useForm<rhfdefaultvalues>({
@@ -108,7 +108,7 @@ const FormBlock = (props: FormBlockProps) => {
 
 			void submitForm();
 		},
-		[formID /* pathname */],
+		[formID, pathname],
 	);
 
 	return (
@@ -118,22 +118,17 @@ const FormBlock = (props: FormBlockProps) => {
 					<div className="space-y-8 lg:col-span-1">
 						{/* show optional companion text beside the form before submission */}
 						{enableCompanionText && companionText && !hasSubmitted && (
-							<RichText
-								className="mb-8 text-center md:col-span-6 md:text-start lg:mb-12 xl:col-span-4"
-								data={companionText as unknown as any}
-							/>
+							<RichText className="mb-8 md:mb-12 md:text-start" data={companionText as unknown as any} />
 						)}
 					</div>
 
 					<div className="lg:col-span-2">
 						<div className="border-border-subtle rounded-xl border-2 bg-white p-3 shadow-lg lg:p-5">
-							<p className="text-text-default pt-3 pb-5 text-2xl font-semibold">Message</p>
-
 							{/* provide react-hook-form context to nested field components */}
 							<FormProvider {...formMethods}>
 								{/* show confirmation message after a successful submission */}
 								{!isLoading && hasSubmitted && confirmationType === "message" && (
-									<RichText className="text-center" data={confirmationMessage} />
+									<RichText className="text-left" data={confirmationMessage} />
 								)}
 
 								{/* show a short loading message during request handling */}
