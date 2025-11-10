@@ -1,3 +1,17 @@
+# [1.23.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.22.0...v1.23.0) (2025-11-10)
+
+
+### Bug Fixes
+
+* change regex to be more robust for phone numbers ([d88912e](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/d88912e8568f34fb475c796118dba085f7d3e681))
+* **ui:** correct Checkbox displayName assignment ([a09f256](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/a09f256e25b4ee7a3775941870db6422d98abd36))
+
+
+### Features
+
+* create message form ([387b97d](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/387b97d5d4b2aab8972934511fca078c776c82a2))
+* create payload form ([d45481f](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/d45481fb923fcc2f8fad5c309be211e97dc58b61))
+
 # [1.22.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.21.0...v1.22.0) (2025-11-08)
 
 
