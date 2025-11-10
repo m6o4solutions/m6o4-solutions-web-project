@@ -2,57 +2,48 @@
 
 import { Container } from "@/components/container";
 import { RichText } from "@/components/rich-text";
-import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/components/submit-button";
 import { fields } from "@/payload/blocks/forms/fields";
 import { getClientSideURL } from "@/payload/utilities/get-url";
-import type { FormFieldBlock } from "@payloadcms/plugin-form-builder/types";
-import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
+import { mapPayloadFieldsToRHFDefaults, rhfdefaultvalues } from "@/payload/utilities/map-form-fields";
+import type { Form as FormType } from "@payloadcms/plugin-form-builder/types";
+import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import { LoaderCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+//import { usePathname } from "next/navigation";
+import { ComponentType, useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-// minimal shape of a form object expected from payload
-type LocalFormType = {
-	id?: string;
-	fields?: FormFieldBlock[];
-	confirmationMessage?: DefaultTypedEditorState;
-	confirmationType?: "message" | "redirect";
-	redirect?: { url?: string };
-	submitButtonLabel?: string;
-};
-
-// defines a form block as structured in payload cms
-export type FormBlockType = {
+// represents a single payload form block and its configuration
+type FormBlockType = {
 	blockName?: string;
 	blockType?: "formBlock";
-	enableIntro?: boolean;
-	form: LocalFormType;
-	introContent?: DefaultTypedEditorState;
 	enableCompanionText?: boolean;
-	companionText?: DefaultTypedEditorState;
+	form: FormType;
+	companionText?: SerializedEditorState;
+	confirmationMessage?: SerializedEditorState;
 };
 
-// combines cms-provided form block with optional id for unique instances
+// extends the block type with an optional element id
 type FormBlockProps = { id?: string } & FormBlockType;
 
-// named export for use across pages or layouts
-export function FormBlock(props: FormBlockProps) {
+// represents any dynamically rendered field component
+type FieldComponent = ComponentType<any>;
+
+// main form component used to render payload-managed forms on the client
+const FormBlock = (props: FormBlockProps) => {
 	const {
-		enableIntro,
-		introContent,
 		enableCompanionText,
-		companionText,
 		form: formFromProps,
-		form: { id: formID, confirmationMessage, confirmationType, redirect, submitButtonLabel } = {},
+		form: { id: formID, confirmationMessage, confirmationType, submitButtonLabel } = {},
+		companionText,
 	} = props;
 
-	// enables programmatic navigation for redirect confirmations
-	const router = useRouter();
+	// track current route for potential use in submission context
+	//const pathname = usePathname();
 
-	// initializes react-hook-form with a generic structure to handle dynamic cms fields
-	const formMethods = useForm<Record<string, any>>({
-		defaultValues: {},
+	// initialize form control with default values based on payload configuration
+	const formMethods = useForm<rhfdefaultvalues>({
+		defaultValues: mapPayloadFieldsToRHFDefaults(formFromProps.fields),
 	});
 
 	const {
@@ -62,25 +53,22 @@ export function FormBlock(props: FormBlockProps) {
 		register,
 	} = formMethods;
 
-	// state used for submission lifecycle and user feedback
+	// ui states for submission feedback and error tracking
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>();
 	const [error, setError] = useState<{ message: string; status?: string } | undefined>();
 
-	// handles form submission and communicates with the api route
+	// handles user submission, posting structured form data to the api
 	const onSubmit = useCallback(
-		(data: Record<string, any>) => {
+		(data: rhfdefaultvalues) => {
 			let loadingTimerID: ReturnType<typeof setTimeout>;
 
 			const submitForm = async () => {
 				setError(undefined);
+				// delay loader activation to prevent flicker on quick responses
+				loadingTimerID = setTimeout(() => setIsLoading(true), 1000);
 
-				// show loader only if request takes long enough to justify it
-				loadingTimerID = setTimeout(() => {
-					setIsLoading(true);
-				}, 1000);
-
-				// transform form data into the payload-compatible array format
+				// shape flat react-hook-form data into payload's expected format
 				const dataToSend = Object.entries(data).map(([name, value]) => ({
 					field: name,
 					value,
@@ -88,10 +76,8 @@ export function FormBlock(props: FormBlockProps) {
 
 				try {
 					const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
-						body: JSON.stringify({
-							form: formID,
-							submissionData: dataToSend,
-						}),
+						body: JSON.stringify({ form: formID, submissionData: dataToSend }),
+						credentials: "include",
 						headers: { "Content-Type": "application/json" },
 						method: "POST",
 					});
@@ -99,103 +85,104 @@ export function FormBlock(props: FormBlockProps) {
 					const res = await req.json();
 					clearTimeout(loadingTimerID);
 
-					// handle server-side validation or internal error
+					// capture server-side errors for user feedback
 					if (req.status >= 400) {
 						setIsLoading(false);
 						setError({
-							message: res.errors?.[0]?.message || "internal server error",
-							status: String(res.status),
+							message: res.errors?.[0]?.message || "Internal Server Error.",
+							status: req.status.toString(),
 						});
 						return;
 					}
 
-					// mark submission as successful and handle redirect
+					// successful submission resets loading and triggers confirmation view
 					setIsLoading(false);
 					setHasSubmitted(true);
-
-					if (confirmationType === "redirect" && redirect?.url) {
-						router.push(redirect.url);
-					}
-				} catch (err) {
-					console.warn(err);
-					clearTimeout(loadingTimerID);
+				} catch (e) {
+					// catch network or unexpected client errors
+					console.warn(e);
 					setIsLoading(false);
-					setError({
-						message: "something went wrong while submitting the form...",
-					});
+					setError({ message: "Something went wrong..." });
 				}
 			};
 
 			void submitForm();
 		},
-		[router, formID, redirect, confirmationType],
+		[formID /* pathname */],
 	);
 
 	return (
 		<section className="section-spacing bg-bg-subtle">
-			<Container className="lg:max-w-4xl">
-				{/* show intro and companion content before submission */}
-				{!hasSubmitted && (
-					<>
-						{enableCompanionText && companionText && (
+			<Container>
+				<div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+					<div className="space-y-8 lg:col-span-1">
+						{/* show optional companion text beside the form before submission */}
+						{enableCompanionText && companionText && !hasSubmitted && (
 							<RichText
-								className="mb-8 text-center md:text-start lg:mb-12"
-								data={companionText || ({} as DefaultTypedEditorState)}
+								className="mb-8 text-center md:col-span-6 md:text-start lg:mb-12 xl:col-span-4"
+								data={companionText as unknown as any}
 							/>
 						)}
-					</>
-				)}
+					</div>
 
-				{/* visually separates form area */}
-				<div className="border-border-subtle rounded-[0.8rem] border bg-white p-4 lg:p-6">
-					<FormProvider {...formMethods}>
-						{/* display confirmation message when form submission succeeds */}
-						{!isLoading && hasSubmitted && confirmationType === "message" && (
-							<RichText className="text-center" data={confirmationMessage || ({} as DefaultTypedEditorState)} />
-						)}
+					<div className="lg:col-span-2">
+						<div className="border-border-subtle rounded-xl border-2 bg-white p-3 shadow-lg lg:p-5">
+							<p className="text-text-default pt-3 pb-5 text-2xl font-semibold">Message</p>
 
-						{/* loading indicator for async submissions */}
-						{isLoading && !hasSubmitted && (
-							<p className="text-muted-foreground mb-4 flex items-center">
-								<LoaderCircle className="me-2 h-4 w-4 animate-spin" /> loading, please wait...
-							</p>
-						)}
+							{/* provide react-hook-form context to nested field components */}
+							<FormProvider {...formMethods}>
+								{/* show confirmation message after a successful submission */}
+								{!isLoading && hasSubmitted && confirmationType === "message" && (
+									<RichText className="text-center" data={confirmationMessage} />
+								)}
 
-						{/* display descriptive error if submission fails */}
-						{error && <div className="mb-4 text-red-400">{`${error.status || "error"}: ${error.message || ""}`}</div>}
+								{/* show a short loading message during request handling */}
+								{isLoading && !hasSubmitted && (
+									<p className="mb-4 flex items-center">
+										<span>
+											<LoaderCircle className="me-2 animate-spin" />
+										</span>{" "}
+										loading, please wait...
+									</p>
+								)}
 
-						{/* render all form fields before submission */}
-						{!hasSubmitted && (
-							<form id={formID} onSubmit={handleSubmit(onSubmit)}>
-								<div className="mb-4 last:mb-0">
-									{formFromProps?.fields?.map((field, index) => {
-										// dynamically load the correct field component type
-										const Field = fields?.[field.blockType as keyof typeof fields] as any;
-										if (!Field) return null;
+								{/* display any api or network error messages */}
+								{error && <div className="text-red-400">{`${error.status || "error"}: ${error.message || ""}`}</div>}
 
-										return (
-											<div className="mb-6 last:mb-0" key={index}>
-												<Field form={formFromProps} {...field} control={control} errors={errors} register={register} />
-											</div>
-										);
-									})}
-								</div>
+								{/* render form fields only if submission has not yet succeeded */}
+								{!hasSubmitted && (
+									<form id={formID} onSubmit={handleSubmit(onSubmit)}>
+										<div className="mb-4 last:mb-0 sm:flex sm:flex-wrap sm:gap-4">
+											{formFromProps?.fields?.map((field, index) => {
+												// dynamically render field components from payload configuration
+												const Field: FieldComponent = (fields as Record<string, FieldComponent>)[field.blockType];
+												if (!Field) return null;
 
-								{/* submit button with spinner feedback */}
-								<Button form={formID} type="submit" variant="default" disabled={isLoading}>
-									{isLoading ? (
-										<>
-											<LoaderCircle className="me-2 h-4 w-4 animate-spin" /> submitting...
-										</>
-									) : (
-										submitButtonLabel || "submit"
-									)}
-								</Button>
-							</form>
-						)}
-					</FormProvider>
+												return (
+													<Field
+														key={index}
+														form={formFromProps}
+														{...field}
+														{...formMethods}
+														control={control}
+														errors={errors}
+														register={register}
+													/>
+												);
+											})}
+										</div>
+
+										{/* submit button triggers validation and form submission */}
+										<SubmitButton loading={isLoading} text={submitButtonLabel ?? "Submit"} form={formID} />
+									</form>
+								)}
+							</FormProvider>
+						</div>
+					</div>
 				</div>
 			</Container>
 		</section>
 	);
-}
+};
+
+export { FormBlock };

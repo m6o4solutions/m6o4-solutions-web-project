@@ -2,6 +2,7 @@ import { Checkbox } from "@/payload/blocks/forms/checkbox";
 import { Email } from "@/payload/blocks/forms/email";
 import { Message } from "@/payload/blocks/forms/message";
 import { Number } from "@/payload/blocks/forms/number";
+import { Phone } from "@/payload/blocks/forms/phone";
 import { Text } from "@/payload/blocks/forms/text";
 import { Textarea } from "@/payload/blocks/forms/textarea";
 
@@ -11,6 +12,7 @@ const fields = {
 	email: Email,
 	message: Message,
 	number: Number,
+	phone: Phone,
 	text: Text,
 	textarea: Textarea,
 };

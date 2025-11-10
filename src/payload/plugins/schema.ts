@@ -127,10 +127,7 @@ const plugins: Plugin[] = [
 
 					// hide the 'confirmationType' field.
 					if (field.type === "radio" && field.name === "confirmationType") {
-						return {
-							...field,
-							hidden: true,
-						};
+						return { ...field, hidden: true };
 					}
 
 					// return the field unchanged if no customization applies.
@@ -144,21 +141,13 @@ const plugins: Plugin[] = [
 						name: "requireRecaptcha",
 						type: "checkbox",
 						label: "Require reCAPTCHA",
-						admin: {
-							position: "sidebar", // positions the field in the admin sidebar.
-						},
+						admin: { position: "sidebar" },
 					},
 				];
 			},
-			admin: {
-				group: "Plugins",
-			},
+			admin: { group: "Plugins" },
 		},
-		formSubmissionOverrides: {
-			admin: {
-				group: "Plugins",
-			},
-		},
+		formSubmissionOverrides: { admin: { group: "Plugins" } },
 		redirectRelationships: ["pages"],
 	}),
 
@@ -186,20 +175,16 @@ const plugins: Plugin[] = [
 				}) as typeof defaultFields;
 			},
 			hooks: {
-				afterChange: [revalidateRedirects], // triggers site revalidation hook.
+				afterChange: [revalidateRedirects],
 			},
-			admin: {
-				group: "Plugins",
-			},
+			admin: { group: "Plugins" },
 		},
 	}),
 
 	// configures s3 storage as the media storage provider.
 	// uses environment variables for bucket name and access credentials.
 	s3Storage({
-		collections: {
-			media: true,
-		},
+		collections: { media: true },
 		bucket: process.env.S3_BUCKET!,
 		config: {
 			credentials: {
@@ -220,9 +205,7 @@ const plugins: Plugin[] = [
 		searchOverrides: {
 			// combines default search fields with custom defined fields for indexing.
 			fields: ({ defaultFields }) => [...defaultFields, ...searchFields],
-			admin: {
-				group: "Plugins",
-			},
+			admin: { group: "Plugins" },
 		},
 	}),
 

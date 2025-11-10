@@ -10,7 +10,7 @@ type Props = {
 	// the field's unique identifier and key for react-hook-form registration
 	name: string;
 	// specifies the native html input type for browser rendering and validation
-	type: "text" | "password" | "email" | "tel" | "number";
+	type: "text" | "password" | "email" | "phone" | "number";
 	// optional text hint displayed inside the input
 	placeholder?: string;
 	// flag indicating if the field must contain a value
@@ -33,11 +33,11 @@ const Input = (props: Props) => {
 			// applies a simple 'required' validation rule if the prop is set
 			pattern = { required: props.required };
 			break;
-		case "tel":
+		case "phone":
 			pattern = {
 				required: props.required,
 				pattern: {
-					message: "Please format your phone number like this: (+999) 999-999999.",
+					message: "Please format your phone number like this: +254 722 123456.",
 					value: /^\+\d{1,4}\s?\d{2,3}\s?\d{3}\s?\d{4,6}$/,
 				},
 			};
