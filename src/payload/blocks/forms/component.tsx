@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 import { ComponentType, useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-// represents a single payload form block and its configuration
+// describes a single form block managed through payload
 type FormBlockType = {
 	blockName?: string;
 	blockType?: "formBlock";
@@ -23,13 +23,13 @@ type FormBlockType = {
 	confirmationMessage?: SerializedEditorState;
 };
 
-// extends the block type with an optional element id
+// combines the form block with an optional element id
 type FormBlockProps = { id?: string } & FormBlockType;
 
-// represents any dynamically rendered field component
+// represents any component used for rendering dynamic field types
 type FieldComponent = ComponentType<any>;
 
-// main form component used to render payload-managed forms on the client
+// renders a payload-managed form with dynamic fields and submission handling
 const FormBlock = (props: FormBlockProps) => {
 	const {
 		enableCompanionText,
@@ -38,10 +38,10 @@ const FormBlock = (props: FormBlockProps) => {
 		companionText,
 	} = props;
 
-	// track current route for potential use in submission context
+	// keep track of current route for contextual form submissions
 	const pathname = usePathname();
 
-	// initialize form control with default values based on payload configuration
+	// set up react-hook-form and prefill default values based on payload field definitions
 	const formMethods = useForm<rhfdefaultvalues>({
 		defaultValues: mapPayloadFieldsToRHFDefaults(formFromProps.fields),
 	});
@@ -53,22 +53,23 @@ const FormBlock = (props: FormBlockProps) => {
 		register,
 	} = formMethods;
 
-	// ui states for submission feedback and error tracking
+	// handle submission state and errors for user feedback
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>();
 	const [error, setError] = useState<{ message: string; status?: string } | undefined>();
 
-	// handles user submission, posting structured form data to the api
+	// manages form submission flow including data formatting and api communication
 	const onSubmit = useCallback(
 		(data: rhfdefaultvalues) => {
 			let loadingTimerID: ReturnType<typeof setTimeout>;
 
 			const submitForm = async () => {
 				setError(undefined);
-				// delay loader activation to prevent flicker on quick responses
+
+				// wait briefly before showing loader to avoid flashing on quick responses
 				loadingTimerID = setTimeout(() => setIsLoading(true), 1000);
 
-				// shape flat react-hook-form data into payload's expected format
+				// transform flat key-value pairs into the structure expected by payload
 				const dataToSend = Object.entries(data).map(([name, value]) => ({
 					field: name,
 					value,
@@ -85,24 +86,24 @@ const FormBlock = (props: FormBlockProps) => {
 					const res = await req.json();
 					clearTimeout(loadingTimerID);
 
-					// capture server-side errors for user feedback
+					// surface backend errors to the user
 					if (req.status >= 400) {
 						setIsLoading(false);
 						setError({
-							message: res.errors?.[0]?.message || "Internal Server Error.",
+							message: res.errors?.[0]?.message || "internal server error.",
 							status: req.status.toString(),
 						});
 						return;
 					}
 
-					// successful submission resets loading and triggers confirmation view
+					// mark form as successfully submitted and show confirmation view
 					setIsLoading(false);
 					setHasSubmitted(true);
 				} catch (e) {
-					// catch network or unexpected client errors
+					// handle unexpected network or client-side issues gracefully
 					console.warn(e);
 					setIsLoading(false);
-					setError({ message: "Something went wrong..." });
+					setError({ message: "something went wrong..." });
 				}
 			};
 
@@ -116,7 +117,7 @@ const FormBlock = (props: FormBlockProps) => {
 			<Container>
 				<div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
 					<div className="space-y-8 lg:col-span-1">
-						{/* show optional companion text beside the form before submission */}
+						{/* display companion text beside form when enabled and before submission */}
 						{enableCompanionText && companionText && !hasSubmitted && (
 							<RichText className="mb-8 md:mb-12 md:text-start" data={companionText as unknown as any} />
 						)}
@@ -124,14 +125,14 @@ const FormBlock = (props: FormBlockProps) => {
 
 					<div className="lg:col-span-2">
 						<div className="border-border-subtle rounded-xl border-2 bg-white p-3 shadow-lg lg:p-5">
-							{/* provide react-hook-form context to nested field components */}
+							{/* provide shared form context to all nested field components */}
 							<FormProvider {...formMethods}>
-								{/* show confirmation message after a successful submission */}
+								{/* show confirmation content if the form was successfully submitted */}
 								{!isLoading && hasSubmitted && confirmationType === "message" && (
 									<RichText className="text-left" data={confirmationMessage} />
 								)}
 
-								{/* show a short loading message during request handling */}
+								{/* temporary visual feedback during network request */}
 								{isLoading && !hasSubmitted && (
 									<p className="mb-4 flex items-center">
 										<span>
@@ -141,15 +142,15 @@ const FormBlock = (props: FormBlockProps) => {
 									</p>
 								)}
 
-								{/* display any api or network error messages */}
+								{/* display user-facing errors if submission fails */}
 								{error && <div className="text-red-400">{`${error.status || "error"}: ${error.message || ""}`}</div>}
 
-								{/* render form fields only if submission has not yet succeeded */}
+								{/* render dynamic fields when form is not yet submitted */}
 								{!hasSubmitted && (
 									<form id={formID} onSubmit={handleSubmit(onSubmit)}>
 										<div className="mb-4 last:mb-0 sm:flex sm:flex-wrap sm:gap-4">
 											{formFromProps?.fields?.map((field, index) => {
-												// dynamically render field components from payload configuration
+												// resolve and render field component based on payload configuration
 												const Field: FieldComponent = (fields as Record<string, FieldComponent>)[field.blockType];
 												if (!Field) return null;
 
@@ -167,7 +168,7 @@ const FormBlock = (props: FormBlockProps) => {
 											})}
 										</div>
 
-										{/* submit button triggers validation and form submission */}
+										{/* display the form submission button */}
 										<SubmitButton loading={isLoading} text={submitButtonLabel ?? "Submit"} form={formID} />
 									</form>
 								)}
