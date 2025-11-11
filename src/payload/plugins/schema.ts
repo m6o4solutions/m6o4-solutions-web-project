@@ -1,5 +1,5 @@
 import { FormSubmission, Page, Post } from "@/payload-types";
-import { defaultValue, hidden, label, name, placeholder, required, width } from "@/payload/blocks/forms/field-config";
+import { defaultValue, hidden, label, name, placeholder, required, width } from "@/payload/blocks/forms/config";
 import { revalidateRedirects } from "@/payload/hooks/revalidate-redirects";
 import { beforeSyncWithSearch } from "@/payload/search/before-sync";
 import { searchFields } from "@/payload/search/field-overrides";
@@ -21,20 +21,22 @@ import {
 import { s3Storage } from "@payloadcms/storage-s3";
 import { Plugin } from "payload";
 
-// defines a dynamic seo title generator for pages and posts.
-// adds the document title followed by the company name, M6O4 Solutions.
+// dynamically constructs seo titles for pages and posts
+// adds brand consistency by appending the company name to each document title
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
 	return doc?.title ? `${doc.title} | M6O4 Solutions` : "M6O4 Solutions";
 };
 
-// defines a dynamic canonical url generator for pages and posts.
-// uses the server-side base url and the document slug to construct the full url.
+// dynamically constructs canonical urls for pages and posts
+// ensures each document url aligns with the current server environment
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 	const url = getServerSideURL();
 	return doc?.slug ? `${url}/${doc.slug}` : url;
 };
 
-const beforeEmail: BeforeEmail<FormSubmission> = (emails, beforeChangeParams) => {
+// injects basic styling into outgoing form submission emails
+// improves readability and branding without altering email content
+const beforeEmail: BeforeEmail<FormSubmission> = (emails) => {
 	return emails.map((email) => ({
 		...email,
 		html: `<div>
@@ -47,13 +49,12 @@ const beforeEmail: BeforeEmail<FormSubmission> = (emails, beforeChangeParams) =>
 	}));
 };
 
-// central plugin registry for the payload cms instance.
-// registers all key plugins: forms, seo, redirects, search, s3, and cloud integration.
+// defines the central plugin configuration for the payload cms instance
+// each plugin extends payload functionality to support forms, seo, search, redirects, storage, and cloud hosting
 const plugins: Plugin[] = [
-	// configures the form builder plugin.
-	// disables default fields (country, payment, state) and customizes the confirmation message editor.
+	// enables advanced form management with custom field controls and submission hooks
 	formBuilderPlugin({
-		beforeEmail: beforeEmail,
+		beforeEmail,
 		fields: {
 			checkbox: {
 				fields: [
@@ -74,7 +75,7 @@ const plugins: Plugin[] = [
 			number: true,
 			payment: false,
 			phone: {
-				// @ts-ignore
+				// @ts-ignore - custom field slug definition
 				slug: "phone",
 				labels: { singular: "Phone Number", plural: "Phone Numbers" },
 				fields: [
@@ -105,10 +106,10 @@ const plugins: Plugin[] = [
 		},
 		formOverrides: {
 			fields: ({ defaultFields }) => {
-				// maps over default fields to customize the confirmation message field.
+				// modifies specific form fields to enhance editor experience and control layout
 				const customizedFields = defaultFields.map((field) => {
 					if ("name" in field && field.name === "confirmationMessage") {
-						// overrides the editor to use lexical with fixed toolbar, headings, and lists.
+						// replaces default editor with lexical and enables structured formatting options
 						return {
 							...field,
 							editor: lexicalEditor({
@@ -125,11 +126,10 @@ const plugins: Plugin[] = [
 						};
 					}
 
-					// return the field unchanged if no customization applies.
 					return field;
 				});
 
-				// returns all customized fields and appends the custom recaptcha field.
+				// appends a recaptcha requirement toggle for additional spam protection
 				return [
 					...customizedFields,
 					{
@@ -146,18 +146,17 @@ const plugins: Plugin[] = [
 		redirectRelationships: ["pages"],
 	}),
 
-	// integrates with payload cloud for hosting and deployment.
+	// integrates payload with the official cloud hosting platform for deployment and backups
 	payloadCloudPlugin(),
 
-	// configures the redirects plugin for pages and posts collections.
-	// adds a rebuild warning to the 'from' field and revalidates the site after a redirect change.
+	// enables server-side redirects and syncs them with static site rebuilds
 	redirectsPlugin({
 		collections: ["pages", "posts"],
 		overrides: {
 			fields: ({ defaultFields }) => {
 				return defaultFields.map((field) => {
 					if (typeof field === "object" && "name" in field && field.name === "from") {
-						// adds an admin note instructing the user to rebuild the site upon changing a redirect source.
+						// adds admin guidance to rebuild the site when changing redirect origins
 						return {
 							...field,
 							admin: {
@@ -169,15 +168,13 @@ const plugins: Plugin[] = [
 					return field;
 				}) as typeof defaultFields;
 			},
-			hooks: {
-				afterChange: [revalidateRedirects],
-			},
+			hooks: { afterChange: [revalidateRedirects] },
 			admin: { group: "Plugins" },
 		},
 	}),
 
-	// configures s3 storage as the media storage provider.
-	// uses environment variables for bucket name and access credentials.
+	// configures s3-compatible storage for media handling
+	// uses env variables to allow flexible deployment across regions or providers
 	s3Storage({
 		collections: { media: true },
 		bucket: process.env.S3_BUCKET!,
@@ -188,24 +185,23 @@ const plugins: Plugin[] = [
 			},
 			region: process.env.S3_REGION!,
 			endpoint: process.env.S3_ENDPOINT!,
-			forcePathStyle: true, // required for minio or self-hosted s3 systems.
+			forcePathStyle: true, // required for minio or local s3-compatible services
 		},
 	}),
 
-	// configures the search plugin.
-	// indexes the posts collection, uses a custom hook for content preprocessing, and includes custom search fields.
+	// enables indexed search with content preprocessing before sync
+	// ensures consistent search accuracy and control over indexed fields
 	searchPlugin({
 		collections: ["posts"],
-		beforeSync: beforeSyncWithSearch, // hook to clean or modify content before it's indexed.
+		beforeSync: beforeSyncWithSearch,
 		searchOverrides: {
-			// combines default search fields with custom defined fields for indexing.
 			fields: ({ defaultFields }) => [...defaultFields, ...searchFields],
 			admin: { group: "Plugins" },
 		},
 	}),
 
-	// configures the seo plugin.
-	// uses custom functions to dynamically generate page titles and canonical urls.
+	// configures seo automation for dynamic metadata generation
+	// improves organic discoverability with canonical urls and custom titles
 	seoPlugin({ generateTitle, generateURL }),
 ];
 

@@ -21,10 +21,7 @@ const Work: CollectionConfig = {
 	},
 
 	/* defines human-friendly naming for the cms interface */
-	labels: {
-		singular: "Work",
-		plural: "Work",
-	},
+	labels: { singular: "Work", plural: "Work" },
 
 	fields: [
 		{

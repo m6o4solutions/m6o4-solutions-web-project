@@ -7,9 +7,7 @@ const name: Field = {
 	// label guides users to use a clean, machine-friendly name
 	label: "Name (lowercase, no special characters)",
 	required: true,
-	admin: {
-		width: "50%",
-	},
+	admin: { width: "50%" },
 };
 
 // defines the user-facing display label for the field
@@ -17,9 +15,7 @@ const label: Field = {
 	name: "label",
 	type: "text",
 	label: "Label",
-	admin: {
-		width: "50%",
-	},
+	admin: { width: "50%" },
 };
 
 // determines if a value is mandatory for this field
@@ -27,9 +23,7 @@ const required: Field = {
 	name: "required",
 	type: "checkbox",
 	label: "Required",
-	admin: {
-		width: "50%",
-	},
+	admin: { width: "50%" },
 };
 
 // specifies hint text to display inside the empty input field
@@ -37,9 +31,7 @@ const placeholder: Field = {
 	name: "placeholder",
 	type: "text",
 	label: "Placeholder",
-	admin: {
-		width: "50%",
-	},
+	admin: { width: "50%" },
 };
 
 // sets the initial value of the field when a new document is created
@@ -47,9 +39,7 @@ const defaultValue: Field = {
 	name: "defaultValue",
 	type: "text",
 	label: "Default Value",
-	admin: {
-		width: "50%",
-	},
+	admin: { width: "50%" },
 };
 
 // allows developers to specify the column width for the field in the admin ui
@@ -72,9 +62,7 @@ const hidden: Field = {
 	name: "hidden",
 	type: "checkbox",
 	label: "Hidden Field?",
-	admin: {
-		width: "50%",
-	},
+	admin: { width: "50%" },
 };
 
 export { defaultValue, hidden, label, name, placeholder, required, width };
