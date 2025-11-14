@@ -19,7 +19,8 @@ const revalidatePost: CollectionAfterChangeHook<Post> = ({ doc, previousDoc, req
 			// clear the next.js cache for the post's dynamic path.
 			revalidatePath(path);
 			// clear the next.js cache for the sitemap to include the new/updated post.
-			revalidateTag("default", "posts-sitemap");
+			revalidateTag("default", "max");
+			revalidateTag("posts-sitemap", "max");
 		}
 
 		// if the post was previously published but is no longer published (e.g., set to 'draft'),
@@ -33,7 +34,8 @@ const revalidatePost: CollectionAfterChangeHook<Post> = ({ doc, previousDoc, req
 			// clear the next.js cache for the post's former path.
 			revalidatePath(oldPath);
 			// clear the next.js cache for the sitemap to reflect the post's removal.
-			revalidateTag("default", "posts-sitemap");
+			revalidateTag("default", "max");
+			revalidateTag("posts-sitemap", "max");
 		}
 	}
 	// return the document data, as required by the hook signature.

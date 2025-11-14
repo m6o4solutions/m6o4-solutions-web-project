@@ -7,7 +7,8 @@ logs the action and triggers cache revalidation for the 'redirects' tag to keep 
 */
 const revalidateRedirects: CollectionAfterChangeHook = ({ doc, req: { payload } }) => {
 	payload.logger.info("revalidating redirects...");
-	revalidateTag("default", "redirects");
+	revalidateTag("redirects", "max");
+
 	return doc;
 };
 
