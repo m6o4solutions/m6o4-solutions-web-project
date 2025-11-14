@@ -15,7 +15,7 @@ export const revalidateFooter: GlobalAfterChangeHook = ({ doc, req: { payload, c
 		// invalidate the next.js cache for the specific tag used when fetching footer data.
 		// revalidateTag now expects a profile (string | CacheLifeConfig) as the first argument
 		// and the tag name as the second argument.
-		revalidateTag("default", "global_footer");
+		revalidateTag("global_footer", "max");
 	}
 
 	// return the document data, as required by the hook signature.

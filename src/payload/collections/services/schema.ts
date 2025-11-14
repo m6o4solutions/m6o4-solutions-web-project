@@ -1,4 +1,5 @@
 import { isAuthenticated, isPublic } from "@/payload/access/access-control";
+import { revalidateDeleteService, revalidateService } from "@/payload/collections/services/hooks/revalidate-service";
 import { link } from "@/payload/fields/link";
 import { slugField } from "@/payload/fields/slug";
 import {
@@ -343,6 +344,12 @@ const Services: CollectionConfig = {
 		/* auto-generates slugs for clean, predictable urls */
 		...slugField(),
 	],
+	hooks: {
+		// trigger revalidation after any creation or update
+		afterChange: [revalidateService],
+		// trigger revalidation after deletion
+		afterDelete: [revalidateDeleteService],
+	},
 };
 
 /* exported for use in the main payload configuration */
