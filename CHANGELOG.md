@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.23.1...v1.24.0) (2025-11-14)
+
+
+### Features
+
+* implement sitemaps for pages, posts and services ([2517ee5](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/2517ee5deac8fece6af3e0b4bf37ac0848118b4b))
+
 ## [1.23.1](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.23.0...v1.23.1) (2025-11-10)
 
 
