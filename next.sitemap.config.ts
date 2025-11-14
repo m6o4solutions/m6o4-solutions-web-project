@@ -38,4 +38,4 @@ const config: IConfig = {
 	},
 };
 
-export default config;
+export { config as default };
