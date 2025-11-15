@@ -54,7 +54,7 @@ const TestimonialsBlock = ({ headline, subheadline, testimonials }: Testimonials
 						{resolvedTestimonials.map((testimony, index) => (
 							<Card
 								key={index}
-								className="border-border-subtle relative w-full shrink-0 snap-start bg-white p-6 md:w-[calc(50%-12px)] md:p-8 lg:w-[calc(33.333%-16px)]"
+								className="border-border-subtle relative w-full shrink-0 snap-start bg-white p-6 lg:w-[calc(33.333%-16px)]"
 							>
 								{/* decorative quote mark reinforcing testimonial context */}
 								<Quote className="text-brand-primary/20 absolute top-6 right-6 h-10 w-10" />
