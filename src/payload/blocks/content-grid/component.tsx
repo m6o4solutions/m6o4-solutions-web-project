@@ -63,9 +63,7 @@ const ContentGridBlock = ({ backgroundColor, columns, gridItems, headline, subhe
 				</div>
 
 				{/* responsive grid maintaining balance across screen sizes */}
-				<div
-					className={`grid grid-cols-1 gap-8 md:grid-cols-2 ${columns === "3" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}
-				>
+				<div className={`grid grid-cols-1 gap-8 ${columns === "3" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
 					{gridItems.map((item, index) => {
 						const headType = item.itemHead?.type;
 						const IconComponent = item.itemHead?.icon ? iconMap[item.itemHead.icon] : null;

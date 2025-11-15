@@ -37,10 +37,10 @@ const ContentCardsServicesBlock = ({ gridCards, headline, subheadline }: Content
 								className="border-border-subtle hover:border-brand-primary-light h-full overflow-hidden rounded-xl bg-white p-0 transition-all duration-300 hover:shadow-lg"
 							>
 								{/* defines a responsive 2-column grid layout for desktop. */}
-								<div className={`grid gap-0 md:grid-cols-2 ${!isEven ? "md:grid-flow-dense" : ""}`}>
+								<div className={`grid gap-0 lg:grid-cols-2 ${!isEven ? "lg:grid-flow-dense" : ""}`}>
 									{/* image container: alternates position on even/odd cards. */}
 									<div
-										className={`relative flex h-80 items-center justify-center bg-white p-3 md:h-96 ${!isEven ? "md:col-start-2" : ""}`}
+										className={`relative flex h-80 items-center justify-center bg-white p-3 md:h-96 ${!isEven ? "lg:col-start-2" : ""}`}
 									>
 										{/* conditional class moves the image to the second column on odd indices, creating a staggered effect. */}
 										<div className="relative h-full w-full overflow-hidden rounded-xl border-2">
