@@ -15,7 +15,7 @@ const LogosBlock = ({ companyLogos, headline, subheadline }: Logos) => {
 				</div>
 
 				{/* logo grid with hover interactions for subtle motion and polish */}
-				<div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 md:grid-cols-4">
+				<div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 lg:grid-cols-4">
 					{companyLogos?.map((item, index) => {
 						// gracefully handle different data structures for logo references
 						let imageSrc = "";
