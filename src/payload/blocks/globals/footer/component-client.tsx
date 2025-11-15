@@ -55,7 +55,7 @@ const FooterClient = async ({ data }: FooterClientProps) => {
 		<footer className="bg-bg-dark text-white">
 			<Container>
 				{/* grid layout for the main content area, changing from a single column to a four-column layout on medium screens. */}
-				<div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-[2fr_1fr_1fr_1fr]">
+				<div className="grid grid-cols-1 gap-8 px-4 lg:grid-cols-[2fr_1fr_1fr_1fr]">
 					{/* organization info column (takes up 2 fractional units on desktop). */}
 					<div className="space-y-4">
 						{/* logo and organization name, linked to the home page. */}
