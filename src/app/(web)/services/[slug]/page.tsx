@@ -149,7 +149,7 @@ const Page = async ({ params: paramsPromise }: Args) => {
 						<p className="text-text-default mx-auto max-w-2xl text-lg">{benefits.subheadline}</p>
 					</div>
 
-					<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+					<div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
 						{benefitsGrid?.map((benefit, index) => {
 							const symbolType = benefit.benefitSymbol?.type;
 							const IconComponent = benefit.benefitSymbol?.icon ? iconMap[benefit.benefitSymbol?.icon] : null;
@@ -185,7 +185,7 @@ const Page = async ({ params: paramsPromise }: Args) => {
 						<p className="text-text-default mx-auto max-w-2xl text-lg">{features.subheadline}</p>
 					</div>
 
-					<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+					<div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
 						{featuresCard?.map((feature, index) => {
 							const image = feature.featureImage;
 							const imageSrc = image && typeof image === "object" && "url" in image && image.url ? image.url : "";
@@ -230,7 +230,7 @@ const Page = async ({ params: paramsPromise }: Args) => {
 							<p className="text-text-default mx-auto max-w-2xl text-lg">{pricing?.subheadline}</p>
 						</div>
 
-						<div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-3">
+						<div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3">
 							{pricingCard?.map((price, index) => (
 								<Card
 									key={index}
@@ -301,7 +301,7 @@ const Page = async ({ params: paramsPromise }: Args) => {
 							<p className="text-text-default mx-auto max-w-2xl text-lg">{saas?.subheadline}</p>
 						</div>
 
-						<div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-3">
+						<div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3">
 							{saasCard?.map((app, index) => {
 								const image = app.saasImage;
 								const imageSrc = image && typeof image === "object" && "url" in image && image.url ? image.url : "";
