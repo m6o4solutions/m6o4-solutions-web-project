@@ -20,7 +20,7 @@ const ContentCardsBlock = ({ gridCards, headline, subheadline }: ContentCards) =
 				</div>
 
 				{/* displays the cards in a responsive grid */}
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+				<div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
 					{gridCards?.map((card, index) => {
 						// safely extract image details and fall back to empty strings if undefined
 						const image = card?.cardImage;
