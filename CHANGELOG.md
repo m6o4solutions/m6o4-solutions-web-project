@@ -1,3 +1,15 @@
+# [1.25.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.24.0...v1.25.0) (2025-11-15)
+
+
+### Bug Fixes
+
+* **ui:** normalize content card layout on mobile and tablet ([2785fcd](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/2785fcd432234a55b5dc22bf249cd681212e3786))
+
+
+### Features
+
+* **header:** implement mobile menu on tablet screens ([58f871b](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/58f871b7e26b6ad6ef2b7f2b821a3907cd348a6d))
+
 # [1.24.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.23.1...v1.24.0) (2025-11-14)
 
 
