@@ -52,7 +52,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 					</Link>
 
 					{/* primary navigation links, hidden on mobile screens. */}
-					<nav className="hidden items-center space-x-8 md:flex">
+					<nav className="hidden items-center space-x-8 lg:flex">
 						{navigationItems?.map(({ link }, index) => (
 							<Link
 								key={index}
@@ -67,7 +67,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 					</nav>
 
 					{/* header call-to-action button, hidden on mobile screens. */}
-					<div className="hidden md:block">
+					<div className="hidden lg:block">
 						{ctaItems?.map(({ link }, index) => (
 							<Button
 								key={index}
@@ -83,7 +83,7 @@ const HeaderClient = ({ data }: HeaderClientProps) => {
 
 					{/* mobile menu sheet component, visible only on mobile screens. */}
 					<Sheet open={isOpen} onOpenChange={setIsOpen}>
-						<SheetTrigger asChild className="md:hidden">
+						<SheetTrigger asChild className="lg:hidden">
 							{/* menu icon button to open the mobile sheet. */}
 							<Button variant="ghost" size="icon">
 								<Menu className="size-6" />
