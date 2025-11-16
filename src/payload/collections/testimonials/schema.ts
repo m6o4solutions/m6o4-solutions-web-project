@@ -18,15 +18,12 @@ const Testimonials: CollectionConfig = {
 
 	/* configures how the collection appears in the payload admin panel */
 	admin: {
-		defaultColumns: ["name", "job", "createdAt", "updatedAt"],
+		defaultColumns: ["name", "job", "rating", "createdAt", "updatedAt"],
 		useAsTitle: "name",
 	},
 
 	/* defines display names used in the cms interface */
-	labels: {
-		singular: "Testimonial",
-		plural: "Testimonials",
-	},
+	labels: { singular: "Testimonial", plural: "Testimonials" },
 
 	/* schema definition for testimonial entries */
 	fields: [
@@ -57,6 +54,16 @@ const Testimonials: CollectionConfig = {
 			type: "textarea",
 			label: "Testimonial",
 			required: true,
+		},
+		{
+			/* rating provided by the client */
+			name: "rating",
+			type: "number",
+			label: "Rating",
+			required: true,
+			defaultValue: 5,
+			min: 1,
+			max: 5,
 		},
 	],
 };
