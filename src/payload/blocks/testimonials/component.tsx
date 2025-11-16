@@ -61,7 +61,7 @@ const TestimonialsBlock = ({ headline, subheadline, testimonials }: Testimonials
 								className="border-border-subtle relative w-full shrink-0 snap-start bg-white p-6 lg:w-[calc(33.333%-16px)]"
 							>
 								{/* decorative quote mark reinforcing testimonial context */}
-								<Quote className="text-brand-primary/20 absolute top-6 right-6 h-10 w-10" />
+								<Quote className="text-brand-primary/20 absolute top-6 right-6 size-10" />
 
 								{/* testimonial body and author details */}
 								<div className="relative z-10 flex h-full flex-col space-y-4">
