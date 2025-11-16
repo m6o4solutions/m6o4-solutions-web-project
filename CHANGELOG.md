@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.25.0...v1.26.0) (2025-11-16)
+
+
+### Features
+
+* **testimonials:** add rating field and display in testimonials component ([0ae3093](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/0ae309368719b027ad5f5403b81d8cf647630218))
+
 # [1.25.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.24.0...v1.25.0) (2025-11-15)
 
 
