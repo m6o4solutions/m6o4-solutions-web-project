@@ -4,15 +4,19 @@ import { Container } from "@/components/container";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Testimonial, Testimonials } from "@/payload-types";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { useRef } from "react";
 
 /* displays a horizontally scrollable carousel of testimonials.
    built for smooth navigation and responsive presentation of client feedback. */
 const TestimonialsBlock = ({ headline, subheadline, testimonials }: Testimonials) => {
 	/* type guard ensuring testimonial data is fully resolved and not a string reference */
-	const isPopulatedTestimonial = (testimonial: string | Testimonial): testimonial is Testimonial =>
-		typeof testimonial !== "string" && testimonial !== null && typeof testimonial === "object";
+	const isPopulatedTestimonial = (
+		testimonial: string | Testimonial,
+	): testimonial is Testimonial =>
+		typeof testimonial !== "string" &&
+		testimonial !== null &&
+		typeof testimonial === "object";
 
 	/* filters out unresolved or invalid testimonial references */
 	const resolvedTestimonials = testimonials?.filter(isPopulatedTestimonial);
@@ -57,11 +61,19 @@ const TestimonialsBlock = ({ headline, subheadline, testimonials }: Testimonials
 								className="border-border-subtle relative w-full shrink-0 snap-start bg-white p-6 lg:w-[calc(33.333%-16px)]"
 							>
 								{/* decorative quote mark reinforcing testimonial context */}
-								<Quote className="text-brand-primary/20 absolute top-6 right-6 h-10 w-10" />
+								<Quote className="text-brand-primary/20 absolute top-6 right-6 size-10" />
 
 								{/* testimonial body and author details */}
 								<div className="relative z-10 flex h-full flex-col space-y-4">
-									<p className="text-text-default grow text-base leading-relaxed">{testimony.testimonial}</p>
+									<div className="flex gap-1">
+										{[...Array(testimony.rating)].map((_, i) => (
+											<Star key={i} className="size-5 fill-yellow-400 text-yellow-400" />
+										))}
+									</div>
+
+									<p className="text-text-default grow text-base leading-relaxed">
+										{testimony.testimonial}
+									</p>
 
 									<div className="border-border-subtle border-t pt-4">
 										<p className="text-text-default font-bold">{testimony.name}</p>
