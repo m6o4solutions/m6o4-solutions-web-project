@@ -1,3 +1,11 @@
+# [1.27.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.26.0...v1.27.0) (2025-11-28)
+
+
+### Features
+
+* add hooks to revalidate testimonials on change and delete ([d2153f8](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/d2153f89e21b4021c385306965811179f6040f74))
+* **faqs:** add hooks to revalidate FAQ changes and deletions ([a513625](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/a513625fde29c1f026ad24e5747e0ce6823b444c))
+
 # [1.26.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.25.0...v1.26.0) (2025-11-16)
 
 
