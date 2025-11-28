@@ -1,4 +1,8 @@
 import { isAuthenticated, isPublic } from "@/payload/access/access-control";
+import {
+	revalidateFaqChange,
+	revalidateFaqDelete,
+} from "@/payload/collections/faqs/hooks/revalidate-faq";
 import type { CollectionConfig } from "payload";
 
 /**
@@ -62,6 +66,10 @@ const FAQ: CollectionConfig = {
 			],
 		},
 	],
+	hooks: {
+		afterChange: [revalidateFaqChange],
+		afterDelete: [revalidateFaqDelete],
+	},
 };
 
 // export the collection config for use in payload.
