@@ -1,4 +1,8 @@
 import { isAuthenticated, isPublic } from "@/payload/access/access-control";
+import {
+	revalidateTestimonyChange,
+	revalidateTestimonyDelete,
+} from "@/payload/collections/testimonials/hooks/revalidate-testimony";
 import type { CollectionConfig } from "payload";
 
 /* defines a payload collection for managing client testimonials.
@@ -66,6 +70,10 @@ const Testimonials: CollectionConfig = {
 			max: 5,
 		},
 	],
+	hooks: {
+		afterChange: [revalidateTestimonyChange],
+		afterDelete: [revalidateTestimonyDelete],
+	},
 };
 
 /* exports the collection configuration for payload registration */

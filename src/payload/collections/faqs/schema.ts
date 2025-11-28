@@ -14,13 +14,9 @@ const FAQ: CollectionConfig = {
 	slug: "faq",
 	// access control defines permissions for collection actions.
 	access: {
-		// only authenticated users can create new faq items.
 		create: isAuthenticated,
-		// only authenticated users can delete faq items.
 		delete: isAuthenticated,
-		// faq items are publicly accessible for website display.
 		read: isPublic,
-		// only authenticated users can update faq items.
 		update: isAuthenticated,
 	},
 	// admin configuration for the cms interface.
