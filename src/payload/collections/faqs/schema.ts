@@ -1,4 +1,8 @@
 import { isAuthenticated, isPublic } from "@/payload/access/access-control";
+import {
+	revalidateFaqChange,
+	revalidateFaqDelete,
+} from "@/payload/collections/faqs/hooks/revalidate-faq";
 import type { CollectionConfig } from "payload";
 
 /**
@@ -10,13 +14,9 @@ const FAQ: CollectionConfig = {
 	slug: "faq",
 	// access control defines permissions for collection actions.
 	access: {
-		// only authenticated users can create new faq items.
 		create: isAuthenticated,
-		// only authenticated users can delete faq items.
 		delete: isAuthenticated,
-		// faq items are publicly accessible for website display.
 		read: isPublic,
-		// only authenticated users can update faq items.
 		update: isAuthenticated,
 	},
 	// admin configuration for the cms interface.
@@ -62,6 +62,10 @@ const FAQ: CollectionConfig = {
 			],
 		},
 	],
+	hooks: {
+		afterChange: [revalidateFaqChange],
+		afterDelete: [revalidateFaqDelete],
+	},
 };
 
 // export the collection config for use in payload.
