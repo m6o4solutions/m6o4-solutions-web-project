@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.27.0...v1.28.0) (2025-12-18)
+
+
+### Features
+
+* add GitHub Actions workflow to build and push Docker image to GHCR ([26a2fce](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/26a2fce7686638c2f4d1bf75af0d673856a4d7ba))
+
 # [1.27.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.26.0...v1.27.0) (2025-11-28)
 
 ### Features
