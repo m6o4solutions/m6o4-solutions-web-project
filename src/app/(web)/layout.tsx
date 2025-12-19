@@ -1,3 +1,4 @@
+import { ClarityTracker } from "@/components/clarity-tracker";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/payload/blocks/globals/footer/component";
@@ -23,6 +24,9 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
 		<html lang="en" suppressHydrationWarning>
 			{/* main body uses a vertical layout, global fonts, and antialiasing for smoother text rendering */}
 			<body className={cn("flex h-screen flex-col font-sans antialiased", inter.className, jakarta.className)}>
+				{/* track user behavior early in the lifecycle to catch session starts */}
+				<ClarityTracker />
+
 				{/* theme provider manages light/dark modes and syncs theme preference across the app */}
 				<ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
 					{/* global header displayed across all pages */}
