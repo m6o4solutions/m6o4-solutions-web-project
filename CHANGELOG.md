@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.30.0...v1.31.0) (2025-12-19)
+
+
+### Features
+
+* add ClarityTracker component for user behavior tracking ([556c9b7](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/556c9b7bff52125d1523761d8ef2b8bc300e3432))
+
 # [1.30.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.29.0...v1.30.0) (2025-12-19)
 
 
