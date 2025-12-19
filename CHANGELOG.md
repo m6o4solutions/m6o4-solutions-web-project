@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.29.0...v1.30.0) (2025-12-19)
+
+
+### Features
+
+* update container-retention-policy action to v3.0.1 with improvements ([02da2a4](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/02da2a47eff675804463346e06dc3c29d9e7e228))
+
 # [1.29.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.28.0...v1.29.0) (2025-12-19)
 
 
