@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.28.0...v1.29.0) (2025-12-19)
+
+
+### Features
+
+* update GitHub Actions workflows for improved token usage and cleanup ([f5acc6a](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/f5acc6a28114cc169fd467647ab64d830ba0dfee))
+
 # [1.28.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.27.0...v1.28.0) (2025-12-18)
 
 
