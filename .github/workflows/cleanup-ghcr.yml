@@ -22,11 +22,11 @@ jobs:
           echo "name=${GITHUB_REPOSITORY##*/}" >> $GITHUB_OUTPUT
 
       - name: Delete Old Docker Images
-        uses: snok/container-retention-policy@v2.2.1
+        uses: snok/container-retention-policy@v3.0.1
         with:
-          image-names: ${{ steps.image.outputs.name }}
-          cut-off: One minute ago UTC
-          keep-at-least: 2
-          account-type: personal
+          account: user
           token: ${{ secrets.GITHUB_TOKEN }}
-          token-type: github-token
+          image-names: ${{ steps.image.outputs.name }}
+          cut-off: 0
+          keep-n-most-recent: 2
+          dry-run: false
