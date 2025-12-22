@@ -1,5 +1,4 @@
 import { withPayload } from "@payloadcms/next/withPayload";
-
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -27,6 +26,10 @@ const nextConfig: NextConfig = {
 			".js": [".ts", ".tsx", ".js", ".jsx"],
 			".mjs": [".mts", ".mjs"],
 		};
+
+		// suppress the "Critical dependency" warning from Payload
+		webpackConfig.ignoreWarnings = [...(webpackConfig.ignoreWarnings || []), { module: /node_modules\/payload/ }];
+
 		return webpackConfig;
 	},
 };

@@ -30,6 +30,7 @@ import { RowLabel as RowLabel_71d93f2aac51ba56fa74695270dc7c33 } from '@/payload
 import { Icon as Icon_2d07a75cfff87b2e0d5ec901057a0056 } from '../../../components/payload/icon/index.tsx'
 import { Logo as Logo_00a464cfce46832e044f02d49d211822 } from '../../../components/payload/logo/index.tsx'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
+import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 
 export const importMap = {
   "@/payload/blocks/hero-primary/row-label#RowLabel": RowLabel_812d70a469ee42aab37efc9b02e5e0e4,
@@ -63,5 +64,6 @@ export const importMap = {
   "@/payload/blocks/globals/footer/row-label#RowLabel": RowLabel_71d93f2aac51ba56fa74695270dc7c33,
   "/components/payload/icon/index.tsx#Icon": Icon_2d07a75cfff87b2e0d5ec901057a0056,
   "/components/payload/logo/index.tsx#Logo": Logo_00a464cfce46832e044f02d49d211822,
-  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24
+  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
+  "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a
 }
