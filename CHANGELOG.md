@@ -1,3 +1,11 @@
+# [1.32.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.31.0...v1.32.0) (2025-12-22)
+
+
+### Features
+
+* add ClarityTrackerDev component for enhanced user behavior tracking ([e470715](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/e4707156c418fd1721a7beaada4c4851ed2a9185))
+* integrate CollectionCards component and enhance ClarityTracker logic ([89cb900](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/89cb90047a1b21d79e7edbe1a68237a8ef6d1d69))
+
 # [1.31.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.30.0...v1.31.0) (2025-12-19)
 
 
