@@ -1,7 +1,7 @@
 # check=skip=SecretsUsedInArgOrEnv
 # syntax=docker.io/docker/dockerfile:1
 
-FROM node:lts-alpine AS base
+FROM node:24-alpine AS base
 
 # install dependencies only when needed
 FROM base AS deps
