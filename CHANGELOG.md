@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.32.0...v1.33.0) (2025-12-26)
+
+
+### Features
+
+* add docker-compose configuration for m6o4-solutions service ([16ff1fd](https://github.com/m6o4solutions/m6o4-solutions-web-project/commit/16ff1fdae642052a5d5841151b0c17669e26dd3d))
+
 # [1.32.0](https://github.com/m6o4solutions/m6o4-solutions-web-project/compare/v1.31.0...v1.32.0) (2025-12-22)
 
 
