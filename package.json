@@ -15,7 +15,7 @@
 		"start": "cross-env NODE_OPTIONS=--no-deprecation next start"
 	},
 	"dependencies": {
-		"@aws-sdk/client-s3": "^3.956.0",
+		"@aws-sdk/client-s3": "^3.958.0",
 		"@microsoft/clarity": "^1.0.2",
 		"@payloadcms/db-mongodb": "^3.69.0",
 		"@payloadcms/email-resend": "^3.69.0",
